@@ -290,6 +290,15 @@ struct cam_isp_context_event_record {
  * @v4l2_event_sub_ids         contains individual bits representing subscribed v4l2 ids
  * @aeb_enabled:               Indicate if stream is for AEB
  * @do_internal_recovery:      Enable KMD halt/reset/resume internal recovery
+ * @mswitch_default_apply_delay_max_cnt: Max mode switch delay among all devices connected
+ *                                       on the same link as this ISP context
+ * @mswitch_default_apply_delay_ref_cnt: Ref cnt for this context to decide when to apply
+ *                                       mode switch settings
+ * @handle_mswitch:            Indicates if IFE needs to explicitly handle mode switch
+ *                             on frame skip callback from request manager.
+ *                             This is decided based on the max mode switch delay published
+ *                             by other devices on the link as part of link setup
+ * @mode_switch_en:            Indicates if mode switch is enabled
  *
  */
 struct cam_isp_context {
@@ -348,6 +357,10 @@ struct cam_isp_context {
 	struct cam_hw_err_param              err_inject_params;
 	bool                                  aeb_enabled;
 	bool                                  do_internal_recovery;
+	int32_t                               mswitch_default_apply_delay_max_cnt;
+	atomic_t                              mswitch_default_apply_delay_ref_cnt;
+	bool                                  handle_mswitch;
+	bool                                  mode_switch_en;
 };
 
 /**
