@@ -1908,21 +1908,37 @@ static int cam_icp_get_icp_dbg_type(void *data, u64 *val)
 DEFINE_SIMPLE_ATTRIBUTE(cam_icp_debug_type_fs, cam_icp_get_icp_dbg_type,
 	cam_icp_set_icp_dbg_type, "%08llu");
 
-static int cam_icp_set_icp_fw_dump_lvl(void *data, u64 val)
+static int cam_icp_set_icp_fw_hang_dump_lvl(void *data, u64 val)
 {
 	if (val < NUM_HFI_DUMP_LVL)
 		icp_hw_mgr.icp_fw_dump_lvl = val;
 	return 0;
 }
 
-static int cam_icp_get_icp_fw_dump_lvl(void *data, u64 *val)
+static int cam_icp_get_icp_fw_hang_dump_lvl(void *data, u64 *val)
 {
 	*val = icp_hw_mgr.icp_fw_dump_lvl;
 	return 0;
 }
 
-DEFINE_SIMPLE_ATTRIBUTE(cam_icp_debug_fw_dump, cam_icp_get_icp_fw_dump_lvl,
-	cam_icp_set_icp_fw_dump_lvl, "%08llu");
+DEFINE_DEBUGFS_ATTRIBUTE(cam_icp_debug_fw_dump, cam_icp_get_icp_fw_hang_dump_lvl,
+	cam_icp_set_icp_fw_hang_dump_lvl, "%08llu");
+
+static int cam_icp_set_icp_fw_ramdump_lvl(void *data, u64 val)
+{
+	if (val < NUM_HFI_RAMDUMP_LVLS)
+		icp_hw_mgr.icp_fw_ramdump_lvl = (uint32_t)val;
+	return 0;
+}
+
+static int cam_icp_get_icp_fw_ramdump_lvl(void *data, u64 *val)
+{
+	*val = icp_hw_mgr.icp_fw_ramdump_lvl;
+	return 0;
+}
+
+DEFINE_DEBUGFS_ATTRIBUTE(cam_icp_debug_fw_ramdump, cam_icp_get_icp_fw_ramdump_lvl,
+	cam_icp_set_icp_fw_ramdump_lvl, "%08llu");
 
 #ifdef CONFIG_CAM_TEST_ICP_FW_DOWNLOAD
 static ssize_t cam_icp_hw_mgr_fw_load_unload(
@@ -2054,6 +2070,9 @@ static int cam_icp_hw_mgr_create_debugfs_entry(void)
 	debugfs_create_file("icp_fw_dump_lvl", 0644,
 		icp_hw_mgr.dentry, NULL, &cam_icp_debug_fw_dump);
 
+	debugfs_create_file("icp_fw_ramdump_lvl", 0644,
+		icp_hw_mgr.dentry, NULL, &cam_icp_debug_fw_ramdump);
+
 	debugfs_create_bool("disable_ubwc_comp", 0644,
 		icp_hw_mgr.dentry, &icp_hw_mgr.disable_ubwc_comp);
 
@@ -2065,8 +2084,9 @@ static int cam_icp_hw_mgr_create_debugfs_entry(void)
 		icp_hw_mgr.dentry, NULL, &cam_icp_irq_line_test);
 
 end:
-	/* Set default hang dump lvl */
+	/* Set default dump lvls */
 	icp_hw_mgr.icp_fw_dump_lvl = HFI_FW_DUMP_ON_FAILURE;
+	icp_hw_mgr.icp_fw_ramdump_lvl = HFI_FW_RAMDUMP_ENABLED;
 	return rc;
 }
 
@@ -2491,6 +2511,7 @@ static int cam_icp_mgr_handle_frame_process(uint32_t *msg_ptr, int flag)
 		if (ctx_data->ctxt_event_cb)
 			ctx_data->ctxt_event_cb(ctx_data->context_priv, CAM_ICP_EVT_ID_ERROR,
 				&icp_err_evt);
+		cam_icp_dump_debug_info(false);
 		mutex_unlock(&ctx_data->ctx_mutex);
 	}
 
@@ -2656,6 +2677,7 @@ static int cam_icp_mgr_process_msg_ping_ack(uint32_t *msg_ptr)
 static int cam_icp_mgr_process_indirect_ack_msg(uint32_t *msg_ptr)
 {
 	int rc;
+	struct hfi_msg_ipebps_async_ack *ioconfig_ack = NULL;
 
 	if (!msg_ptr) {
 		CAM_ERR(CAM_ICP, "msg ptr is NULL");
@@ -2677,11 +2699,18 @@ static int cam_icp_mgr_process_indirect_ack_msg(uint32_t *msg_ptr)
 		if (rc)
 			return rc;
 		break;
-	default:
-		CAM_ERR(CAM_ICP, "Invalid opcode : %u",
-			msg_ptr[ICP_PACKET_OPCODE]);
-		rc = -EINVAL;
-		break;
+	default: {
+			// apply QC Patch (CN#06449944)
+			CAM_ERR(CAM_ICP, "Invalid opcode : %u",
+				msg_ptr[ICP_PACKET_OPCODE]);
+			cam_icp_mgr_dump_active_req_info();
+
+			ioconfig_ack = (struct hfi_msg_ipebps_async_ack *)msg_ptr;
+			CAM_INFO(CAM_ICP, "user_data2 [request_id]: %llu",
+				ioconfig_ack->user_data2);
+			BUG_ON(1);
+			return -EINVAL;
+		}
 	}
 
 	return rc;
@@ -5688,6 +5717,8 @@ static int cam_icp_mgr_prepare_hw_update(void *hw_mgr_priv,
 		return rc;
 	}
 
+	prepare_args->pf_data->packet = packet;
+
 	CAM_DBG(CAM_REQ, "req id = %lld for ctx = %u",
 		packet->header.request_id, ctx_data->ctx_id);
 	/* Update Buffer Address from handles and patch information */
@@ -6489,7 +6520,8 @@ static int cam_icp_mgr_acquire_hw(void *hw_mgr_priv, void *acquire_hw_args)
 			hfi_set_debug_level(icp_hw_mgr.icp_debug_type,
 				icp_hw_mgr.icp_dbg_lvl);
 
-		hfi_set_fw_dump_level(icp_hw_mgr.icp_fw_dump_lvl);
+		hfi_set_fw_dump_levels(icp_hw_mgr.icp_fw_dump_lvl,
+			icp_hw_mgr.icp_fw_ramdump_lvl);
 
 		rc = cam_icp_send_ubwc_cfg(hw_mgr);
 		if (rc)
@@ -6967,14 +6999,9 @@ static void cam_icp_mgr_dump_pf_data(struct cam_icp_hw_mgr *hw_mgr,
 {
 	struct cam_packet          *packet;
 	struct cam_hw_dump_pf_args *pf_args;
-	int                         rc;
 
+	packet = pf_cmd_args->pf_req_info->packet;
 	pf_args = pf_cmd_args->pf_args;
-
-	rc = cam_packet_util_get_packet_addr(&packet, pf_cmd_args->pf_req_info->packet_handle,
-		pf_cmd_args->pf_req_info->packet_offset);
-	if (rc)
-		return;
 
 	/*
 	 * res_id_support is false since ICP doesn't have knowledge

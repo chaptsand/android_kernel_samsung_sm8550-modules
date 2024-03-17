@@ -2552,7 +2552,8 @@ int cam_soc_util_regulator_enable(struct regulator *rgltr,
 		rc = regulator_set_voltage(
 			rgltr, rgltr_min_volt, rgltr_max_volt);
 		if (rc) {
-			CAM_ERR(CAM_UTIL, "%s set voltage failed", rgltr_name);
+			CAM_ERR(CAM_UTIL, "%s set voltage failed, voltage min=%d, max=%d", 
+				rgltr_name, rgltr_min_volt, rgltr_max_volt);
 			return rc;
 		}
 

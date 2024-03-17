@@ -277,6 +277,9 @@ struct cam_hw_soc_info {
 	int32_t                         aggregate_clk[CAM_SOC_MAX_CLK][2];
 	uint32_t                        aggregate_clk_mask;
 
+#if defined(CONFIG_SENSOR_RETENTION)
+	bool disable_sensor_retention;
+#endif
 };
 
 /**

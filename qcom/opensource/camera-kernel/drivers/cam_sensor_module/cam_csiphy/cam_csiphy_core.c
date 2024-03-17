@@ -17,6 +17,12 @@
 #include "cam_mem_mgr.h"
 #include "cam_cpas_api.h"
 #include "cam_compat.h"
+#if defined(CONFIG_CAMERA_ADAPTIVE_MIPI) && defined(CONFIG_CAMERA_RF_MIPI)
+#include "cam_sensor_mipi.h"
+#endif
+#if defined(CONFIG_CAMERA_CDR_TEST)
+#include "cam_clock_data_recovery.h"
+#endif
 
 #define SCM_SVC_CAMERASS 0x18
 #define SECURE_SYSCALL_ID 0x6
@@ -38,6 +44,7 @@ static DEFINE_MUTEX(main_aon_selection);
 
 static int csiphy_onthego_reg_count;
 static unsigned int csiphy_onthego_regs[150];
+
 module_param_array(csiphy_onthego_regs, uint, &csiphy_onthego_reg_count, 0644);
 MODULE_PARM_DESC(csiphy_onthego_regs, "Functionality to let csiphy registers program on the fly");
 
@@ -618,8 +625,6 @@ static int cam_csiphy_sanitize_lane_cnt(
 		/* 2DPHY + 1CPHY or 2CPHY + 1DPHY */
 		if (csiphy_dev->csiphy_info[index].csiphy_3phase)
 			max_supported_lanes = 2;
-		else
-			max_supported_lanes = 2;
 	} else {
 		/* Mission Mode */
 		if (csiphy_dev->csiphy_info[index].csiphy_3phase)
@@ -1137,6 +1142,16 @@ static int cam_csiphy_cphy_data_rate_config(struct csiphy_device *csiphy_device,
 		CAM_DBG(CAM_CSIPHY, "table[%d] BW : %llu Selected",
 			data_rate_idx, supported_phy_bw);
 
+#if defined(CONFIG_SEC_DM3Q_PROJECT)
+		if (csiphy_device->soc_info.index == WIDE_CAM
+			&& supported_phy_bw == 4560000000 //2.0 GSpS
+			&& datarate_variant_idx == 0) {
+			datarate_variant_idx = 1;
+			CAM_INFO(CAM_CSIPHY, "[MIPI_DBG] Change csiphy table for wide camera : %d",
+				datarate_variant_idx);
+		}
+#endif
+
 		if (datarate_variant_idx >= CAM_CSIPHY_MAX_DATARATE_VARIANTS) {
 			CAM_ERR(CAM_CSIPHY, "Datarate variant Idx: %u can not exceed %u",
 				datarate_variant_idx, CAM_CSIPHY_MAX_DATARATE_VARIANTS-1);
@@ -1156,10 +1171,12 @@ static int cam_csiphy_cphy_data_rate_config(struct csiphy_device *csiphy_device,
 			reg_data = config_params[i].reg_data;
 			reg_param_type = config_params[i].csiphy_param_type;
 			delay = config_params[i].delay;
+#if defined(CONFIG_CAMERA_ADAPTIVE_MIPI) && defined(CONFIG_CAMERA_RF_MIPI)
 			CAM_DBG(CAM_CSIPHY,
-				"param_type: %d writing reg : %x val : %x delay: %dus",
+				"[RF_MIPI_DBG] param_type: %02d writing reg : %04X val : %02X delay: %dus",
 				reg_param_type, reg_addr, reg_data,
 				delay);
+#endif
 			switch (reg_param_type) {
 			case CSIPHY_DEFAULT_PARAMS:
 				cam_io_w_mb(reg_data,
@@ -1184,7 +1201,7 @@ static int cam_csiphy_cphy_data_rate_config(struct csiphy_device *csiphy_device,
 				if (g_phy_data[phy_idx].data_rate_aux_mask &
 					BIT_ULL(data_rate_idx)) {
 					cam_io_w_mb(reg_data, csiphybase + reg_addr);
-					CAM_DBG(CAM_CSIPHY,
+					CAM_INFO(CAM_CSIPHY,
 						"CSIPHY: %u configuring new aux setting reg_addr: 0x%x reg_val: 0x%x",
 						csiphy_device->soc_info.index, reg_addr, reg_data);
 				}
@@ -1996,6 +2013,30 @@ static void __cam_csiphy_get_preamble_status(
 	return;
 }
 
+#if defined(CONFIG_CAMERA_ADAPTIVE_MIPI) && defined(CONFIG_CAMERA_RF_MIPI)
+uint8_t cam_csiphy_core_check_rf_condition(void)
+{
+	uint8_t ret = 0;
+	struct cam_cp_noti_info rf_info;
+
+	get_rf_info(&rf_info);
+	CAM_INFO(CAM_CSIPHY,
+		"[RF_MIPI_DBG] rat : %d, band : %d, channel : %d",
+		rf_info.rat, rf_info.band, rf_info.channel);
+
+	//add rf condition
+//	if (rf_info.band == CAM_BAND_257_NR5G_N002) {
+//		ret = 1;
+//	}
+
+	if (ret != 0) {
+		CAM_INFO(CAM_CSIPHY, "[RF_MIPI_DBG] Change mipi table : %d", ret);
+	}
+
+	return ret;
+}
+#endif
+
 int32_t cam_csiphy_core_cfg(void *phy_dev,
 			void *arg)
 {
@@ -2405,6 +2446,10 @@ int32_t cam_csiphy_core_cfg(void *phy_dev,
 		uint8_t data_rate_variant_idx = 0;
 		unsigned long clk_rate = 0;
 
+#if defined(CONFIG_CAMERA_ADAPTIVE_MIPI) && defined(CONFIG_CAMERA_RF_MIPI)
+		data_rate_variant_idx = cam_csiphy_core_check_rf_condition();
+#endif
+
 		CAM_DBG(CAM_CSIPHY, "START_DEV Called");
 		rc = copy_from_user(&config, (void __user *)cmd->handle,
 			sizeof(config));
@@ -2576,6 +2621,13 @@ int32_t cam_csiphy_core_cfg(void *phy_dev,
 
 		if (csiphy_onthego_reg_count)
 			cam_csiphy_apply_onthego_reg_values(csiphybase, soc_info->index);
+
+#if defined(CONFIG_CAMERA_CDR_TEST)
+		if (cam_clock_data_recovery_is_requested()) {
+			cam_clock_data_recovery_write_register(csiphybase);
+			cam_clock_data_recovery_reset_request();
+		}
+#endif
 
 		cam_csiphy_release_from_reset_state(csiphy_dev, csiphybase, offset);
 

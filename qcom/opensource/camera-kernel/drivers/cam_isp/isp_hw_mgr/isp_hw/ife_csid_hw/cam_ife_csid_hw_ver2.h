@@ -660,6 +660,7 @@ struct cam_ife_csid_ver2_hw {
 	enum cam_isp_hw_sync_mode              sync_mode;
 	uint32_t                               mup;
 	atomic_t                               discard_frame_per_path;
+	atomic_t                               status_tracker;
 	bool                                   drv_init_done;
 };
 

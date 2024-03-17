@@ -25,6 +25,11 @@
 #include "cam_common_util.h"
 #include "cam_subdev.h"
 
+#if defined(CONFIG_USE_CAMERA_HW_BIG_DATA)
+#include "cam_sensor_cmn_header.h"
+#include "cam_hw_bigdata.h"
+#endif
+
 #define IFE_CSID_TIMEOUT                               1000
 
 /* Timeout values in usec */
@@ -3969,6 +3974,11 @@ static int cam_ife_csid_ver1_rx_bottom_half_handler(
 	struct cam_hw_soc_info                     *soc_info;
 	uint32_t                                    data_idx;
 
+#if defined(CONFIG_USE_CAMERA_HW_BIG_DATA)
+	uint32_t hw_cam_position = 0;
+	uint32_t hwb_mipi_err = FALSE;
+#endif
+
 	if (!csid_hw || !evt_payload) {
 		CAM_ERR(CAM_ISP,
 			"Invalid Param handler_priv %pK evt_payload_priv %pK",
@@ -4044,6 +4054,9 @@ static int cam_ife_csid_ver1_rx_bottom_half_handler(
 		}
 
 		if (irq_status & IFE_CSID_VER1_RX_ERROR_ECC) {
+#if defined(CONFIG_USE_CAMERA_HW_BIG_DATA)
+			hwb_mipi_err |= TRUE;
+#endif
 			event_type |= CAM_ISP_HW_ERROR_CSID_PKT_HDR_CORRUPTED;
 			CAM_ERR_BUF(CAM_ISP, log_buf, CAM_IFE_CSID_LOG_BUF_LEN, &len,
 				"DPHY_ERROR_ECC: Pkt hdr errors unrecoverable\n");
@@ -4065,6 +4078,9 @@ static int cam_ife_csid_ver1_rx_bottom_half_handler(
 		}
 
 		if (irq_status & IFE_CSID_VER1_RX_ERROR_CRC) {
+#if defined(CONFIG_USE_CAMERA_HW_BIG_DATA)
+			hwb_mipi_err |= TRUE;
+#endif
 			event_type |= CAM_ISP_HW_ERROR_CSID_PKT_PAYLOAD_CORRUPTED;
 			CAM_ERR_BUF(CAM_ISP, log_buf, CAM_IFE_CSID_LOG_BUF_LEN, &len,
 				"CPHY_ERROR_CRC: Long pkt payload CRC mismatch\n");
@@ -4115,6 +4131,16 @@ static int cam_ife_csid_ver1_rx_bottom_half_handler(
 		cam_ife_csid_ver1_handle_event_err(csid_hw, evt_payload, event_type);
 		csid_hw->flags.reset_awaited = true;
 	}
+
+#if defined(CONFIG_USE_CAMERA_HW_BIG_DATA)
+	if (hwb_mipi_err == TRUE) {
+		msm_is_sec_get_sensor_position(&hw_cam_position);
+		{
+			hw_bigdata_mipi_from_ife_csid_ver1(hw_cam_position);
+		}
+	}
+#endif
+
 
 	return IRQ_HANDLED;
 }
