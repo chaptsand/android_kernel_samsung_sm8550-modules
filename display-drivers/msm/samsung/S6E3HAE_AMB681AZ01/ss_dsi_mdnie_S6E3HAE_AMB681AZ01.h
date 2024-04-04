@@ -4,7 +4,6 @@
  *
  *	Description:  samsung display common file
  *
- *	Author: cj1225.jang
  *	Company:  Samsung Electronics
  *
  * ================================================================
@@ -25,8 +24,8 @@ Copyright (C) 2021, Samsung Electronics. All rights reserved.
  *
  * You should have received a copy of the GNU General Public License
 */
-#ifndef _SAMSUNG_DSI_MDNIE_S6E3FAC_AMB655AY01_
-#define _SAMSUNG_DSI_MDNIE_S6E3FAC_AMB655AY01_
+#ifndef _SAMSUNG_DSI_MDNIE_S6E3HAE_AMB681AZ01_
+#define _SAMSUNG_DSI_MDNIE_S6E3HAE_AMB681AZ01_
 
 #include "ss_dsi_mdnie_lite_common.h"
 
@@ -546,7 +545,7 @@ static char BYPASS_MDNIE_1[] = {
 	0x80,
 	0x08, //ascr_gamma_y16
 	0x00,
-	0x00,	 //iove_on
+  0x00,	 //iove_on
   0x00,	 //iove_gain
   0x00,	 //iove_type
   0x00,	 //iove_histo_range_dark
@@ -851,8 +850,8 @@ static char BYPASS_MDNIE_2[] = {
 static char BYPASS_MDNIE_3[] = {
 	0xDD,
 	0x01, //mdnie_en
-	0x00, //mask 0 0000
 	0x00, //nove
+	0x00, //mask 0 0000
 	0x00, //ascr algo aolce gamut 00 00 00 00
 	0x07, //v_partial_on
 	0x7f, //partial_en1
@@ -867,7 +866,7 @@ static char BYPASS_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0x00, //trans_on trans_block 0 000 0000
 	0x00, //trans_slope
 	0x00, //trans_interval
@@ -1222,7 +1221,7 @@ static char NEGATIVE_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -1577,7 +1576,7 @@ static char GRAYSCALE_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //tarns_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -1932,7 +1931,7 @@ static char GRAYSCALE_NEGATIVE_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans 0n
+	0x01, //trans_en
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -2287,7 +2286,7 @@ static char COLOR_BLIND_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -2421,6 +2420,106 @@ static char NIGHT_MODE_MDNIE_1[] = {
 	0x80,
 	0x08, //ascr_gamma_y16
 	0x00,
+  0x00,	 //iove_on
+  0x00,	 //iove_gain
+  0x00,	 //iove_type
+  0x10,	 //iove_histo_range_dark
+  0xf9,	 //iove_histo_range_light
+  0x01,	 //iove_diff_en
+  0x00,	 //iove_diff_dark_min
+  0xE0,	
+  0x00,	 //iove_diff_dark_max
+  0x20,	
+  0x01,	 //iove_diff_light_min
+  0x00,	 
+  0x00,	 //iove_diff_light_max
+  0x00,	
+  0x01,	 //iove_slope_en 
+  0x18,	 //iove_slope_dark_min
+  0x00,	  
+  0xE0,	 
+  0xE0,	 //iove_slope_dark_max
+  0x00,	 
+  0x30,	
+  0x18,	 //iove_slope_light_min
+  0x00,	
+  0xE0,	 
+  0xE0,	 //iove_slope_light_max
+  0x00,	
+  0x20,	
+  0x01,	 //iove_same_diff
+  0x00,	 
+  0x01,	 //iove_smoothing_en
+  0x40,	 //iove_stretch_w
+  0x03,	 //iove_pixel_num
+  0xFF,	 
+  0x01,	 //iove_trans_stretch_en 
+  0x08,	 //iove_trans_stretch_w
+  0x01,	 //iove_trans_curve_en
+  0x08,	 //iove_trans_curve_w
+  0x01,	 //iove_pattern_en
+  0x50,	 //iove_pattern_min
+  0x7A,	
+  0x80,	
+  0x01,	 //iove_bg_en
+  0x40,	 //iove_bg_min
+  0x50,	
+  0x00,	
+  0x01,	 //iove_histo_ration_en
+  0x00,	 //iove_histo_min
+  0x80,	
+  0x20,	 
+  0x00,	
+  0x01,	 //iove_cs_en 
+  0x01,	 //iove_cs_dark_min
+  0x90,	 
+  0x01,	 //iove_cs_dark_max
+  0xF4,	
+  0x01,	 //iove_cs_light_min
+  0x90,	 
+  0x01,	 //iove_cs_light_max
+  0x2c,	
+  0x01,	 //iove_cs_low_en
+  0x0D,	 //iove_cs_low_min
+  0x00,	 
+  0x00,	
+  0x26,	 //iove_cs_low_max
+  0x01,	 //iove_skin_cs_prob_en
+  0x28,	 //iove_skin_cs_prob_increase
+  0x00,	 //iove_skin_cs_gain
+  0x10,	 
+  0x40,	 //iove_skin_w
+  0x6A,	 //iove_skin_CB
+  0x9A,	 //iove_skin_cr
+  0x3A,	 //dist_u
+  0x1A,	 //dist_d
+  0x16,	 //dist_r
+  0x2A,	 //dist_l
+  0x00,	 //skin_dist_u
+  0x23,	
+  0x4F,	
+  0x00,	
+  0x4E,	
+  0xC5,	
+  0x00,	
+  0x5D,	
+  0x17,	
+  0x00,	
+  0x30,	
+  0xC3,	
+  0x06,	
+  0x40,	 //iove_skin_dark_w
+  0x40,	
+  0x20,	
+  0x40,	 
+  0x00,	
+  0x60,	
+  0x40,	
+  0x60,	
+  0x00,	
+  0x60,	
+  0x30,	
+  0x60,	
 };
 
 static char NIGHT_MODE_MDNIE_2[] = {
@@ -2642,7 +2741,7 @@ static char NIGHT_MODE_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -2997,7 +3096,7 @@ static char COLOR_LENS_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -3026,42 +3125,42 @@ static char HBM_CE_MDNIE_1[] = {
 	0x00, //ascr_div_left
 	0x30,
 	0xc3,
-  0xFF,	 //ascr_skin_Rr
-  0x41,	 //ascr_skin_Rg
-  0x32,	 //ascr_skin_Rb
-  0xFF,	 //ascr_skin_Yr
-  0xFA,	 //ascr_skin_Yg
-  0x00,	 //ascr_skin_Yb
-  0xFF,	 //ascr_skin_Mr
-  0x00,	 //ascr_skin_Mg
-  0xFF,	 //ascr_skin_Mb
-  0xFF,	 //ascr_skin_Wr
-  0xFF,	 //ascr_skin_Wg
-  0xFF,	 //ascr_skin_Wb
-  0x00,	 //ascr_Cr
-  0xff,	 //ascr_Rr
-  0xFF,	 //ascr_Cg
-  0x00,	 //ascr_Rg
-  0xF7,	 //ascr_Cb
-  0x00,	 //ascr_Rb
-  0xFF,	 //ascr_Mr
-  0x28,	 //ascr_Gr
-  0x00,	 //ascr_Mg
-  0xFF,	 //ascr_Gg
-  0xFF,	 //ascr_Mb
-  0x00,	 //ascr_Gb
-  0xFF,	 //ascr_Yr
-  0x00,	 //ascr_Br
-  0xF7,	 //ascr_Yg
-  0x00,	 //ascr_Bg
-  0x00,	 //ascr_Yb
-  0xFF,	 //ascr_Bb
-  0xFF,	 //ascr_Wr
-  0x00,	 //ascr_Kr
-  0xFF,	 //ascr_Wg
-  0x00,	 //ascr_Kg
-  0xFF,	 //ascr_Wb
-  0x00,	 //ascr_Kb
+	0xff, //ascr_skin_Rr
+	0x30, //ascr_skin_Rg
+	0x30, //ascr_skin_Rb
+	0xff, //ascr_skin_Yr
+	0xff, //ascr_skin_Yg
+	0x00, //ascr_skin_Yb
+	0xff, //ascr_skin_Mr
+	0x00, //ascr_skin_Mg
+	0xff, //ascr_skin_Mb
+	0xff, //ascr_skin_Wr
+	0xff, //ascr_skin_Wg
+	0xff, //ascr_skin_Wb
+	0x00, //ascr_Cr
+	0xff, //ascr_Rr
+	0xff, //ascr_Cg
+	0x00, //ascr_Rg
+	0xff, //ascr_Cb
+	0x00, //ascr_Rb
+	0xff, //ascr_Mr
+	0x00, //ascr_Gr
+	0x00, //ascr_Mg
+	0xff, //ascr_Gg
+	0xff, //ascr_Mb
+	0x00, //ascr_Gb
+	0xff, //ascr_Yr
+	0x00, //ascr_Br
+	0xf0, //ascr_Yg
+	0x00, //ascr_Bg
+	0x00, //ascr_Yb
+	0xff, //ascr_Bb
+	0xff, //ascr_Wr
+	0x00, //ascr_Kr
+	0xff, //ascr_Wg
+	0x00, //ascr_Kg
+	0xff, //ascr_Wb
+	0x00, //ascr_Kb
 	0x00, //ascr_gamma_w
 	0x00, //ascr_gamma_x0
 	0x00,
@@ -3139,30 +3238,30 @@ static char HBM_CE_MDNIE_1[] = {
   0x01,	 //iove_diff_en
   0x00,	 //iove_diff_dark_min
   0xE0,	
-  0x00,	 //iove_diff_dark_max
+  0x00,	 //iove_diff_dark_ma
   0x20,	
   0x01,	 //iove_diff_light_min
   0x00,	 
-  0x00,	 //iove_diff_light_max
+  0x00,	 //iove_diff_light_ma
   0x00,	
   0x01,	 //iove_slope_en 
   0x18,	 //iove_slope_dark_min
   0x00,	  
   0xE0,	 
-  0xE0,	 //iove_slope_dark_max
+  0xE0,	 //iove_slope_dark_ma
   0x00,	 
   0x30,	
   0x18,	 //iove_slope_light_min
   0x00,	
   0xE0,	 
-  0xE0,	 //iove_slope_light_max
+  0xE0,	 //iove_slope_light_ma
   0x00,	
   0x20,	
   0x01,	 //iove_same_diff
   0x00,	 
   0x01,	 //iove_smoothing_en
   0x40,	 //iove_stretch_w
-  0x03,	 //iove_pixel_num
+  0x03,	 //iove_pi
   0xFF,	 
   0x01,	 //iove_trans_stretch_en 
   0x08,	 //iove_trans_stretch_w
@@ -3182,19 +3281,19 @@ static char HBM_CE_MDNIE_1[] = {
   0x20,	 
   0x00,	
   0x01,	 //iove_cs_en 
-  0x01,	 //iove_cs_dark_min
+  0x01,	 //iove_cs_dark_min 400
   0x90,	 
-  0x01,	 //iove_cs_dark_max
+  0x01,	 //iove_cs_dark_ma
   0xF4,	
-  0x01,	 //iove_cs_light_min
+  0x01,	 //iove_cs_light_min 400
   0x90,	 
-  0x01,	 //iove_cs_light_max
+  0x01,	 //iove_cs_light_ma
   0x2c,	
   0x01,	 //iove_cs_low_en
   0x0D,	 //iove_cs_low_min
   0x00,	 
   0x00,	
-  0x26,	 //iove_cs_low_max
+  0x26,	 //iove_cs_low_ma
   0x01,	 //iove_skin_cs_prob_en
   0x28,	 //iove_skin_cs_prob_increase
   0x01,	 //iove_skin_cs_gain
@@ -3452,7 +3551,7 @@ static char HBM_CE_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x08, //trans_slope
 	0x01, //trans_interval
@@ -3481,42 +3580,42 @@ static char HBM_CE_D65_MDNIE_1[] = {
 	0x00, //ascr_div_left
 	0x30,
 	0xc3,
-  0xFF,	 //ascr_skin_Rr
-  0x41,	 //ascr_skin_Rg
-  0x32,	 //ascr_skin_Rb
-  0xFF,	 //ascr_skin_Yr
-  0xFA,	 //ascr_skin_Yg
-  0x00,	 //ascr_skin_Yb
-  0xFF,	 //ascr_skin_Mr
-  0x00,	 //ascr_skin_Mg
-  0xFF,	 //ascr_skin_Mb
-  0xFF,	 //ascr_skin_Wr
-  0xFF,	 //ascr_skin_Wg
-  0xFF,	 //ascr_skin_Wb
-  0x00,	 //ascr_Cr
-  0xff,	 //ascr_Rr
-  0xFF,	 //ascr_Cg
-  0x00,	 //ascr_Rg
-  0xF7,	 //ascr_Cb
-  0x00,	 //ascr_Rb
-  0xFF,	 //ascr_Mr
-  0x28,	 //ascr_Gr
-  0x00,	 //ascr_Mg
-  0xFF,	 //ascr_Gg
-  0xFF,	 //ascr_Mb
-  0x00,	 //ascr_Gb
-  0xFF,	 //ascr_Yr
-  0x00,	 //ascr_Br
-  0xF7,	 //ascr_Yg
-  0x00,	 //ascr_Bg
-  0x00,	 //ascr_Yb
-  0xFF,	 //ascr_Bb
-  0xFF,	 //ascr_Wr
-  0x00,	 //ascr_Kr
-  0xFc,	 //ascr_Wg
-  0x00,	 //ascr_Kg
-  0xF6,	 //ascr_Wb
-  0x00,	 //ascr_Kb
+	0xff, //ascr_skin_Rr
+	0x30, //ascr_skin_Rg
+	0x30, //ascr_skin_Rb
+	0xff, //ascr_skin_Yr
+	0xff, //ascr_skin_Yg
+	0x00, //ascr_skin_Yb
+	0xff, //ascr_skin_Mr
+	0x00, //ascr_skin_Mg
+	0xff, //ascr_skin_Mb
+	0xff, //ascr_skin_Wr
+	0xff, //ascr_skin_Wg
+	0xff, //ascr_skin_Wb
+	0x00, //ascr_Cr
+	0xff, //ascr_Rr
+	0xff, //ascr_Cg
+	0x00, //ascr_Rg
+	0xff, //ascr_Cb
+	0x00, //ascr_Rb
+	0xff, //ascr_Mr
+	0x00, //ascr_Gr
+	0x00, //ascr_Mg
+	0xff, //ascr_Gg
+	0xff, //ascr_Mb
+	0x00, //ascr_Gb
+	0xff, //ascr_Yr
+	0x00, //ascr_Br
+	0xf0, //ascr_Yg
+	0x00, //ascr_Bg
+	0x00, //ascr_Yb
+	0xff, //ascr_Bb
+	0xff, //ascr_Wr
+	0x00, //ascr_Kr
+	0xfc, //ascr_Wg
+	0x00, //ascr_Kg
+	0xf6, //ascr_Wb
+	0x00, //ascr_Kb
 	0x00, //ascr_gamma_w
 	0x00, //ascr_gamma_x0
 	0x00,
@@ -3594,30 +3693,30 @@ static char HBM_CE_D65_MDNIE_1[] = {
   0x01,	 //iove_diff_en
   0x00,	 //iove_diff_dark_min
   0xE0,	
-  0x00,	 //iove_diff_dark_max
+  0x00,	 //iove_diff_dark_ma
   0x20,	
   0x01,	 //iove_diff_light_min
   0x00,	 
-  0x00,	 //iove_diff_light_max
+  0x00,	 //iove_diff_light_ma
   0x00,	
   0x01,	 //iove_slope_en 
   0x18,	 //iove_slope_dark_min
   0x00,	  
   0xE0,	 
-  0xE0,	 //iove_slope_dark_max
+  0xE0,	 //iove_slope_dark_ma
   0x00,	 
   0x30,	
   0x18,	 //iove_slope_light_min
   0x00,	
   0xE0,	 
-  0xE0,	 //iove_slope_light_max
+  0xE0,	 //iove_slope_light_ma
   0x00,	
   0x20,	
   0x01,	 //iove_same_diff
   0x00,	 
   0x01,	 //iove_smoothing_en
   0x40,	 //iove_stretch_w
-  0x03,	 //iove_pixel_num
+  0x03,	 //iove_pi
   0xFF,	 
   0x01,	 //iove_trans_stretch_en 
   0x08,	 //iove_trans_stretch_w
@@ -3637,19 +3736,19 @@ static char HBM_CE_D65_MDNIE_1[] = {
   0x20,	 
   0x00,	
   0x01,	 //iove_cs_en 
-  0x01,	 //iove_cs_dark_min
+  0x01,	 //iove_cs_dark_min 400
   0x90,	 
-  0x01,	 //iove_cs_dark_max
+  0x01,	 //iove_cs_dark_ma
   0xF4,	
-  0x01,	 //iove_cs_light_min
+  0x01,	 //iove_cs_light_min 400
   0x90,	 
-  0x01,	 //iove_cs_light_max
+  0x01,	 //iove_cs_light_ma
   0x2c,	
   0x01,	 //iove_cs_low_en
   0x0D,	 //iove_cs_low_min
   0x00,	 
   0x00,	
-  0x26,	 //iove_cs_low_max
+  0x26,	 //iove_cs_low_ma
   0x01,	 //iove_skin_cs_prob_en
   0x28,	 //iove_skin_cs_prob_increase
   0x01,	 //iove_skin_cs_gain
@@ -3685,7 +3784,7 @@ static char HBM_CE_D65_MDNIE_1[] = {
   0x00,	
   0x60,	
   0x30,	
-  0x60,		
+  0x60,			
 };
 
 static char HBM_CE_D65_MDNIE_2[] = {
@@ -3907,7 +4006,7 @@ static char HBM_CE_D65_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x08, //trans_slope
 	0x01, //trans_interval
@@ -4075,9 +4174,9 @@ static char RGB_SENSOR_MDNIE_1[] = {
   0x03,	 //iove_pixel_num
   0xFF,	 
   0x01,	 //iove_trans_stretch_en 
-  0x05,	 //iove_trans_stretch_w
+  0x08,	 //iove_trans_stretch_w
   0x01,	 //iove_trans_curve_en
-  0x05,	 //iove_trans_curve_w
+  0x08,	 //iove_trans_curve_w
   0x01,	 //iove_pattern_en
   0x50,	 //iove_pattern_min
   0x7A,	
@@ -4107,8 +4206,8 @@ static char RGB_SENSOR_MDNIE_1[] = {
   0x26,	 //iove_cs_low_max
   0x01,	 //iove_skin_cs_prob_en
   0x28,	 //iove_skin_cs_prob_increase
-  0x01,	 //iove_skin_cs_gain
-  0x00,	  
+  0x00,	 //iove_skin_cs_gain
+  0x10,	 
   0x40,	 //iove_skin_w
   0x6A,	 //iove_skin_CB
   0x9A,	 //iove_skin_cr
@@ -4129,8 +4228,8 @@ static char RGB_SENSOR_MDNIE_1[] = {
   0x30,	
   0xC3,	
   0x06,	
-  0x40,	 //iove_skin_dark_w_x
-  0x50,	
+  0x40,	 //iove_skin_dark_w
+  0x40,	
   0x20,	
   0x40,	 
   0x00,	
@@ -4362,7 +4461,7 @@ static char RGB_SENSOR_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -4530,9 +4629,9 @@ static char SCREEN_CURTAIN_MDNIE_1[] = {
   0x03,	 //iove_pixel_num
   0xFF,	 
   0x01,	 //iove_trans_stretch_en 
-  0x05,	 //iove_trans_stretch_w
+  0x08,	 //iove_trans_stretch_w
   0x01,	 //iove_trans_curve_en
-  0x05,	 //iove_trans_curve_w
+  0x08,	 //iove_trans_curve_w
   0x01,	 //iove_pattern_en
   0x50,	 //iove_pattern_min
   0x7A,	
@@ -4562,8 +4661,8 @@ static char SCREEN_CURTAIN_MDNIE_1[] = {
   0x26,	 //iove_cs_low_max
   0x01,	 //iove_skin_cs_prob_en
   0x28,	 //iove_skin_cs_prob_increase
-  0x01,	 //iove_skin_cs_gain
-  0x00,	  
+  0x00,	 //iove_skin_cs_gain
+  0x10,	 
   0x40,	 //iove_skin_w
   0x6A,	 //iove_skin_CB
   0x9A,	 //iove_skin_cr
@@ -4584,8 +4683,8 @@ static char SCREEN_CURTAIN_MDNIE_1[] = {
   0x30,	
   0xC3,	
   0x06,	
-  0x40,	 //iove_skin_dark_w_x
-  0x50,	
+  0x40,	 //iove_skin_dark_w
+  0x40,	
   0x20,	
   0x40,	 
   0x00,	
@@ -4817,7 +4916,7 @@ static char SCREEN_CURTAIN_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -4951,7 +5050,7 @@ static char LIGHT_NOTIFICATION_MDNIE_1[] = {
 	0x80,
 	0x08, //ascr_gamma_y16
 	0x00,
-  0x00,	 //iove_on
+   0x00,	 //iove_on
   0x00,	 //iove_gain
   0x00,	 //iove_type
   0x10,	 //iove_histo_range_dark
@@ -4985,9 +5084,9 @@ static char LIGHT_NOTIFICATION_MDNIE_1[] = {
   0x03,	 //iove_pixel_num
   0xFF,	 
   0x01,	 //iove_trans_stretch_en 
-  0x05,	 //iove_trans_stretch_w
+  0x08,	 //iove_trans_stretch_w
   0x01,	 //iove_trans_curve_en
-  0x05,	 //iove_trans_curve_w
+  0x08,	 //iove_trans_curve_w
   0x01,	 //iove_pattern_en
   0x50,	 //iove_pattern_min
   0x7A,	
@@ -5017,8 +5116,8 @@ static char LIGHT_NOTIFICATION_MDNIE_1[] = {
   0x26,	 //iove_cs_low_max
   0x01,	 //iove_skin_cs_prob_en
   0x28,	 //iove_skin_cs_prob_increase
-  0x01,	 //iove_skin_cs_gain
-  0x00,	  
+  0x00,	 //iove_skin_cs_gain
+  0x10,	 
   0x40,	 //iove_skin_w
   0x6A,	 //iove_skin_CB
   0x9A,	 //iove_skin_cr
@@ -5039,8 +5138,8 @@ static char LIGHT_NOTIFICATION_MDNIE_1[] = {
   0x30,	
   0xC3,	
   0x06,	
-  0x40,	 //iove_skin_dark_w_x
-  0x50,	
+  0x40,	 //iove_skin_dark_w
+  0x40,	
   0x20,	
   0x40,	 
   0x00,	
@@ -5050,7 +5149,7 @@ static char LIGHT_NOTIFICATION_MDNIE_1[] = {
   0x00,	
   0x60,	
   0x30,	
-  0x60,	
+  0x60,			
 };
 
 static char LIGHT_NOTIFICATION_MDNIE_2[] = {
@@ -5272,7 +5371,7 @@ static char LIGHT_NOTIFICATION_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -5440,9 +5539,9 @@ static unsigned char HDR_VIDEO_1_MDNIE_1[] = {
   0x03,	 //iove_pixel_num
   0xFF,	 
   0x01,	 //iove_trans_stretch_en 
-  0x05,	 //iove_trans_stretch_w
+  0x08,	 //iove_trans_stretch_w
   0x01,	 //iove_trans_curve_en
-  0x05,	 //iove_trans_curve_w
+  0x08,	 //iove_trans_curve_w
   0x01,	 //iove_pattern_en
   0x50,	 //iove_pattern_min
   0x7A,	
@@ -5472,8 +5571,8 @@ static unsigned char HDR_VIDEO_1_MDNIE_1[] = {
   0x26,	 //iove_cs_low_max
   0x01,	 //iove_skin_cs_prob_en
   0x28,	 //iove_skin_cs_prob_increase
-  0x01,	 //iove_skin_cs_gain
-  0x00,	  
+  0x00,	 //iove_skin_cs_gain
+  0x10,	 
   0x40,	 //iove_skin_w
   0x6A,	 //iove_skin_CB
   0x9A,	 //iove_skin_cr
@@ -5494,8 +5593,8 @@ static unsigned char HDR_VIDEO_1_MDNIE_1[] = {
   0x30,	
   0xC3,	
   0x06,	
-  0x40,	 //iove_skin_dark_w_x
-  0x50,	
+  0x40,	 //iove_skin_dark_w
+  0x40,	
   0x20,	
   0x40,	 
   0x00,	
@@ -5505,8 +5604,7 @@ static unsigned char HDR_VIDEO_1_MDNIE_1[] = {
   0x00,	
   0x60,	
   0x30,	
-  0x60,	
-		
+  0x60,		
 };
 
 static unsigned char HDR_VIDEO_1_MDNIE_2[] = {
@@ -5728,7 +5826,7 @@ static unsigned char HDR_VIDEO_1_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -5896,9 +5994,9 @@ static unsigned char HDR_VIDEO_2_MDNIE_1[] = {
   0x03,	 //iove_pixel_num
   0xFF,	 
   0x01,	 //iove_trans_stretch_en 
-  0x05,	 //iove_trans_stretch_w
+  0x08,	 //iove_trans_stretch_w
   0x01,	 //iove_trans_curve_en
-  0x05,	 //iove_trans_curve_w
+  0x08,	 //iove_trans_curve_w
   0x01,	 //iove_pattern_en
   0x50,	 //iove_pattern_min
   0x7A,	
@@ -5928,8 +6026,8 @@ static unsigned char HDR_VIDEO_2_MDNIE_1[] = {
   0x26,	 //iove_cs_low_max
   0x01,	 //iove_skin_cs_prob_en
   0x28,	 //iove_skin_cs_prob_increase
-  0x01,	 //iove_skin_cs_gain
-  0x00,	  
+  0x00,	 //iove_skin_cs_gain
+  0x10,	 
   0x40,	 //iove_skin_w
   0x6A,	 //iove_skin_CB
   0x9A,	 //iove_skin_cr
@@ -5950,8 +6048,8 @@ static unsigned char HDR_VIDEO_2_MDNIE_1[] = {
   0x30,	
   0xC3,	
   0x06,	
-  0x40,	 //iove_skin_dark_w_x
-  0x50,	
+  0x40,	 //iove_skin_dark_w
+  0x40,	
   0x20,	
   0x40,	 
   0x00,	
@@ -5961,7 +6059,7 @@ static unsigned char HDR_VIDEO_2_MDNIE_1[] = {
   0x00,	
   0x60,	
   0x30,	
-  0x60,			
+  0x60,	
 };
 
 static unsigned char HDR_VIDEO_2_MDNIE_2[] = {
@@ -5988,7 +6086,7 @@ static unsigned char HDR_VIDEO_2_MDNIE_2[] = {
 	0x00,
 	0x00, //slce_on cadrx_en 0000 0000
 	0x00, //lce_gain 000 0000
-	0x30, //lce_color_gain 00 0000
+	0x15, //lce_color_gain 00 0000
 	0x01, //lce_min_ref_offset
 	0x00,
 	0x70, //lce_illum_gain
@@ -6183,7 +6281,7 @@ static unsigned char HDR_VIDEO_2_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -6317,7 +6415,7 @@ static unsigned char HDR_VIDEO_3_MDNIE_1[] = {
 	0x80,
 	0x08, //ascr_gamma_y16
 	0x00,
-   0x00,	 //iove_on
+  0x00,	 //iove_on
   0x00,	 //iove_gain
   0x00,	 //iove_type
   0x10,	 //iove_histo_range_dark
@@ -6351,9 +6449,9 @@ static unsigned char HDR_VIDEO_3_MDNIE_1[] = {
   0x03,	 //iove_pixel_num
   0xFF,	 
   0x01,	 //iove_trans_stretch_en 
-  0x05,	 //iove_trans_stretch_w
+  0x08,	 //iove_trans_stretch_w
   0x01,	 //iove_trans_curve_en
-  0x05,	 //iove_trans_curve_w
+  0x08,	 //iove_trans_curve_w
   0x01,	 //iove_pattern_en
   0x50,	 //iove_pattern_min
   0x7A,	
@@ -6383,8 +6481,8 @@ static unsigned char HDR_VIDEO_3_MDNIE_1[] = {
   0x26,	 //iove_cs_low_max
   0x01,	 //iove_skin_cs_prob_en
   0x28,	 //iove_skin_cs_prob_increase
-  0x01,	 //iove_skin_cs_gain
-  0x00,	  
+  0x00,	 //iove_skin_cs_gain
+  0x10,	 
   0x40,	 //iove_skin_w
   0x6A,	 //iove_skin_CB
   0x9A,	 //iove_skin_cr
@@ -6405,8 +6503,8 @@ static unsigned char HDR_VIDEO_3_MDNIE_1[] = {
   0x30,	
   0xC3,	
   0x06,	
-  0x40,	 //iove_skin_dark_w_x
-  0x50,	
+  0x40,	 //iove_skin_dark_w
+  0x40,	
   0x20,	
   0x40,	 
   0x00,	
@@ -6416,7 +6514,7 @@ static unsigned char HDR_VIDEO_3_MDNIE_1[] = {
   0x00,	
   0x60,	
   0x30,	
-  0x60,			
+  0x60,	
 };
 
 static unsigned char HDR_VIDEO_3_MDNIE_2[] = {
@@ -6638,7 +6736,7 @@ static unsigned char HDR_VIDEO_3_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -6993,7 +7091,7 @@ static unsigned char HDR_VIDEO_4_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -7348,7 +7446,7 @@ static unsigned char HDR_VIDEO_5_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -7483,49 +7581,49 @@ static unsigned char VIDEO_ENHANCER_D65_MDNIE_1[] = {
 	0x08, //ascr_gamma_y16
 	0x00,
   0x00,	 //iove_on
-  0x01,	 //iove_gain
+  0x00,	 //iove_gain
   0x00,	 //iove_type
   0x10,	 //iove_histo_range_dark
-  0xfb,	 //iove_histo_range_light
+  0xf9,	 //iove_histo_range_light
   0x01,	 //iove_diff_en
   0x00,	 //iove_diff_dark_min
   0xE0,	
-  0x00,	 //iove_diff_dark_ma
+  0x00,	 //iove_diff_dark_max
   0x20,	
   0x01,	 //iove_diff_light_min
   0x00,	 
-  0x00,	 //iove_diff_light_ma
+  0x00,	 //iove_diff_light_max
   0x00,	
   0x01,	 //iove_slope_en 
   0x18,	 //iove_slope_dark_min
   0x00,	  
   0xE0,	 
-  0xE0,	 //iove_slope_dark_ma
+  0xE0,	 //iove_slope_dark_max
   0x00,	 
   0x30,	
   0x18,	 //iove_slope_light_min
   0x00,	
   0xE0,	 
-  0xE0,	 //iove_slope_light_ma
+  0xE0,	 //iove_slope_light_max
   0x00,	
   0x20,	
   0x01,	 //iove_same_diff
   0x00,	 
   0x01,	 //iove_smoothing_en
   0x40,	 //iove_stretch_w
-  0x03,	 //iove_pi
+  0x03,	 //iove_pixel_num
   0xFF,	 
   0x01,	 //iove_trans_stretch_en 
   0x08,	 //iove_trans_stretch_w
   0x01,	 //iove_trans_curve_en
-  0x05,	 //iove_trans_curve_w
+  0x08,	 //iove_trans_curve_w
   0x01,	 //iove_pattern_en
   0x50,	 //iove_pattern_min
   0x7A,	
   0x80,	
   0x01,	 //iove_bg_en
   0x40,	 //iove_bg_min
-  0x60,	
+  0x50,	
   0x00,	
   0x01,	 //iove_histo_ration_en
   0x00,	 //iove_histo_min
@@ -7533,23 +7631,23 @@ static unsigned char VIDEO_ENHANCER_D65_MDNIE_1[] = {
   0x20,	 
   0x00,	
   0x01,	 //iove_cs_en 
-  0x01,	 //iove_cs_dark_min 400
-  0x72,	 
-  0x01,	 //iove_cs_dark_ma
-  0xD6,	
-  0x01,	 //iove_cs_light_min 400
-  0x72,	 
-  0x01,	 //iove_cs_light_ma
-  0x0E,	
+  0x01,	 //iove_cs_dark_min
+  0x90,	 
+  0x01,	 //iove_cs_dark_max
+  0xF4,	
+  0x01,	 //iove_cs_light_min
+  0x90,	 
+  0x01,	 //iove_cs_light_max
+  0x2c,	
   0x01,	 //iove_cs_low_en
   0x0D,	 //iove_cs_low_min
   0x00,	 
   0x00,	
-  0x26,	 //iove_cs_low_ma
+  0x26,	 //iove_cs_low_max
   0x01,	 //iove_skin_cs_prob_en
   0x28,	 //iove_skin_cs_prob_increase
-  0x01,	 //iove_skin_cs_gain
-  0x00,	 
+  0x00,	 //iove_skin_cs_gain
+  0x10,	 
   0x40,	 //iove_skin_w
   0x6A,	 //iove_skin_CB
   0x9A,	 //iove_skin_cr
@@ -7571,17 +7669,17 @@ static unsigned char VIDEO_ENHANCER_D65_MDNIE_1[] = {
   0xC3,	
   0x06,	
   0x40,	 //iove_skin_dark_w
-  0x10,	
-  0x20,	
-  0x10,	 
-  0x00,	
-  0x10,	
   0x40,	
-  0x10,	
+  0x20,	
+  0x40,	 
   0x00,	
-  0x10,	
+  0x60,	
+  0x40,	
+  0x60,	
+  0x00,	
+  0x60,	
   0x30,	
-  0x10,			
+  0x60,	
 };
 
 static unsigned char VIDEO_ENHANCER_D65_MDNIE_2[] = {
@@ -7803,7 +7901,7 @@ static unsigned char VIDEO_ENHANCER_D65_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -7813,7 +7911,7 @@ static unsigned char VIDEO_ENHANCER_D65_MDNIE_3[] = {
 static unsigned char VIDEO_ENHANCER_AUTO_MDNIE_1[] = {
 	//start
 	0xDF,
-  0x01,	 //linear_on
+	0x01, //linear_on ascr_skin_on 0000 0000
   0x6A,	 //ascr_skin_cb
   0x9A,	 //ascr_skin_cr
   0x25,	 //ascr_dist_up
@@ -7833,10 +7931,10 @@ static unsigned char VIDEO_ENHANCER_AUTO_MDNIE_1[] = {
   0x30,	
   0xC3,	
   0xFF,	 //ascr_skin_Rr
-  0x41,	 //ascr_skin_Rg
-  0x32,	 //ascr_skin_Rb
+  0x37,	 //ascr_skin_Rg
+  0x19,	 //ascr_skin_Rb
   0xFF,	 //ascr_skin_Yr
-  0xFA,	 //ascr_skin_Yg
+  0xF7,	 //ascr_skin_Yg
   0x00,	 //ascr_skin_Yb
   0xFF,	 //ascr_skin_Mr
   0x00,	 //ascr_skin_Mg
@@ -7845,13 +7943,13 @@ static unsigned char VIDEO_ENHANCER_AUTO_MDNIE_1[] = {
   0xFF,	 //ascr_skin_Wg
   0xFF,	 //ascr_skin_Wb
   0x00,	 //ascr_Cr
-  0xff,	 //ascr_Rr
-  0xFF,	 //ascr_Cg
+  0xF8,	 //ascr_Rr
+  0xEF,	 //ascr_Cg
   0x00,	 //ascr_Rg
-  0xF7,	 //ascr_Cb
+  0xFF,	 //ascr_Cb
   0x00,	 //ascr_Rb
   0xFF,	 //ascr_Mr
-  0x28,	 //ascr_Gr
+  0x4E,	 //ascr_Gr
   0x00,	 //ascr_Mg
   0xFF,	 //ascr_Gg
   0xFF,	 //ascr_Mb
@@ -7971,9 +8069,9 @@ static unsigned char VIDEO_ENHANCER_AUTO_MDNIE_1[] = {
   0x03,	 //iove_pixel_num
   0xFF,	 
   0x01,	 //iove_trans_stretch_en 
-  0x05,	 //iove_trans_stretch_w
+  0x04,	 //iove_trans_stretch_w
   0x01,	 //iove_trans_curve_en
-  0x05,	 //iove_trans_curve_w
+  0x04,	 //iove_trans_curve_w
   0x01,	 //iove_pattern_en
   0x50,	 //iove_pattern_min
   0x7A,	
@@ -8003,8 +8101,8 @@ static unsigned char VIDEO_ENHANCER_AUTO_MDNIE_1[] = {
   0x26,	 //iove_cs_low_max
   0x01,	 //iove_skin_cs_prob_en
   0x28,	 //iove_skin_cs_prob_increase
-  0x00,	 //iove_skin_cs_gain
-  0x50,	 
+  0x01,	 //iove_skin_cs_gain
+  0x00,	 
   0x40,	 //iove_skin_w
   0x6A,	 //iove_skin_CB
   0x9A,	 //iove_skin_cr
@@ -8025,7 +8123,7 @@ static unsigned char VIDEO_ENHANCER_AUTO_MDNIE_1[] = {
   0x30,	
   0xC3,	
   0x06,	
-  0x40,	 //iove_skin_dark_w_x
+  0x40,	 //iove_skin_dark_w
   0x50,	
   0x20,	
   0x40,	 
@@ -8258,7 +8356,7 @@ static unsigned char VIDEO_ENHANCER_AUTO_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -8394,49 +8492,49 @@ static unsigned char VIDEO_ENHANCER_THIRD_D65_MDNIE_1[] = {
 	0x08, //ascr_gamma_y16
 	0x00,
   0x00,	 //iove_on
-  0x01,	 //iove_gain
+  0x00,	 //iove_gain
   0x00,	 //iove_type
-  0x04,	 //iove_histo_range_dark
-  0xfb,	 //iove_histo_range_light
+  0x10,	 //iove_histo_range_dark
+  0xf9,	 //iove_histo_range_light
   0x01,	 //iove_diff_en
   0x00,	 //iove_diff_dark_min
   0xE0,	
-  0x00,	 //iove_diff_dark_ma
+  0x00,	 //iove_diff_dark_max
   0x20,	
   0x01,	 //iove_diff_light_min
   0x00,	 
-  0x00,	 //iove_diff_light_ma
+  0x00,	 //iove_diff_light_max
   0x00,	
   0x01,	 //iove_slope_en 
   0x18,	 //iove_slope_dark_min
   0x00,	  
   0xE0,	 
-  0xE0,	 //iove_slope_dark_ma
+  0xE0,	 //iove_slope_dark_max
   0x00,	 
   0x30,	
   0x18,	 //iove_slope_light_min
   0x00,	
   0xE0,	 
-  0xE0,	 //iove_slope_light_ma
+  0xE0,	 //iove_slope_light_max
   0x00,	
   0x20,	
   0x01,	 //iove_same_diff
   0x00,	 
   0x01,	 //iove_smoothing_en
   0x40,	 //iove_stretch_w
-  0x03,	 //iove_pi
+  0x03,	 //iove_pixel_num
   0xFF,	 
   0x01,	 //iove_trans_stretch_en 
-  0x08,	 //iove_trans_stretch_w
+  0x04,	 //iove_trans_stretch_w
   0x01,	 //iove_trans_curve_en
-  0x05,	 //iove_trans_curve_w
+  0x04,	 //iove_trans_curve_w
   0x01,	 //iove_pattern_en
   0x50,	 //iove_pattern_min
   0x7A,	
   0x80,	
   0x01,	 //iove_bg_en
   0x40,	 //iove_bg_min
-  0x60,	
+  0x50,	
   0x00,	
   0x01,	 //iove_histo_ration_en
   0x00,	 //iove_histo_min
@@ -8444,19 +8542,19 @@ static unsigned char VIDEO_ENHANCER_THIRD_D65_MDNIE_1[] = {
   0x20,	 
   0x00,	
   0x01,	 //iove_cs_en 
-  0x01,	 //iove_cs_dark_min 400
-  0x72,	 
-  0x01,	 //iove_cs_dark_ma
-  0xD6,	
-  0x01,	 //iove_cs_light_min 400
-  0x72,	 
-  0x01,	 //iove_cs_light_ma
-  0x0E,	
+  0x01,	 //iove_cs_dark_min
+  0x90,	 
+  0x01,	 //iove_cs_dark_max
+  0xF4,	
+  0x01,	 //iove_cs_light_min
+  0x90,	 
+  0x01,	 //iove_cs_light_max
+  0x2c,	
   0x01,	 //iove_cs_low_en
   0x0D,	 //iove_cs_low_min
   0x00,	 
   0x00,	
-  0x26,	 //iove_cs_low_ma
+  0x26,	 //iove_cs_low_max
   0x01,	 //iove_skin_cs_prob_en
   0x28,	 //iove_skin_cs_prob_increase
   0x01,	 //iove_skin_cs_gain
@@ -8482,17 +8580,17 @@ static unsigned char VIDEO_ENHANCER_THIRD_D65_MDNIE_1[] = {
   0xC3,	
   0x06,	
   0x40,	 //iove_skin_dark_w
-  0x10,	
-  0x20,	
-  0x10,	 
-  0x00,	
-  0x10,	
   0x40,	
-  0x10,	
+  0x20,	
+  0x40,	 
   0x00,	
-  0x10,	
+  0x60,	
+  0x40,	
+  0x60,	
+  0x00,	
+  0x60,	
   0x30,	
-  0x10,			
+  0x60,	
 };
 
 static unsigned char VIDEO_ENHANCER_THIRD_D65_MDNIE_2[] = {
@@ -8714,7 +8812,7 @@ static unsigned char VIDEO_ENHANCER_THIRD_D65_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -8724,61 +8822,61 @@ static unsigned char VIDEO_ENHANCER_THIRD_D65_MDNIE_3[] = {
 static unsigned char VIDEO_ENHANCER_THIRD_AUTO_MDNIE_1[] = {
 	//start
 	0xDF,
-  0x01,	 //linear_on
-  0x6A,	 //ascr_skin_cb
-  0x9A,	 //ascr_skin_cr
-  0x25,	 //ascr_dist_up
-  0x1A,	 //ascr_dist_down
-  0x16,	 //ascr_dist_right
-  0x2A,	 //ascr_dist_left
-  0x00,	 //ascr_div_up 20
-  0x37,	
-  0x5A,	
-  0x00,	 //ascr_div_down
-  0x4E,	
-  0xC5,	
-  0x00,	 //ascr_div_right
-  0x5D,	
-  0x17,	
-  0x00,	 //ascr_div_left
-  0x30,	
-  0xC3,	
-  0xFF,	 //ascr_skin_Rr
-  0x41,	 //ascr_skin_Rg
-  0x32,	 //ascr_skin_Rb
-  0xFF,	 //ascr_skin_Yr
-  0xFA,	 //ascr_skin_Yg
-  0x00,	 //ascr_skin_Yb
-  0xFF,	 //ascr_skin_Mr
-  0x00,	 //ascr_skin_Mg
-  0xFF,	 //ascr_skin_Mb
-  0xFF,	 //ascr_skin_Wr
-  0xFF,	 //ascr_skin_Wg
-  0xFF,	 //ascr_skin_Wb
-  0x00,	 //ascr_Cr
-  0xff,	 //ascr_Rr
-  0xFF,	 //ascr_Cg
-  0x00,	 //ascr_Rg
-  0xF7,	 //ascr_Cb
-  0x00,	 //ascr_Rb
-  0xFF,	 //ascr_Mr
-  0x28,	 //ascr_Gr
-  0x00,	 //ascr_Mg
-  0xFF,	 //ascr_Gg
-  0xFF,	 //ascr_Mb
-  0x00,	 //ascr_Gb
-  0xFF,	 //ascr_Yr
-  0x00,	 //ascr_Br
-  0xF7,	 //ascr_Yg
-  0x00,	 //ascr_Bg
-  0x00,	 //ascr_Yb
-  0xFF,	 //ascr_Bb
-  0xFF,	 //ascr_Wr
-  0x00,	 //ascr_Kr
-  0xFF,	 //ascr_Wg
-  0x00,	 //ascr_Kg
-  0xFF,	 //ascr_Wb
-  0x00,	 //ascr_Kb
+	0x01, //linear_on ascr_skin_on 0000 0000
+	0x6a, //ascr_skin_cb
+	0x9a, //ascr_skin_cr
+	0x25, //ascr_dist_up
+	0x1a, //ascr_dist_down
+	0x16, //ascr_dist_right
+	0x2a, //ascr_dist_left
+	0x00, //ascr_div_up 20
+	0x37,
+	0x5a,
+	0x00, //ascr_div_down
+	0x4e,
+	0xc5,
+	0x00, //ascr_div_right
+	0x5d,
+	0x17,
+	0x00, //ascr_div_left
+	0x30,
+	0xc3,
+	0xff, //ascr_skin_Rr
+	0x50, //ascr_skin_Rg
+	0x48, //ascr_skin_Rb
+	0xff, //ascr_skin_Yr
+	0xf7, //ascr_skin_Yg
+	0x00, //ascr_skin_Yb
+	0xff, //ascr_skin_Mr
+	0x00, //ascr_skin_Mg
+	0xff, //ascr_skin_Mb
+	0xff, //ascr_skin_Wr
+	0xff, //ascr_skin_Wg
+	0xff, //ascr_skin_Wb
+	0x00, //ascr_Cr
+	0xf8, //ascr_Rr
+	0xef, //ascr_Cg
+	0x00, //ascr_Rg
+	0xff, //ascr_Cb
+	0x00, //ascr_Rb
+	0xff, //ascr_Mr
+	0x4e, //ascr_Gr
+	0x00, //ascr_Mg
+	0xff, //ascr_Gg
+	0xff, //ascr_Mb
+	0x00, //ascr_Gb
+	0xff, //ascr_Yr
+	0x00, //ascr_Br
+	0xf7, //ascr_Yg
+	0x00, //ascr_Bg
+	0x00, //ascr_Yb
+	0xff, //ascr_Bb
+	0xff, //ascr_Wr
+	0x00, //ascr_Kr
+	0xff, //ascr_Wg
+	0x00, //ascr_Kg
+	0xff, //ascr_Wb
+	0x00, //ascr_Kb
 	0x08, //ascr_gamma_w
 	0x00, //ascr_gamma_x0
 	0x00,
@@ -8882,9 +8980,9 @@ static unsigned char VIDEO_ENHANCER_THIRD_AUTO_MDNIE_1[] = {
   0x03,	 //iove_pixel_num
   0xFF,	 
   0x01,	 //iove_trans_stretch_en 
-  0x05,	 //iove_trans_stretch_w
+  0x04,	 //iove_trans_stretch_w
   0x01,	 //iove_trans_curve_en
-  0x05,	 //iove_trans_curve_w
+  0x04,	 //iove_trans_curve_w
   0x01,	 //iove_pattern_en
   0x50,	 //iove_pattern_min
   0x7A,	
@@ -8914,8 +9012,8 @@ static unsigned char VIDEO_ENHANCER_THIRD_AUTO_MDNIE_1[] = {
   0x26,	 //iove_cs_low_max
   0x01,	 //iove_skin_cs_prob_en
   0x28,	 //iove_skin_cs_prob_increase
-  0x00,	 //iove_skin_cs_gain
-  0x50,	 
+  0x01,	 //iove_skin_cs_gain
+  0x00,	 
   0x40,	 //iove_skin_w
   0x6A,	 //iove_skin_CB
   0x9A,	 //iove_skin_cr
@@ -8936,7 +9034,7 @@ static unsigned char VIDEO_ENHANCER_THIRD_AUTO_MDNIE_1[] = {
   0x30,	
   0xC3,	
   0x06,	
-  0x40,	 //iove_skin_dark_w_x
+  0x40,	 //iove_skin_dark_w
   0x50,	
   0x20,	
   0x40,	 
@@ -9169,7 +9267,7 @@ static unsigned char VIDEO_ENHANCER_THIRD_AUTO_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -9180,7 +9278,7 @@ static char UI_DYNAMIC_MDNIE_1[] = {
 	//start
 	0xDF,
 	0x11, //linear_on ascr_skin_on 0000 0000
-	0x6A,	 //ascr_skin_cb
+  0x6A,	 //ascr_skin_cb
   0x9A,	 //ascr_skin_cr
   0x25,	 //ascr_dist_up
   0x1A,	 //ascr_dist_down
@@ -9199,10 +9297,10 @@ static char UI_DYNAMIC_MDNIE_1[] = {
   0x30,	
   0xC3,	
   0xFF,	 //ascr_skin_Rr
-  0x41,	 //ascr_skin_Rg
-  0x32,	 //ascr_skin_Rb
+  0x37,	 //ascr_skin_Rg
+  0x19,	 //ascr_skin_Rb
   0xFF,	 //ascr_skin_Yr
-  0xFA,	 //ascr_skin_Yg
+  0xF7,	 //ascr_skin_Yg
   0x00,	 //ascr_skin_Yb
   0xFF,	 //ascr_skin_Mr
   0x00,	 //ascr_skin_Mg
@@ -9210,29 +9308,29 @@ static char UI_DYNAMIC_MDNIE_1[] = {
   0xFF,	 //ascr_skin_Wr
   0xFF,	 //ascr_skin_Wg
   0xFF,	 //ascr_skin_Wb
-  0x53,	 //ascr_Cr
-  0xF2,	 //ascr_Rr
-  0xFC,	 //ascr_Cg
-  0x22,	 //ascr_Rg
-  0xF4,	 //ascr_Cb
+  0x61,	 //ascr_Cr
+  0xEA,	 //ascr_Rr
+  0xF8,	 //ascr_Cg
+  0x20,	 //ascr_Rg
+  0xF7,	 //ascr_Cb
   0x00,	 //ascr_Rb
-  0xF4,	 //ascr_Mr
+  0xF6,	 //ascr_Mr
   0x46,	 //ascr_Gr
-  0x28,	 //ascr_Mg
-  0xF8,	 //ascr_Gg
+  0x14,	 //ascr_Mg
+  0xEB,	 //ascr_Gg
   0xEC,	 //ascr_Mb
   0x00,	 //ascr_Gb
-  0xFA,	 //ascr_Yr
-  0x42,	 //ascr_Br
-  0xFA,	 //ascr_Yg
+  0xF6,	 //ascr_Yr
+  0x46,	 //ascr_Br
+  0xF0,	 //ascr_Yg
   0x00,	 //ascr_Bg
   0x00,	 //ascr_Yb
-  0xF4,	 //ascr_Bb
+  0xF8,	 //ascr_Bb
   0xFF,	 //ascr_Wr
   0x00,	 //ascr_Kr
-  0xFC,	 //ascr_Wg
+  0xFA,	 //ascr_Wg
   0x00,	 //ascr_Kg
-  0xF6,	 //ascr_Wb
+  0xF4,	 //ascr_Wb
   0x00,	 //ascr_Kb
 	0x00, //ascr_gamma_w
 	0x00, //ascr_gamma_x0
@@ -9337,9 +9435,9 @@ static char UI_DYNAMIC_MDNIE_1[] = {
   0x03,	 //iove_pixel_num
   0xFF,	 
   0x01,	 //iove_trans_stretch_en 
-  0x05,	 //iove_trans_stretch_w
+  0x04,	 //iove_trans_stretch_w
   0x01,	 //iove_trans_curve_en
-  0x05,	 //iove_trans_curve_w
+  0x04,	 //iove_trans_curve_w
   0x01,	 //iove_pattern_en
   0x50,	 //iove_pattern_min
   0x7A,	
@@ -9369,8 +9467,8 @@ static char UI_DYNAMIC_MDNIE_1[] = {
   0x26,	 //iove_cs_low_max
   0x01,	 //iove_skin_cs_prob_en
   0x28,	 //iove_skin_cs_prob_increase
-  0x01,	 //iove_skin_cs_gain
-  0x00,	  
+  0x00,	 //iove_skin_cs_gain
+  0x10,	 
   0x40,	 //iove_skin_w
   0x6A,	 //iove_skin_CB
   0x9A,	 //iove_skin_cr
@@ -9391,7 +9489,7 @@ static char UI_DYNAMIC_MDNIE_1[] = {
   0x30,	
   0xC3,	
   0x06,	
-  0x40,	 //iove_skin_dark_w_x
+  0x40,	 //iove_skin_dark_w
   0x50,	
   0x20,	
   0x40,	 
@@ -9624,7 +9722,7 @@ static char UI_DYNAMIC_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -9979,7 +10077,7 @@ static char UI_STANDARD_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -10334,7 +10432,7 @@ static char UI_NATURAL_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -10344,7 +10442,7 @@ static char UI_NATURAL_MDNIE_3[] = {
 static char UI_AUTO_MDNIE_1[] = {
 	//start
 	0xDF,
-  0x01,	 //linear_on
+	0x01, //linear_on ascr_skin_on 0000 0000
   0x6A,	 //ascr_skin_cb
   0x9A,	 //ascr_skin_cr
   0x25,	 //ascr_dist_up
@@ -10364,10 +10462,10 @@ static char UI_AUTO_MDNIE_1[] = {
   0x30,	
   0xC3,	
   0xFF,	 //ascr_skin_Rr
-  0x41,	 //ascr_skin_Rg
-  0x32,	 //ascr_skin_Rb
+  0x37,	 //ascr_skin_Rg
+  0x19,	 //ascr_skin_Rb
   0xFF,	 //ascr_skin_Yr
-  0xFA,	 //ascr_skin_Yg
+  0xF7,	 //ascr_skin_Yg
   0x00,	 //ascr_skin_Yb
   0xFF,	 //ascr_skin_Mr
   0x00,	 //ascr_skin_Mg
@@ -10376,13 +10474,13 @@ static char UI_AUTO_MDNIE_1[] = {
   0xFF,	 //ascr_skin_Wg
   0xFF,	 //ascr_skin_Wb
   0x00,	 //ascr_Cr
-  0xff,	 //ascr_Rr
-  0xFF,	 //ascr_Cg
+  0xF8,	 //ascr_Rr
+  0xEF,	 //ascr_Cg
   0x00,	 //ascr_Rg
-  0xF7,	 //ascr_Cb
+  0xFF,	 //ascr_Cb
   0x00,	 //ascr_Rb
   0xFF,	 //ascr_Mr
-  0x28,	 //ascr_Gr
+  0x4E,	 //ascr_Gr
   0x00,	 //ascr_Mg
   0xFF,	 //ascr_Gg
   0xFF,	 //ascr_Mb
@@ -10502,9 +10600,9 @@ static char UI_AUTO_MDNIE_1[] = {
   0x03,	 //iove_pixel_num
   0xFF,	 
   0x01,	 //iove_trans_stretch_en 
-  0x05,	 //iove_trans_stretch_w
+  0x04,	 //iove_trans_stretch_w
   0x01,	 //iove_trans_curve_en
-  0x05,	 //iove_trans_curve_w
+  0x04,	 //iove_trans_curve_w
   0x01,	 //iove_pattern_en
   0x50,	 //iove_pattern_min
   0x7A,	
@@ -10535,7 +10633,7 @@ static char UI_AUTO_MDNIE_1[] = {
   0x01,	 //iove_skin_cs_prob_en
   0x28,	 //iove_skin_cs_prob_increase
   0x01,	 //iove_skin_cs_gain
-  0x00,	  
+  0x00,	 
   0x40,	 //iove_skin_w
   0x6A,	 //iove_skin_CB
   0x9A,	 //iove_skin_cr
@@ -10556,7 +10654,7 @@ static char UI_AUTO_MDNIE_1[] = {
   0x30,	
   0xC3,	
   0x06,	
-  0x40,	 //iove_skin_dark_w_x
+  0x40,	 //iove_skin_dark_w
   0x50,	
   0x20,	
   0x40,	 
@@ -10789,7 +10887,7 @@ static char UI_AUTO_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -10800,60 +10898,60 @@ static char VIDEO_DYNAMIC_MDNIE_1[] = {
 	//start
 	0xDF,
 	0x11, //linear_on ascr_skin_on 0000 0000
-	0x6a, //ascr_skin_cb
-	0x9a, //ascr_skin_cr
-	0x25, //ascr_dist_up
-	0x1a, //ascr_dist_down
-	0x16, //ascr_dist_right
-	0x2a, //ascr_dist_left
-	0x00, //ascr_div_up 20
-	0x37,
-	0x5a,
-	0x00, //ascr_div_down
-	0x4e,
-	0xc5,
-	0x00, //ascr_div_right
-	0x5d,
-	0x17,
-	0x00, //ascr_div_left
-	0x30,
-	0xc3,
-	0xf1, //ascr_skin_Rr
-	0x12, //ascr_skin_Rg
-	0x00, //ascr_skin_Rb
-	0xfa, //ascr_skin_Yr
-	0xfc, //ascr_skin_Yg
-	0x00, //ascr_skin_Yb
-	0xf4, //ascr_skin_Mr
-	0x00, //ascr_skin_Mg
-	0xf3, //ascr_skin_Mb
-	0xff, //ascr_skin_Wr
-	0xfc, //ascr_skin_Wg
-	0xf6, //ascr_skin_Wb
-	0x61, //ascr_Cr
-	0xf1, //ascr_Rr
-	0xfc, //ascr_Cg
-	0x12, //ascr_Rg
-	0xf7, //ascr_Cb
-	0x00, //ascr_Rb
-	0xf4, //ascr_Mr
-	0x4c, //ascr_Gr
-	0x00, //ascr_Mg
-	0xfb, //ascr_Gg
-	0xf3, //ascr_Mb
-	0x00, //ascr_Gb
-	0xfa, //ascr_Yr
-	0x34, //ascr_Br
-	0xfc, //ascr_Yg
-	0x00, //ascr_Bg
-	0x00, //ascr_Yb
-	0xf0, //ascr_Bb
-	0xff, //ascr_Wr
-	0x00, //ascr_Kr
-	0xfc, //ascr_Wg
-	0x00, //ascr_Kg
-	0xf6, //ascr_Wb
-	0x00, //ascr_Kb
+  0x6A,	 //ascr_skin_cb
+  0x9A,	 //ascr_skin_cr
+  0x25,	 //ascr_dist_up
+  0x1A,	 //ascr_dist_down
+  0x16,	 //ascr_dist_right
+  0x2A,	 //ascr_dist_left
+  0x00,	 //ascr_div_up 20
+  0x37,	
+  0x5A,	
+  0x00,	 //ascr_div_down
+  0x4E,	
+  0xC5,	
+  0x00,	 //ascr_div_right
+  0x5D,	
+  0x17,	
+  0x00,	 //ascr_div_left
+  0x30,	
+  0xC3,	
+  0xFF,	 //ascr_skin_Rr
+  0x37,	 //ascr_skin_Rg
+  0x19,	 //ascr_skin_Rb
+  0xFF,	 //ascr_skin_Yr
+  0xF7,	 //ascr_skin_Yg
+  0x00,	 //ascr_skin_Yb
+  0xFF,	 //ascr_skin_Mr
+  0x00,	 //ascr_skin_Mg
+  0xFF,	 //ascr_skin_Mb
+  0xFF,	 //ascr_skin_Wr
+  0xFF,	 //ascr_skin_Wg
+  0xFF,	 //ascr_skin_Wb
+  0x61,	 //ascr_Cr
+  0xEA,	 //ascr_Rr
+  0xF8,	 //ascr_Cg
+  0x20,	 //ascr_Rg
+  0xF7,	 //ascr_Cb
+  0x00,	 //ascr_Rb
+  0xF6,	 //ascr_Mr
+  0x46,	 //ascr_Gr
+  0x14,	 //ascr_Mg
+  0xEB,	 //ascr_Gg
+  0xEC,	 //ascr_Mb
+  0x00,	 //ascr_Gb
+  0xF6,	 //ascr_Yr
+  0x46,	 //ascr_Br
+  0xF0,	 //ascr_Yg
+  0x00,	 //ascr_Bg
+  0x00,	 //ascr_Yb
+  0xF8,	 //ascr_Bb
+  0xFF,	 //ascr_Wr
+  0x00,	 //ascr_Kr
+  0xFA,	 //ascr_Wg
+  0x00,	 //ascr_Kg
+  0xF4,	 //ascr_Wb
+  0x00,	 //ascr_Kb
 	0x00, //ascr_gamma_w
 	0x00, //ascr_gamma_x0
 	0x00,
@@ -10957,9 +11055,9 @@ static char VIDEO_DYNAMIC_MDNIE_1[] = {
   0x03,	 //iove_pixel_num
   0xFF,	 
   0x01,	 //iove_trans_stretch_en 
-  0x05,	 //iove_trans_stretch_w
+  0x04,	 //iove_trans_stretch_w
   0x01,	 //iove_trans_curve_en
-  0x05,	 //iove_trans_curve_w
+  0x04,	 //iove_trans_curve_w
   0x01,	 //iove_pattern_en
   0x50,	 //iove_pattern_min
   0x7A,	
@@ -11011,7 +11109,7 @@ static char VIDEO_DYNAMIC_MDNIE_1[] = {
   0x30,	
   0xC3,	
   0x06,	
-  0x40,	 //iove_skin_dark_w_x
+  0x40,	 //iove_skin_dark_w
   0x50,	
   0x20,	
   0x40,	 
@@ -11022,7 +11120,7 @@ static char VIDEO_DYNAMIC_MDNIE_1[] = {
   0x00,	
   0x60,	
   0x30,	
-  0x60,	
+  0x60,		
 };
 
 static char VIDEO_DYNAMIC_MDNIE_2[] = {
@@ -11244,7 +11342,7 @@ static char VIDEO_DYNAMIC_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -11378,6 +11476,106 @@ static char VIDEO_STANDARD_MDNIE_1[] = {
 	0x80,
 	0x08, //ascr_gamma_y16
 	0x00,
+  0x00,	 //iove_on
+  0x00,	 //iove_gain
+  0x00,	 //iove_type
+  0x00,	 //iove_histo_range_dark
+  0xFF,	 //iove_histo_range_light
+  0x01,	 //iove_diff_en
+  0x00,	 //iove_diff_dark_min
+  0x00,	
+  0x00,	 //iove_diff_dark_max
+  0x00,	
+  0x00,	 //iove_diff_light_min
+  0x00,	 
+  0x00,	 //iove_diff_light_max
+  0x00,	
+  0x01,	 //iove_slope_en 
+  0x18,	 //iove_slope_dark_min
+  0x00,	  
+  0x00,	 
+  0xE0,	 //iove_slope_dark_max
+  0x00,	 
+  0x00,	
+  0x18,	 //iove_slope_light_min
+  0x00,	
+  0x00,	 
+  0xE0,	 //iove_slope_light_max
+  0x00,	
+  0x00,	
+  0x01,	 //iove_same_diff
+  0x00,	 
+  0x01,	 //iove_smoothing_en
+  0x00,	 //iove_stretch_w
+  0x03,	 //iove_pixel_num
+  0xFF,	 
+  0x01,	 //iove_trans_stretch_en 
+  0x04,	 //iove_trans_stretch_w
+  0x01,	 //iove_trans_curve_en
+  0x04,	 //iove_trans_curve_w
+  0x00, //iove_pattern_en
+  0x73,	 //iove_pattern_min
+  0x7A,
+  0x80,
+  0x00,	 //iove_bg_en
+  0x40,	 //iove_bg_min
+  0x60,	
+  0x00,	
+  0x00,	 //iove_histo_ration_en
+  0x00,	 //iove_histo_min
+  0x80,	
+  0x20,	 
+  0x00,	
+  0x00,	 //iove_cs_en 
+  0x01,	 //iove_cs_dark_min
+  0x00,	 
+  0x01,	 //iove_cs_dark_max
+  0x00,	
+  0x01,	 //iove_cs_light_min
+  0x00,	 
+  0x01,	 //iove_cs_light_max
+  0x00,	
+  0x00,	 //iove_cs_low_en
+  0x0D,	 //iove_cs_low_min
+  0x01,	 
+  0x00,	
+  0x26,	 //iove_cs_low_max
+  0x00,	 //iove_skin_cs_prob_en
+  0x20,	 //iove_skin_cs_prob_increase
+  0x01,	 //iove_skin_cs_gain
+  0x00,	 
+  0x00,	 //iove_skin_w
+  0x6A,	 //iove_skin_CB
+  0x9A,	 //iove_skin_cr
+  0x0C,	 //dist_u
+  0x0C,	 //dist_d
+  0x0C,	 //dist_r
+  0x0C,	 //dist_l
+  0x00,	 //skin_dist_u
+  0xAA,	
+  0xAB,	
+  0x00,	
+  0xAA,	
+  0xAB,
+  0x00,
+  0xAA,
+  0xAB,	
+  0x00,	
+  0xAA,	
+  0xAB,	
+  0x00,	
+  0x40,	 //iove_skin_dark_w
+  0x40,	
+  0x40,	
+  0x40,	 
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,		
 };
 
 static char VIDEO_STANDARD_MDNIE_2[] = {
@@ -11599,7 +11797,7 @@ static char VIDEO_STANDARD_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -11733,6 +11931,106 @@ static char VIDEO_NATURAL_MDNIE_1[] = {
 	0x80,
 	0x08, //ascr_gamma_y16
 	0x00,
+  0x00,	 //iove_on
+  0x00,	 //iove_gain
+  0x00,	 //iove_type
+  0x00,	 //iove_histo_range_dark
+  0xFF,	 //iove_histo_range_light
+  0x01,	 //iove_diff_en
+  0x00,	 //iove_diff_dark_min
+  0x00,	
+  0x00,	 //iove_diff_dark_max
+  0x00,	
+  0x00,	 //iove_diff_light_min
+  0x00,	 
+  0x00,	 //iove_diff_light_max
+  0x00,	
+  0x01,	 //iove_slope_en 
+  0x18,	 //iove_slope_dark_min
+  0x00,	  
+  0x00,	 
+  0xE0,	 //iove_slope_dark_max
+  0x00,	 
+  0x00,	
+  0x18,	 //iove_slope_light_min
+  0x00,	
+  0x00,	 
+  0xE0,	 //iove_slope_light_max
+  0x00,	
+  0x00,	
+  0x01,	 //iove_same_diff
+  0x00,	 
+  0x01,	 //iove_smoothing_en
+  0x00,	 //iove_stretch_w
+  0x03,	 //iove_pixel_num
+  0xFF,	 
+  0x01,	 //iove_trans_stretch_en 
+  0x04,	 //iove_trans_stretch_w
+  0x01,	 //iove_trans_curve_en
+  0x04,	 //iove_trans_curve_w
+  0x00, //iove_pattern_en
+  0x73,	 //iove_pattern_min
+  0x7A,
+  0x80,
+  0x00,	 //iove_bg_en
+  0x40,	 //iove_bg_min
+  0x60,	
+  0x00,	
+  0x00,	 //iove_histo_ration_en
+  0x00,	 //iove_histo_min
+  0x80,	
+  0x20,	 
+  0x00,	
+  0x00,	 //iove_cs_en 
+  0x01,	 //iove_cs_dark_min
+  0x00,	 
+  0x01,	 //iove_cs_dark_max
+  0x00,	
+  0x01,	 //iove_cs_light_min
+  0x00,	 
+  0x01,	 //iove_cs_light_max
+  0x00,	
+  0x00,	 //iove_cs_low_en
+  0x0D,	 //iove_cs_low_min
+  0x01,	 
+  0x00,	
+  0x26,	 //iove_cs_low_max
+  0x00,	 //iove_skin_cs_prob_en
+  0x20,	 //iove_skin_cs_prob_increase
+  0x01,	 //iove_skin_cs_gain
+  0x00,	 
+  0x00,	 //iove_skin_w
+  0x6A,	 //iove_skin_CB
+  0x9A,	 //iove_skin_cr
+  0x0C,	 //dist_u
+  0x0C,	 //dist_d
+  0x0C,	 //dist_r
+  0x0C,	 //dist_l
+  0x00,	 //skin_dist_u
+  0xAA,	
+  0xAB,	
+  0x00,	
+  0xAA,	
+  0xAB,
+  0x00,
+  0xAA,
+  0xAB,	
+  0x00,	
+  0xAA,	
+  0xAB,	
+  0x00,	
+  0x40,	 //iove_skin_dark_w
+  0x40,	
+  0x40,	
+  0x40,	 
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
 };
 
 static char VIDEO_NATURAL_MDNIE_2[] = {
@@ -11954,7 +12252,7 @@ static char VIDEO_NATURAL_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -11964,7 +12262,7 @@ static char VIDEO_NATURAL_MDNIE_3[] = {
 static char VIDEO_AUTO_MDNIE_1[] = {
 	//start
 	0xDF,
-  0x01,	 //linear_on
+	0x01, //linear_on ascr_skin_on 0000 0000
   0x6A,	 //ascr_skin_cb
   0x9A,	 //ascr_skin_cr
   0x25,	 //ascr_dist_up
@@ -11984,10 +12282,10 @@ static char VIDEO_AUTO_MDNIE_1[] = {
   0x30,	
   0xC3,	
   0xFF,	 //ascr_skin_Rr
-  0x41,	 //ascr_skin_Rg
-  0x32,	 //ascr_skin_Rb
+  0x37,	 //ascr_skin_Rg
+  0x19,	 //ascr_skin_Rb
   0xFF,	 //ascr_skin_Yr
-  0xFA,	 //ascr_skin_Yg
+  0xF7,	 //ascr_skin_Yg
   0x00,	 //ascr_skin_Yb
   0xFF,	 //ascr_skin_Mr
   0x00,	 //ascr_skin_Mg
@@ -11996,13 +12294,13 @@ static char VIDEO_AUTO_MDNIE_1[] = {
   0xFF,	 //ascr_skin_Wg
   0xFF,	 //ascr_skin_Wb
   0x00,	 //ascr_Cr
-  0xff,	 //ascr_Rr
-  0xFF,	 //ascr_Cg
+  0xF8,	 //ascr_Rr
+  0xEF,	 //ascr_Cg
   0x00,	 //ascr_Rg
-  0xF7,	 //ascr_Cb
+  0xFF,	 //ascr_Cb
   0x00,	 //ascr_Rb
   0xFF,	 //ascr_Mr
-  0x28,	 //ascr_Gr
+  0x4E,	 //ascr_Gr
   0x00,	 //ascr_Mg
   0xFF,	 //ascr_Gg
   0xFF,	 //ascr_Mb
@@ -12122,9 +12420,9 @@ static char VIDEO_AUTO_MDNIE_1[] = {
   0x03,	 //iove_pixel_num
   0xFF,	 
   0x01,	 //iove_trans_stretch_en 
-  0x05,	 //iove_trans_stretch_w
+  0x08,	 //iove_trans_stretch_w
   0x01,	 //iove_trans_curve_en
-  0x05,	 //iove_trans_curve_w
+  0x08,	 //iove_trans_curve_w
   0x01,	 //iove_pattern_en
   0x50,	 //iove_pattern_min
   0x7A,	
@@ -12176,7 +12474,7 @@ static char VIDEO_AUTO_MDNIE_1[] = {
   0x30,	
   0xC3,	
   0x06,	
-  0x40,	 //iove_skin_dark_w_x
+  0x40,	 //iove_skin_dark_w
   0x50,	
   0x20,	
   0x40,	 
@@ -12409,9 +12707,9 @@ static char VIDEO_AUTO_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
-	0x06, //trans_slope
+	0x04, //trans_slope
 	0x01, //trans_interval
 	//end
 };
@@ -12420,7 +12718,7 @@ static char CAMERA_DYNAMIC_MDNIE_1[] = {
 	//start
 	0xDF,
 	0x11, //linear_on ascr_skin_on 0000 0000
-  0x6A,	 //ascr_skin_cb
+ 0x6A,	 //ascr_skin_cb
   0x9A,	 //ascr_skin_cr
   0x25,	 //ascr_dist_up
   0x1A,	 //ascr_dist_down
@@ -12439,10 +12737,10 @@ static char CAMERA_DYNAMIC_MDNIE_1[] = {
   0x30,	
   0xC3,	
   0xFF,	 //ascr_skin_Rr
-  0x41,	 //ascr_skin_Rg
-  0x32,	 //ascr_skin_Rb
+  0x37,	 //ascr_skin_Rg
+  0x19,	 //ascr_skin_Rb
   0xFF,	 //ascr_skin_Yr
-  0xFA,	 //ascr_skin_Yg
+  0xF7,	 //ascr_skin_Yg
   0x00,	 //ascr_skin_Yb
   0xFF,	 //ascr_skin_Mr
   0x00,	 //ascr_skin_Mg
@@ -12450,29 +12748,29 @@ static char CAMERA_DYNAMIC_MDNIE_1[] = {
   0xFF,	 //ascr_skin_Wr
   0xFF,	 //ascr_skin_Wg
   0xFF,	 //ascr_skin_Wb
-  0x53,	 //ascr_Cr
-  0xF2,	 //ascr_Rr
-  0xFC,	 //ascr_Cg
-  0x22,	 //ascr_Rg
-  0xF4,	 //ascr_Cb
+  0x61,	 //ascr_Cr
+  0xEA,	 //ascr_Rr
+  0xF8,	 //ascr_Cg
+  0x20,	 //ascr_Rg
+  0xF7,	 //ascr_Cb
   0x00,	 //ascr_Rb
-  0xF4,	 //ascr_Mr
+  0xF6,	 //ascr_Mr
   0x46,	 //ascr_Gr
-  0x28,	 //ascr_Mg
-  0xF8,	 //ascr_Gg
+  0x14,	 //ascr_Mg
+  0xEB,	 //ascr_Gg
   0xEC,	 //ascr_Mb
   0x00,	 //ascr_Gb
-  0xFA,	 //ascr_Yr
-  0x42,	 //ascr_Br
-  0xFA,	 //ascr_Yg
+  0xF6,	 //ascr_Yr
+  0x46,	 //ascr_Br
+  0xF0,	 //ascr_Yg
   0x00,	 //ascr_Bg
   0x00,	 //ascr_Yb
-  0xF4,	 //ascr_Bb
+  0xF8,	 //ascr_Bb
   0xFF,	 //ascr_Wr
   0x00,	 //ascr_Kr
-  0xFC,	 //ascr_Wg
+  0xFA,	 //ascr_Wg
   0x00,	 //ascr_Kg
-  0xF6,	 //ascr_Wb
+  0xF4,	 //ascr_Wb
   0x00,	 //ascr_Kb
 	0x00, //ascr_gamma_w
 	0x00, //ascr_gamma_x0
@@ -12577,9 +12875,9 @@ static char CAMERA_DYNAMIC_MDNIE_1[] = {
   0x03,	 //iove_pixel_num
   0xFF,	 
   0x01,	 //iove_trans_stretch_en 
-  0x05,	 //iove_trans_stretch_w
+  0x08,	 //iove_trans_stretch_w
   0x01,	 //iove_trans_curve_en
-  0x05,	 //iove_trans_curve_w
+  0x08,	 //iove_trans_curve_w
   0x01,	 //iove_pattern_en
   0x50,	 //iove_pattern_min
   0x7A,	
@@ -12631,7 +12929,7 @@ static char CAMERA_DYNAMIC_MDNIE_1[] = {
   0x30,	
   0xC3,	
   0x06,	
-  0x40,	 //iove_skin_dark_w_x
+  0x40,	 //iove_skin_dark_w
   0x50,	
   0x20,	
   0x40,	 
@@ -12864,7 +13162,7 @@ static char CAMERA_DYNAMIC_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+  0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -12998,6 +13296,106 @@ static char CAMERA_STANDARD_MDNIE_1[] = {
 	0x80,
 	0x08, //ascr_gamma_y16
 	0x00,
+  0x00,	 //iove_on
+  0x00,	 //iove_gain
+  0x00,	 //iove_type
+  0x00,	 //iove_histo_range_dark
+  0xFF,	 //iove_histo_range_light
+  0x01,	 //iove_diff_en
+  0x00,	 //iove_diff_dark_min
+  0x00,	
+  0x00,	 //iove_diff_dark_max
+  0x00,	
+  0x00,	 //iove_diff_light_min
+  0x00,	 
+  0x00,	 //iove_diff_light_max
+  0x00,	
+  0x01,	 //iove_slope_en 
+  0x18,	 //iove_slope_dark_min
+  0x00,	  
+  0x00,	 
+  0xE0,	 //iove_slope_dark_max
+  0x00,	 
+  0x00,	
+  0x18,	 //iove_slope_light_min
+  0x00,	
+  0x00,	 
+  0xE0,	 //iove_slope_light_max
+  0x00,	
+  0x00,	
+  0x01,	 //iove_same_diff
+  0x00,	 
+  0x01,	 //iove_smoothing_en
+  0x00,	 //iove_stretch_w
+  0x03,	 //iove_pixel_num
+  0xFF,	 
+  0x01,	 //iove_trans_stretch_en 
+  0x08,	 //iove_trans_stretch_w
+  0x01,	 //iove_trans_curve_en
+  0x08,	 //iove_trans_curve_w
+  0x00, //iove_pattern_en
+  0x73,	 //iove_pattern_min
+  0x7A,
+  0x80,
+  0x00,	 //iove_bg_en
+  0x40,	 //iove_bg_min
+  0x60,	
+  0x00,	
+  0x00,	 //iove_histo_ration_en
+  0x00,	 //iove_histo_min
+  0x80,	
+  0x20,	 
+  0x00,	
+  0x00,	 //iove_cs_en 
+  0x01,	 //iove_cs_dark_min
+  0x00,	 
+  0x01,	 //iove_cs_dark_max
+  0x00,	
+  0x01,	 //iove_cs_light_min
+  0x00,	 
+  0x01,	 //iove_cs_light_max
+  0x00,	
+  0x00,	 //iove_cs_low_en
+  0x0D,	 //iove_cs_low_min
+  0x01,	 
+  0x00,	
+  0x26,	 //iove_cs_low_max
+  0x00,	 //iove_skin_cs_prob_en
+  0x20,	 //iove_skin_cs_prob_increase
+  0x01,	 //iove_skin_cs_gain
+  0x00,	 
+  0x00,	 //iove_skin_w
+  0x6A,	 //iove_skin_CB
+  0x9A,	 //iove_skin_cr
+  0x0C,	 //dist_u
+  0x0C,	 //dist_d
+  0x0C,	 //dist_r
+  0x0C,	 //dist_l
+  0x00,	 //skin_dist_u
+  0xAA,	
+  0xAB,	
+  0x00,	
+  0xAA,	
+  0xAB,
+  0x00,
+  0xAA,
+  0xAB,	
+  0x00,	
+  0xAA,	
+  0xAB,	
+  0x00,	
+  0x40,	 //iove_skin_dark_w
+  0x40,	
+  0x40,	
+  0x40,	 
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
 };
 
 static char CAMERA_STANDARD_MDNIE_2[] = {
@@ -13219,7 +13617,7 @@ static char CAMERA_STANDARD_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -13353,6 +13751,106 @@ static char CAMERA_NATURAL_MDNIE_1[] = {
 	0x80,
 	0x08, //ascr_gamma_y16
 	0x00,
+  0x00,	 //iove_on
+  0x00,	 //iove_gain
+  0x00,	 //iove_type
+  0x00,	 //iove_histo_range_dark
+  0xFF,	 //iove_histo_range_light
+  0x01,	 //iove_diff_en
+  0x00,	 //iove_diff_dark_min
+  0x00,	
+  0x00,	 //iove_diff_dark_max
+  0x00,	
+  0x00,	 //iove_diff_light_min
+  0x00,	 
+  0x00,	 //iove_diff_light_max
+  0x00,	
+  0x01,	 //iove_slope_en 
+  0x18,	 //iove_slope_dark_min
+  0x00,	  
+  0x00,	 
+  0xE0,	 //iove_slope_dark_max
+  0x00,	 
+  0x00,	
+  0x18,	 //iove_slope_light_min
+  0x00,	
+  0x00,	 
+  0xE0,	 //iove_slope_light_max
+  0x00,	
+  0x00,	
+  0x01,	 //iove_same_diff
+  0x00,	 
+  0x01,	 //iove_smoothing_en
+  0x00,	 //iove_stretch_w
+  0x03,	 //iove_pixel_num
+  0xFF,	 
+  0x01,	 //iove_trans_stretch_en 
+  0x04,	 //iove_trans_stretch_w
+  0x01,	 //iove_trans_curve_en
+  0x04,	 //iove_trans_curve_w
+  0x00, //iove_pattern_en
+  0x73,	 //iove_pattern_min
+  0x7A,
+  0x80,
+  0x00,	 //iove_bg_en
+  0x40,	 //iove_bg_min
+  0x60,	
+  0x00,	
+  0x00,	 //iove_histo_ration_en
+  0x00,	 //iove_histo_min
+  0x80,	
+  0x20,	 
+  0x00,	
+  0x00,	 //iove_cs_en 
+  0x01,	 //iove_cs_dark_min
+  0x00,	 
+  0x01,	 //iove_cs_dark_max
+  0x00,	
+  0x01,	 //iove_cs_light_min
+  0x00,	 
+  0x01,	 //iove_cs_light_max
+  0x00,	
+  0x00,	 //iove_cs_low_en
+  0x0D,	 //iove_cs_low_min
+  0x01,	 
+  0x00,	
+  0x26,	 //iove_cs_low_max
+  0x00,	 //iove_skin_cs_prob_en
+  0x20,	 //iove_skin_cs_prob_increase
+  0x01,	 //iove_skin_cs_gain
+  0x00,	 
+  0x00,	 //iove_skin_w
+  0x6A,	 //iove_skin_CB
+  0x9A,	 //iove_skin_cr
+  0x0C,	 //dist_u
+  0x0C,	 //dist_d
+  0x0C,	 //dist_r
+  0x0C,	 //dist_l
+  0x00,	 //skin_dist_u
+  0xAA,	
+  0xAB,	
+  0x00,	
+  0xAA,	
+  0xAB,
+  0x00,
+  0xAA,
+  0xAB,	
+  0x00,	
+  0xAA,	
+  0xAB,	
+  0x00,	
+  0x40,	 //iove_skin_dark_w
+  0x40,	
+  0x40,	
+  0x40,	 
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,		
 };
 
 static char CAMERA_NATURAL_MDNIE_2[] = {
@@ -13574,7 +14072,7 @@ static char CAMERA_NATURAL_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_En 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -13584,7 +14082,7 @@ static char CAMERA_NATURAL_MDNIE_3[] = {
 static char CAMERA_AUTO_MDNIE_1[] = {
 	//start
 	0xDF,
-  0x01,	 //linear_on
+	0x01, //linear_on ascr_skin_on 0000 0000
   0x6A,	 //ascr_skin_cb
   0x9A,	 //ascr_skin_cr
   0x25,	 //ascr_dist_up
@@ -13604,10 +14102,10 @@ static char CAMERA_AUTO_MDNIE_1[] = {
   0x30,	
   0xC3,	
   0xFF,	 //ascr_skin_Rr
-  0x41,	 //ascr_skin_Rg
-  0x32,	 //ascr_skin_Rb
+  0x37,	 //ascr_skin_Rg
+  0x19,	 //ascr_skin_Rb
   0xFF,	 //ascr_skin_Yr
-  0xFA,	 //ascr_skin_Yg
+  0xF7,	 //ascr_skin_Yg
   0x00,	 //ascr_skin_Yb
   0xFF,	 //ascr_skin_Mr
   0x00,	 //ascr_skin_Mg
@@ -13616,13 +14114,13 @@ static char CAMERA_AUTO_MDNIE_1[] = {
   0xFF,	 //ascr_skin_Wg
   0xFF,	 //ascr_skin_Wb
   0x00,	 //ascr_Cr
-  0xff,	 //ascr_Rr
-  0xFF,	 //ascr_Cg
+  0xF8,	 //ascr_Rr
+  0xEF,	 //ascr_Cg
   0x00,	 //ascr_Rg
-  0xF7,	 //ascr_Cb
+  0xFF,	 //ascr_Cb
   0x00,	 //ascr_Rb
   0xFF,	 //ascr_Mr
-  0x28,	 //ascr_Gr
+  0x4E,	 //ascr_Gr
   0x00,	 //ascr_Mg
   0xFF,	 //ascr_Gg
   0xFF,	 //ascr_Mb
@@ -13742,9 +14240,9 @@ static char CAMERA_AUTO_MDNIE_1[] = {
   0x03,	 //iove_pixel_num
   0xFF,	 
   0x01,	 //iove_trans_stretch_en 
-  0x05,	 //iove_trans_stretch_w
+  0x08,	 //iove_trans_stretch_w
   0x01,	 //iove_trans_curve_en
-  0x05,	 //iove_trans_curve_w
+  0x08,	 //iove_trans_curve_w
   0x01,	 //iove_pattern_en
   0x50,	 //iove_pattern_min
   0x7A,	
@@ -14029,7 +14527,7 @@ static char CAMERA_AUTO_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -14040,7 +14538,7 @@ static char GALLERY_DYNAMIC_MDNIE_1[] = {
 	//start
 	0xDF,
 	0x11, //linear_on ascr_skin_on 0000 0000
-	0x6A,	 //ascr_skin_cb
+  0x6A,	 //ascr_skin_cb
   0x9A,	 //ascr_skin_cr
   0x25,	 //ascr_dist_up
   0x1A,	 //ascr_dist_down
@@ -14059,10 +14557,10 @@ static char GALLERY_DYNAMIC_MDNIE_1[] = {
   0x30,	
   0xC3,	
   0xFF,	 //ascr_skin_Rr
-  0x41,	 //ascr_skin_Rg
-  0x32,	 //ascr_skin_Rb
+  0x37,	 //ascr_skin_Rg
+  0x19,	 //ascr_skin_Rb
   0xFF,	 //ascr_skin_Yr
-  0xFA,	 //ascr_skin_Yg
+  0xF7,	 //ascr_skin_Yg
   0x00,	 //ascr_skin_Yb
   0xFF,	 //ascr_skin_Mr
   0x00,	 //ascr_skin_Mg
@@ -14070,29 +14568,29 @@ static char GALLERY_DYNAMIC_MDNIE_1[] = {
   0xFF,	 //ascr_skin_Wr
   0xFF,	 //ascr_skin_Wg
   0xFF,	 //ascr_skin_Wb
-  0x53,	 //ascr_Cr
-  0xF2,	 //ascr_Rr
-  0xFC,	 //ascr_Cg
-  0x22,	 //ascr_Rg
-  0xF4,	 //ascr_Cb
+  0x61,	 //ascr_Cr
+  0xEA,	 //ascr_Rr
+  0xF8,	 //ascr_Cg
+  0x20,	 //ascr_Rg
+  0xF7,	 //ascr_Cb
   0x00,	 //ascr_Rb
-  0xF4,	 //ascr_Mr
+  0xF6,	 //ascr_Mr
   0x46,	 //ascr_Gr
-  0x28,	 //ascr_Mg
-  0xF8,	 //ascr_Gg
+  0x14,	 //ascr_Mg
+  0xEB,	 //ascr_Gg
   0xEC,	 //ascr_Mb
   0x00,	 //ascr_Gb
-  0xFA,	 //ascr_Yr
-  0x42,	 //ascr_Br
-  0xFA,	 //ascr_Yg
+  0xF6,	 //ascr_Yr
+  0x46,	 //ascr_Br
+  0xF0,	 //ascr_Yg
   0x00,	 //ascr_Bg
   0x00,	 //ascr_Yb
-  0xF4,	 //ascr_Bb
+  0xF8,	 //ascr_Bb
   0xFF,	 //ascr_Wr
   0x00,	 //ascr_Kr
-  0xFC,	 //ascr_Wg
+  0xFA,	 //ascr_Wg
   0x00,	 //ascr_Kg
-  0xF6,	 //ascr_Wb
+  0xF4,	 //ascr_Wb
   0x00,	 //ascr_Kb
 	0x00, //ascr_gamma_w
 	0x00, //ascr_gamma_x0
@@ -14197,9 +14695,9 @@ static char GALLERY_DYNAMIC_MDNIE_1[] = {
   0x03,	 //iove_pixel_num
   0xFF,	 
   0x01,	 //iove_trans_stretch_en 
-  0x05,	 //iove_trans_stretch_w
+  0x08,	 //iove_trans_stretch_w
   0x01,	 //iove_trans_curve_en
-  0x05,	 //iove_trans_curve_w
+  0x08,	 //iove_trans_curve_w
   0x01,	 //iove_pattern_en
   0x50,	 //iove_pattern_min
   0x7A,	
@@ -14484,7 +14982,7 @@ static char GALLERY_DYNAMIC_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -14618,106 +15116,106 @@ static char GALLERY_STANDARD_MDNIE_1[] = {
 	0x80,
 	0x08, //ascr_gamma_y16
 	0x00,
-	0x00, //iove_on
-	0x00, //iove_gain
-	0x00, //iove_type
-	0x10, //iove_histo_range_dark
-	0xfb, //iove_histo_range_light
-	0x01, //iove_diff_en
-	0x00, //iove_diff_dark_min
-	0xE0,
-	0x00, //iove_diff_dark_max
-	0x20,
-	0x01, //iove_diff_light_min
-	0x00, 
-	0x00, //iove_diff_light_max
+  0x00,	 //iove_on
+  0x00,	 //iove_gain
+  0x00,	 //iove_type
+  0x00,	 //iove_histo_range_dark
+  0xFF,	 //iove_histo_range_light
+  0x01,	 //iove_diff_en
+  0x00,	 //iove_diff_dark_min
+  0x00,	
+  0x00,	 //iove_diff_dark_max
+  0x00,	
+  0x00,	 //iove_diff_light_min
+  0x00,	 
+  0x00,	 //iove_diff_light_max
+  0x00,	
+  0x01,	 //iove_slope_en 
+  0x18,	 //iove_slope_dark_min
+  0x00,	  
+  0x00,	 
+  0xE0,	 //iove_slope_dark_max
+  0x00,	 
+  0x00,	
+  0x18,	 //iove_slope_light_min
+  0x00,	
+  0x00,	 
+  0xE0,	 //iove_slope_light_max
+  0x00,	
+  0x00,	
+  0x01,	 //iove_same_diff
+  0x00,	 
+  0x01,	 //iove_smoothing_en
+  0x00,	 //iove_stretch_w
+  0x03,	 //iove_pixel_num
+  0xFF,	 
+  0x01,	 //iove_trans_stretch_en 
+  0x04,	 //iove_trans_stretch_w
+  0x01,	 //iove_trans_curve_en
+  0x04,	 //iove_trans_curve_w
+  0x00, //iove_pattern_en
+  0x73,	 //iove_pattern_min
+  0x7A,
+  0x80,
+  0x00,	 //iove_bg_en
+  0x40,	 //iove_bg_min
+  0x60,	
+  0x00,	
+  0x00,	 //iove_histo_ration_en
+  0x00,	 //iove_histo_min
+  0x80,	
+  0x20,	 
+  0x00,	
+  0x00,	 //iove_cs_en 
+  0x01,	 //iove_cs_dark_min
+  0x00,	 
+  0x01,	 //iove_cs_dark_max
+  0x00,	
+  0x01,	 //iove_cs_light_min
+  0x00,	 
+  0x01,	 //iove_cs_light_max
+  0x00,	
+  0x00,	 //iove_cs_low_en
+  0x0D,	 //iove_cs_low_min
+  0x01,	 
+  0x00,	
+  0x26,	 //iove_cs_low_max
+  0x00,	 //iove_skin_cs_prob_en
+  0x20,	 //iove_skin_cs_prob_increase
+  0x01,	 //iove_skin_cs_gain
+  0x00,	 
+  0x00,	 //iove_skin_w
+  0x6A,	 //iove_skin_CB
+  0x9A,	 //iove_skin_cr
+  0x0C,	 //dist_u
+  0x0C,	 //dist_d
+  0x0C,	 //dist_r
+  0x0C,	 //dist_l
+  0x00,	 //skin_dist_u
+  0xAA,	
+  0xAB,	
+  0x00,	
+  0xAA,	
+  0xAB,
   0x00,
-	0x01, //iove_slope_en 
-	0x18, //iove_slope_dark_min
-	0x00,  
-	0xE0, 
-	0xE0, //iove_slope_dark_max
-	0x00, 
-	0x30,
-	0x18, //iove_slope_light_min
-	0x00,
-	0xE0, 
-	0xE0, //iove_slope_light_max
-	0x00,
-	0x20,
-	0x01, //iove_same_diff
-	0x00, 
-	0x01, //iove_smoothing_en
-	0x40, //iove_stretch_w
-	0x03, //iove_pixel_num
-	0xFF, 
-	0x01, //iove_trans_stretch_en 
-	0x08, //iove_trans_stretch_w
-	0x01, //iove_trans_curve_en
-	0x05, //iove_trans_curve_w
-	0x01, //iove_pattern_en
-	0x50, //iove_pattern_min
-	0x7A,
-	0x80,
-	0x01, //iove_bg_en
-	0x40, //iove_bg_min
-	0x60,
-	0x00,
-	0x01, //iove_histo_ration_en
-	0x00, //iove_histo_min
-	0x80,
-	0x20, 
-	0x00,
-	0x01, //iove_cs_en 
-	0x01, //iove_cs_dark_min
-	0xF4, 
-	0x02, //iove_cs_dark_max
-	0x58,
-	0x01, //iove_cs_light_min
-	0xF4, 
-	0x01, //iove_cs_light_max
-	0x90,
-	0x01, //iove_cs_low_en
-	0x0D, //iove_cs_low_min
-	0x00, 
-	0x00,
-	0x26, //iove_cs_low_max
-	0x01, //iove_skin_cs_prob_en
-	0x28, //iove_skin_cs_prob_increase
-	0x01, //iove_skin_cs_gain
-	0x00, 
-	0x40, //iove_skin_w
-	0x6A, //iove_skin_CB
-	0x9A, //iove_skin_cr
-	0x3A, //dist_u
-	0x1A, //dist_d
-	0x16, //dist_r
-	0x2A, //dist_l
-	0x00, //skin_dist_u
-	0x23,
-	0x4F,
-	0x00,
-	0x4E,
-	0xC5,
-	0x00,
-	0x5D,
-	0x17,
-	0x00,
-	0x30,
-	0xC3,
-	0x06,
-	0x40, //iove_skin_dark_w
-	0x40,
-	0x20,
-	0x40, 
-	0x00,
-	0x60,
-	0x40,
-	0x60,
-	0x00,
-	0x60,
-	0x30,
-	0x60,
+  0xAA,
+  0xAB,	
+  0x00,	
+  0xAA,	
+  0xAB,	
+  0x00,	
+  0x40,	 //iove_skin_dark_w
+  0x40,	
+  0x40,	
+  0x40,	 
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,		
 };
 
 static char GALLERY_STANDARD_MDNIE_2[] = {
@@ -14939,7 +15437,7 @@ static char GALLERY_STANDARD_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -15073,6 +15571,106 @@ static char GALLERY_NATURAL_MDNIE_1[] = {
 	0x80,
 	0x08, //ascr_gamma_y16
 	0x00,
+  0x00,	 //iove_on
+  0x00,	 //iove_gain
+  0x00,	 //iove_type
+  0x10,	 //iove_histo_range_dark
+  0xFF,	 //iove_histo_range_light
+  0x01,	 //iove_diff_en
+  0x00,	 //iove_diff_dark_min
+  0x00,	
+  0x00,	 //iove_diff_dark_max
+  0x00,	
+  0x00,	 //iove_diff_light_min
+  0x00,	 
+  0x00,	 //iove_diff_light_max
+  0x00,	
+  0x01,	 //iove_slope_en 
+  0x18,	 //iove_slope_dark_min
+  0x00,	  
+  0x00,	 
+  0xE0,	 //iove_slope_dark_max
+  0x00,	 
+  0x00,	
+  0x18,	 //iove_slope_light_min
+  0x00,	
+  0x00,	 
+  0xE0,	 //iove_slope_light_max
+  0x00,	
+  0x00,	
+  0x01,	 //iove_same_diff
+  0x00,	 
+  0x01,	 //iove_smoothing_en
+  0x00,	 //iove_stretch_w
+  0x03,	 //iove_pixel_num
+  0xFF,	 
+  0x01,	 //iove_trans_stretch_en 
+  0x04,	 //iove_trans_stretch_w
+  0x01,	 //iove_trans_curve_en
+  0x04,	 //iove_trans_curve_w
+  0x00, //iove_pattern_en
+  0x73,	 //iove_pattern_min
+  0x7A,
+  0x80,
+  0x00,	 //iove_bg_en
+  0x40,	 //iove_bg_min
+  0x60,	
+  0x00,	
+  0x00,	 //iove_histo_ration_en
+  0x00,	 //iove_histo_min
+  0x80,	
+  0x20,	 
+  0x00,	
+  0x00,	 //iove_cs_en 
+  0x01,	 //iove_cs_dark_min
+  0x00,	 
+  0x01,	 //iove_cs_dark_max
+  0x00,	
+  0x01,	 //iove_cs_light_min
+  0x00,	 
+  0x01,	 //iove_cs_light_max
+  0x00,	
+  0x00,	 //iove_cs_low_en
+  0x0D,	 //iove_cs_low_min
+  0x01,	 
+  0x00,	
+  0x26,	 //iove_cs_low_max
+  0x00,	 //iove_skin_cs_prob_en
+  0x20,	 //iove_skin_cs_prob_increase
+  0x01,	 //iove_skin_cs_gain
+  0x00,	 
+  0x00,	 //iove_skin_w
+  0x6A,	 //iove_skin_CB
+  0x9A,	 //iove_skin_cr
+  0x0C,	 //dist_u
+  0x0C,	 //dist_d
+  0x0C,	 //dist_r
+  0x0C,	 //dist_l
+  0x00,	 //skin_dist_u
+  0xAA,	
+  0xAB,	
+  0x00,	
+  0xAA,	
+  0xAB,
+  0x00,
+  0xAA,
+  0xAB,	
+  0x00,	
+  0xAA,	
+  0xAB,	
+  0x00,	
+  0x40,	 //iove_skin_dark_w
+  0x40,	
+  0x40,	
+  0x40,	 
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
 };
 
 static char GALLERY_NATURAL_MDNIE_2[] = {
@@ -15273,6 +15871,106 @@ static char GALLERY_NATURAL_MDNIE_2[] = {
 	0xf8, //curve_y_31
 	0x01, //curve_y_32
 	0x00,
+  0x00,	 //iove_on
+  0x00,	 //iove_gain
+  0x00,	 //iove_type
+  0x00,	 //iove_histo_range_dark
+  0xFF,	 //iove_histo_range_light
+  0x01,	 //iove_diff_en
+  0x00,	 //iove_diff_dark_min
+  0x00,	
+  0x00,	 //iove_diff_dark_max
+  0x00,	
+  0x00,	 //iove_diff_light_min
+  0x00,	 
+  0x00,	 //iove_diff_light_max
+  0x00,	
+  0x01,	 //iove_slope_en 
+  0x18,	 //iove_slope_dark_min
+  0x00,	  
+  0x00,	 
+  0xE0,	 //iove_slope_dark_max
+  0x00,	 
+  0x00,	
+  0x18,	 //iove_slope_light_min
+  0x00,	
+  0x00,	 
+  0xE0,	 //iove_slope_light_max
+  0x00,	
+  0x00,	
+  0x01,	 //iove_same_diff
+  0x00,	 
+  0x01,	 //iove_smoothing_en
+  0x00,	 //iove_stretch_w
+  0x03,	 //iove_pixel_num
+  0xFF,	 
+  0x01,	 //iove_trans_stretch_en 
+  0x04,	 //iove_trans_stretch_w
+  0x01,	 //iove_trans_curve_en
+  0x04,	 //iove_trans_curve_w
+  0x00, //iove_pattern_en
+  0x73,	 //iove_pattern_min
+  0x7A,
+  0x80,
+  0x00,	 //iove_bg_en
+  0x40,	 //iove_bg_min
+  0x60,	
+  0x00,	
+  0x00,	 //iove_histo_ration_en
+  0x00,	 //iove_histo_min
+  0x80,	
+  0x20,	 
+  0x00,	
+  0x00,	 //iove_cs_en 
+  0x01,	 //iove_cs_dark_min
+  0x00,	 
+  0x01,	 //iove_cs_dark_max
+  0x00,	
+  0x01,	 //iove_cs_light_min
+  0x00,	 
+  0x01,	 //iove_cs_light_max
+  0x00,	
+  0x00,	 //iove_cs_low_en
+  0x0D,	 //iove_cs_low_min
+  0x01,	 
+  0x00,	
+  0x26,	 //iove_cs_low_max
+  0x00,	 //iove_skin_cs_prob_en
+  0x20,	 //iove_skin_cs_prob_increase
+  0x01,	 //iove_skin_cs_gain
+  0x00,	 
+  0x00,	 //iove_skin_w
+  0x6A,	 //iove_skin_CB
+  0x9A,	 //iove_skin_cr
+  0x0C,	 //dist_u
+  0x0C,	 //dist_d
+  0x0C,	 //dist_r
+  0x0C,	 //dist_l
+  0x00,	 //skin_dist_u
+  0xAA,	
+  0xAB,	
+  0x00,	
+  0xAA,	
+  0xAB,
+  0x00,
+  0xAA,
+  0xAB,	
+  0x00,	
+  0xAA,	
+  0xAB,	
+  0x00,	
+  0x40,	 //iove_skin_dark_w
+  0x40,	
+  0x40,	
+  0x40,	 
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
 };
 
 static char GALLERY_NATURAL_MDNIE_3[] = {
@@ -15294,7 +15992,7 @@ static char GALLERY_NATURAL_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -15304,7 +16002,7 @@ static char GALLERY_NATURAL_MDNIE_3[] = {
 static char GALLERY_AUTO_MDNIE_1[] = {
 	//start
 	0xDF,
-  0x01,	 //linear_on
+	0x01, //linear_on ascr_skin_on 0000 0000
   0x6A,	 //ascr_skin_cb
   0x9A,	 //ascr_skin_cr
   0x25,	 //ascr_dist_up
@@ -15324,10 +16022,10 @@ static char GALLERY_AUTO_MDNIE_1[] = {
   0x30,	
   0xC3,	
   0xFF,	 //ascr_skin_Rr
-  0x41,	 //ascr_skin_Rg
-  0x32,	 //ascr_skin_Rb
+  0x37,	 //ascr_skin_Rg
+  0x19,	 //ascr_skin_Rb
   0xFF,	 //ascr_skin_Yr
-  0xFA,	 //ascr_skin_Yg
+  0xF7,	 //ascr_skin_Yg
   0x00,	 //ascr_skin_Yb
   0xFF,	 //ascr_skin_Mr
   0x00,	 //ascr_skin_Mg
@@ -15336,13 +16034,13 @@ static char GALLERY_AUTO_MDNIE_1[] = {
   0xFF,	 //ascr_skin_Wg
   0xFF,	 //ascr_skin_Wb
   0x00,	 //ascr_Cr
-  0xff,	 //ascr_Rr
-  0xFF,	 //ascr_Cg
+  0xF8,	 //ascr_Rr
+  0xEF,	 //ascr_Cg
   0x00,	 //ascr_Rg
-  0xF7,	 //ascr_Cb
+  0xFF,	 //ascr_Cb
   0x00,	 //ascr_Rb
   0xFF,	 //ascr_Mr
-  0x28,	 //ascr_Gr
+  0x4E,	 //ascr_Gr
   0x00,	 //ascr_Mg
   0xFF,	 //ascr_Gg
   0xFF,	 //ascr_Mb
@@ -15462,9 +16160,9 @@ static char GALLERY_AUTO_MDNIE_1[] = {
   0x03,	 //iove_pixel_num
   0xFF,	 
   0x01,	 //iove_trans_stretch_en 
-  0x05,	 //iove_trans_stretch_w
+  0x08,	 //iove_trans_stretch_w
   0x01,	 //iove_trans_curve_en
-  0x05,	 //iove_trans_curve_w
+  0x08,	 //iove_trans_curve_w
   0x01,	 //iove_pattern_en
   0x50,	 //iove_pattern_min
   0x7A,	
@@ -15749,7 +16447,7 @@ static char GALLERY_AUTO_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x05, //trans_slope
 	0x01, //trans_interval
@@ -15760,7 +16458,7 @@ static char BROWSER_DYNAMIC_MDNIE_1[] = {
 	//start
 	0xDF,
 	0x11, //linear_on ascr_skin_on 0000 0000
-	0x6A,	 //ascr_skin_cb
+  0x6A,	 //ascr_skin_cb
   0x9A,	 //ascr_skin_cr
   0x25,	 //ascr_dist_up
   0x1A,	 //ascr_dist_down
@@ -15779,10 +16477,10 @@ static char BROWSER_DYNAMIC_MDNIE_1[] = {
   0x30,	
   0xC3,	
   0xFF,	 //ascr_skin_Rr
-  0x41,	 //ascr_skin_Rg
-  0x32,	 //ascr_skin_Rb
+  0x37,	 //ascr_skin_Rg
+  0x19,	 //ascr_skin_Rb
   0xFF,	 //ascr_skin_Yr
-  0xFA,	 //ascr_skin_Yg
+  0xF7,	 //ascr_skin_Yg
   0x00,	 //ascr_skin_Yb
   0xFF,	 //ascr_skin_Mr
   0x00,	 //ascr_skin_Mg
@@ -15790,29 +16488,29 @@ static char BROWSER_DYNAMIC_MDNIE_1[] = {
   0xFF,	 //ascr_skin_Wr
   0xFF,	 //ascr_skin_Wg
   0xFF,	 //ascr_skin_Wb
-  0x53,	 //ascr_Cr
-  0xF2,	 //ascr_Rr
-  0xFC,	 //ascr_Cg
-  0x22,	 //ascr_Rg
-  0xF4,	 //ascr_Cb
+  0x61,	 //ascr_Cr
+  0xEA,	 //ascr_Rr
+  0xF8,	 //ascr_Cg
+  0x20,	 //ascr_Rg
+  0xF7,	 //ascr_Cb
   0x00,	 //ascr_Rb
-  0xF4,	 //ascr_Mr
+  0xF6,	 //ascr_Mr
   0x46,	 //ascr_Gr
-  0x28,	 //ascr_Mg
-  0xF8,	 //ascr_Gg
+  0x14,	 //ascr_Mg
+  0xEB,	 //ascr_Gg
   0xEC,	 //ascr_Mb
   0x00,	 //ascr_Gb
-  0xFA,	 //ascr_Yr
-  0x42,	 //ascr_Br
-  0xFA,	 //ascr_Yg
+  0xF6,	 //ascr_Yr
+  0x46,	 //ascr_Br
+  0xF0,	 //ascr_Yg
   0x00,	 //ascr_Bg
   0x00,	 //ascr_Yb
-  0xF4,	 //ascr_Bb
+  0xF8,	 //ascr_Bb
   0xFF,	 //ascr_Wr
   0x00,	 //ascr_Kr
-  0xFC,	 //ascr_Wg
+  0xFA,	 //ascr_Wg
   0x00,	 //ascr_Kg
-  0xF6,	 //ascr_Wb
+  0xF4,	 //ascr_Wb
   0x00,	 //ascr_Kb
 	0x00, //ascr_gamma_w
 	0x00, //ascr_gamma_x0
@@ -15917,9 +16615,9 @@ static char BROWSER_DYNAMIC_MDNIE_1[] = {
   0x03,	 //iove_pixel_num
   0xFF,	 
   0x01,	 //iove_trans_stretch_en 
-  0x05,	 //iove_trans_stretch_w
+  0x08,	 //iove_trans_stretch_w
   0x01,	 //iove_trans_curve_en
-  0x05,	 //iove_trans_curve_w
+  0x08,	 //iove_trans_curve_w
   0x01,	 //iove_pattern_en
   0x50,	 //iove_pattern_min
   0x7A,	
@@ -16204,7 +16902,7 @@ static char BROWSER_DYNAMIC_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -16338,6 +17036,106 @@ static char BROWSER_STANDARD_MDNIE_1[] = {
 	0x80,
 	0x08, //ascr_gamma_y16
 	0x00,
+	  0x00,	 //iove_on
+  0x00,	 //iove_gain
+  0x00,	 //iove_type
+  0x00,	 //iove_histo_range_dark
+  0xFF,	 //iove_histo_range_light
+  0x01,	 //iove_diff_en
+  0x00,	 //iove_diff_dark_min
+  0x00,	
+  0x00,	 //iove_diff_dark_max
+  0x00,	
+  0x00,	 //iove_diff_light_min
+  0x00,	 
+  0x00,	 //iove_diff_light_max
+  0x00,	
+  0x01,	 //iove_slope_en 
+  0x18,	 //iove_slope_dark_min
+  0x00,	  
+  0x00,	 
+  0xE0,	 //iove_slope_dark_max
+  0x00,	 
+  0x00,	
+  0x18,	 //iove_slope_light_min
+  0x00,	
+  0x00,	 
+  0xE0,	 //iove_slope_light_max
+  0x00,	
+  0x00,	
+  0x01,	 //iove_same_diff
+  0x00,	 
+  0x01,	 //iove_smoothing_en
+  0x00,	 //iove_stretch_w
+  0x03,	 //iove_pixel_num
+  0xFF,	 
+  0x01,	 //iove_trans_stretch_en 
+  0x04,	 //iove_trans_stretch_w
+  0x01,	 //iove_trans_curve_en
+  0x04,	 //iove_trans_curve_w
+  0x00, //iove_pattern_en
+  0x73,	 //iove_pattern_min
+  0x7A,
+  0x80,
+  0x00,	 //iove_bg_en
+  0x40,	 //iove_bg_min
+  0x60,	
+  0x00,	
+  0x00,	 //iove_histo_ration_en
+  0x00,	 //iove_histo_min
+  0x80,	
+  0x20,	 
+  0x00,	
+  0x00,	 //iove_cs_en 
+  0x01,	 //iove_cs_dark_min
+  0x00,	 
+  0x01,	 //iove_cs_dark_max
+  0x00,	
+  0x01,	 //iove_cs_light_min
+  0x00,	 
+  0x01,	 //iove_cs_light_max
+  0x00,	
+  0x00,	 //iove_cs_low_en
+  0x0D,	 //iove_cs_low_min
+  0x01,	 
+  0x00,	
+  0x26,	 //iove_cs_low_max
+  0x00,	 //iove_skin_cs_prob_en
+  0x20,	 //iove_skin_cs_prob_increase
+  0x01,	 //iove_skin_cs_gain
+  0x00,	 
+  0x00,	 //iove_skin_w
+  0x6A,	 //iove_skin_CB
+  0x9A,	 //iove_skin_cr
+  0x0C,	 //dist_u
+  0x0C,	 //dist_d
+  0x0C,	 //dist_r
+  0x0C,	 //dist_l
+  0x00,	 //skin_dist_u
+  0xAA,	
+  0xAB,	
+  0x00,	
+  0xAA,	
+  0xAB,
+  0x00,
+  0xAA,
+  0xAB,	
+  0x00,	
+  0xAA,	
+  0xAB,	
+  0x00,	
+  0x40,	 //iove_skin_dark_w
+  0x40,	
+  0x40,	
+  0x40,	 
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
 };
 
 static char BROWSER_STANDARD_MDNIE_2[] = {
@@ -16559,7 +17357,7 @@ static char BROWSER_STANDARD_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -16693,6 +17491,106 @@ static char BROWSER_NATURAL_MDNIE_1[] = {
 	0x80,
 	0x08, //ascr_gamma_y16
 	0x00,
+	  0x00,	 //iove_on
+  0x00,	 //iove_gain
+  0x00,	 //iove_type
+  0x00,	 //iove_histo_range_dark
+  0xFF,	 //iove_histo_range_light
+  0x01,	 //iove_diff_en
+  0x00,	 //iove_diff_dark_min
+  0x00,	
+  0x00,	 //iove_diff_dark_max
+  0x00,	
+  0x00,	 //iove_diff_light_min
+  0x00,	 
+  0x00,	 //iove_diff_light_max
+  0x00,	
+  0x01,	 //iove_slope_en 
+  0x18,	 //iove_slope_dark_min
+  0x00,	  
+  0x00,	 
+  0xE0,	 //iove_slope_dark_max
+  0x00,	 
+  0x00,	
+  0x18,	 //iove_slope_light_min
+  0x00,	
+  0x00,	 
+  0xE0,	 //iove_slope_light_max
+  0x00,	
+  0x00,	
+  0x01,	 //iove_same_diff
+  0x00,	 
+  0x01,	 //iove_smoothing_en
+  0x00,	 //iove_stretch_w
+  0x03,	 //iove_pixel_num
+  0xFF,	 
+  0x01,	 //iove_trans_stretch_en 
+  0x04,	 //iove_trans_stretch_w
+  0x01,	 //iove_trans_curve_en
+  0x04,	 //iove_trans_curve_w
+  0x00, //iove_pattern_en
+  0x73,	 //iove_pattern_min
+  0x7A,
+  0x80,
+  0x00,	 //iove_bg_en
+  0x40,	 //iove_bg_min
+  0x60,	
+  0x00,	
+  0x00,	 //iove_histo_ration_en
+  0x00,	 //iove_histo_min
+  0x80,	
+  0x20,	 
+  0x00,	
+  0x00,	 //iove_cs_en 
+  0x01,	 //iove_cs_dark_min
+  0x00,	 
+  0x01,	 //iove_cs_dark_max
+  0x00,	
+  0x01,	 //iove_cs_light_min
+  0x00,	 
+  0x01,	 //iove_cs_light_max
+  0x00,	
+  0x00,	 //iove_cs_low_en
+  0x0D,	 //iove_cs_low_min
+  0x01,	 
+  0x00,	
+  0x26,	 //iove_cs_low_max
+  0x00,	 //iove_skin_cs_prob_en
+  0x20,	 //iove_skin_cs_prob_increase
+  0x01,	 //iove_skin_cs_gain
+  0x00,	 
+  0x00,	 //iove_skin_w
+  0x6A,	 //iove_skin_CB
+  0x9A,	 //iove_skin_cr
+  0x0C,	 //dist_u
+  0x0C,	 //dist_d
+  0x0C,	 //dist_r
+  0x0C,	 //dist_l
+  0x00,	 //skin_dist_u
+  0xAA,	
+  0xAB,	
+  0x00,	
+  0xAA,	
+  0xAB,
+  0x00,
+  0xAA,
+  0xAB,	
+  0x00,	
+  0xAA,	
+  0xAB,	
+  0x00,	
+  0x40,	 //iove_skin_dark_w
+  0x40,	
+  0x40,	
+  0x40,	 
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
 };
 
 static char BROWSER_NATURAL_MDNIE_2[] = {
@@ -16719,7 +17617,7 @@ static char BROWSER_NATURAL_MDNIE_2[] = {
 	0x00,
 	0x00, //slce_on cadrx_en 0000 0000
 	0x00, //lce_gain 000 0000
-	0x15, //lce_color_gain 00 0000
+	0x30, //lce_color_gain 00 0000
 	0x01, //lce_min_ref_offset
 	0x00,
 	0x70, //lce_illum_gain
@@ -16914,7 +17812,7 @@ static char BROWSER_NATURAL_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -16944,10 +17842,10 @@ static char BROWSER_AUTO_MDNIE_1[] = {
   0x30,	
   0xC3,	
   0xFF,	 //ascr_skin_Rr
-  0x41,	 //ascr_skin_Rg
-  0x32,	 //ascr_skin_Rb
+  0x37,	 //ascr_skin_Rg
+  0x19,	 //ascr_skin_Rb
   0xFF,	 //ascr_skin_Yr
-  0xFA,	 //ascr_skin_Yg
+  0xF7,	 //ascr_skin_Yg
   0x00,	 //ascr_skin_Yb
   0xFF,	 //ascr_skin_Mr
   0x00,	 //ascr_skin_Mg
@@ -16956,13 +17854,13 @@ static char BROWSER_AUTO_MDNIE_1[] = {
   0xFF,	 //ascr_skin_Wg
   0xFF,	 //ascr_skin_Wb
   0x00,	 //ascr_Cr
-  0xff,	 //ascr_Rr
-  0xFF,	 //ascr_Cg
+  0xF8,	 //ascr_Rr
+  0xEF,	 //ascr_Cg
   0x00,	 //ascr_Rg
-  0xF7,	 //ascr_Cb
+  0xFF,	 //ascr_Cb
   0x00,	 //ascr_Rb
   0xFF,	 //ascr_Mr
-  0x28,	 //ascr_Gr
+  0x4E,	 //ascr_Gr
   0x00,	 //ascr_Mg
   0xFF,	 //ascr_Gg
   0xFF,	 //ascr_Mb
@@ -17082,9 +17980,9 @@ static char BROWSER_AUTO_MDNIE_1[] = {
   0x03,	 //iove_pixel_num
   0xFF,	 
   0x01,	 //iove_trans_stretch_en 
-  0x05,	 //iove_trans_stretch_w
+  0x08,	 //iove_trans_stretch_w
   0x01,	 //iove_trans_curve_en
-  0x05,	 //iove_trans_curve_w
+  0x08,	 //iove_trans_curve_w
   0x01,	 //iove_pattern_en
   0x50,	 //iove_pattern_min
   0x7A,	
@@ -17369,7 +18267,7 @@ static char BROWSER_AUTO_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -17380,7 +18278,7 @@ static char EBOOK_DYNAMIC_MDNIE_1[] = {
 	//start
 	0xDF,
 	0x11, //linear_on ascr_skin_on 0000 0000
-	0x6A,	 //ascr_skin_cb
+  0x6A,	 //ascr_skin_cb
   0x9A,	 //ascr_skin_cr
   0x25,	 //ascr_dist_up
   0x1A,	 //ascr_dist_down
@@ -17399,10 +18297,10 @@ static char EBOOK_DYNAMIC_MDNIE_1[] = {
   0x30,	
   0xC3,	
   0xFF,	 //ascr_skin_Rr
-  0x41,	 //ascr_skin_Rg
-  0x32,	 //ascr_skin_Rb
+  0x37,	 //ascr_skin_Rg
+  0x19,	 //ascr_skin_Rb
   0xFF,	 //ascr_skin_Yr
-  0xFA,	 //ascr_skin_Yg
+  0xF7,	 //ascr_skin_Yg
   0x00,	 //ascr_skin_Yb
   0xFF,	 //ascr_skin_Mr
   0x00,	 //ascr_skin_Mg
@@ -17410,29 +18308,29 @@ static char EBOOK_DYNAMIC_MDNIE_1[] = {
   0xFF,	 //ascr_skin_Wr
   0xFF,	 //ascr_skin_Wg
   0xFF,	 //ascr_skin_Wb
-  0x53,	 //ascr_Cr
-  0xF2,	 //ascr_Rr
-  0xFC,	 //ascr_Cg
-  0x22,	 //ascr_Rg
-  0xF4,	 //ascr_Cb
+  0x61,	 //ascr_Cr
+  0xEA,	 //ascr_Rr
+  0xF8,	 //ascr_Cg
+  0x20,	 //ascr_Rg
+  0xF7,	 //ascr_Cb
   0x00,	 //ascr_Rb
-  0xF4,	 //ascr_Mr
+  0xF6,	 //ascr_Mr
   0x46,	 //ascr_Gr
-  0x28,	 //ascr_Mg
-  0xF8,	 //ascr_Gg
+  0x14,	 //ascr_Mg
+  0xEB,	 //ascr_Gg
   0xEC,	 //ascr_Mb
   0x00,	 //ascr_Gb
-  0xFA,	 //ascr_Yr
-  0x42,	 //ascr_Br
-  0xFA,	 //ascr_Yg
+  0xF6,	 //ascr_Yr
+  0x46,	 //ascr_Br
+  0xF0,	 //ascr_Yg
   0x00,	 //ascr_Bg
   0x00,	 //ascr_Yb
-  0xF4,	 //ascr_Bb
+  0xF8,	 //ascr_Bb
   0xFF,	 //ascr_Wr
   0x00,	 //ascr_Kr
-  0xFC,	 //ascr_Wg
+  0xFA,	 //ascr_Wg
   0x00,	 //ascr_Kg
-  0xF6,	 //ascr_Wb
+  0xF4,	 //ascr_Wb
   0x00,	 //ascr_Kb
 	0x00, //ascr_gamma_w
 	0x00, //ascr_gamma_x0
@@ -17537,9 +18435,9 @@ static char EBOOK_DYNAMIC_MDNIE_1[] = {
   0x03,	 //iove_pixel_num
   0xFF,	 
   0x01,	 //iove_trans_stretch_en 
-  0x05,	 //iove_trans_stretch_w
+  0x08,	 //iove_trans_stretch_w
   0x01,	 //iove_trans_curve_en
-  0x05,	 //iove_trans_curve_w
+  0x08,	 //iove_trans_curve_w
   0x01,	 //iove_pattern_en
   0x50,	 //iove_pattern_min
   0x7A,	
@@ -17569,8 +18467,8 @@ static char EBOOK_DYNAMIC_MDNIE_1[] = {
   0x26,	 //iove_cs_low_max
   0x01,	 //iove_skin_cs_prob_en
   0x28,	 //iove_skin_cs_prob_increase
-  0x01,	 //iove_skin_cs_gain
-  0x00,	  
+  0x00,	 //iove_skin_cs_gain
+  0x10,	 
   0x40,	 //iove_skin_w
   0x6A,	 //iove_skin_CB
   0x9A,	 //iove_skin_cr
@@ -17629,7 +18527,7 @@ static char EBOOK_DYNAMIC_MDNIE_2[] = {
 	0x00,
 	0x00, //slce_on cadrx_en 0000 0000
 	0x00, //lce_gain 000 0000
-	0x15, //lce_color_gain 00 0000
+	0x30, //lce_color_gain 00 0000
 	0x01, //lce_min_ref_offset
 	0x00,
 	0x70, //lce_illum_gain
@@ -17824,7 +18722,7 @@ static char EBOOK_DYNAMIC_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -17958,6 +18856,106 @@ static char EBOOK_STANDARD_MDNIE_1[] = {
 	0x80,
 	0x08, //ascr_gamma_y16
 	0x00,
+	  0x00,	 //iove_on
+  0x00,	 //iove_gain
+  0x00,	 //iove_type
+  0x00,	 //iove_histo_range_dark
+  0xFF,	 //iove_histo_range_light
+  0x01,	 //iove_diff_en
+  0x00,	 //iove_diff_dark_min
+  0x00,	
+  0x00,	 //iove_diff_dark_max
+  0x00,	
+  0x00,	 //iove_diff_light_min
+  0x00,	 
+  0x00,	 //iove_diff_light_max
+  0x00,	
+  0x01,	 //iove_slope_en 
+  0x18,	 //iove_slope_dark_min
+  0x00,	  
+  0x00,	 
+  0xE0,	 //iove_slope_dark_max
+  0x00,	 
+  0x00,	
+  0x18,	 //iove_slope_light_min
+  0x00,	
+  0x00,	 
+  0xE0,	 //iove_slope_light_max
+  0x00,	
+  0x00,	
+  0x01,	 //iove_same_diff
+  0x00,	 
+  0x01,	 //iove_smoothing_en
+  0x00,	 //iove_stretch_w
+  0x03,	 //iove_pixel_num
+  0xFF,	 
+  0x01,	 //iove_trans_stretch_en 
+  0x04,	 //iove_trans_stretch_w
+  0x01,	 //iove_trans_curve_en
+  0x04,	 //iove_trans_curve_w
+  0x00, //iove_pattern_en
+  0x73,	 //iove_pattern_min
+  0x7A,
+  0x80,
+  0x00,	 //iove_bg_en
+  0x40,	 //iove_bg_min
+  0x60,	
+  0x00,	
+  0x00,	 //iove_histo_ration_en
+  0x00,	 //iove_histo_min
+  0x80,	
+  0x20,	 
+  0x00,	
+  0x00,	 //iove_cs_en 
+  0x01,	 //iove_cs_dark_min
+  0x00,	 
+  0x01,	 //iove_cs_dark_max
+  0x00,	
+  0x01,	 //iove_cs_light_min
+  0x00,	 
+  0x01,	 //iove_cs_light_max
+  0x00,	
+  0x00,	 //iove_cs_low_en
+  0x0D,	 //iove_cs_low_min
+  0x01,	 
+  0x00,	
+  0x26,	 //iove_cs_low_max
+  0x00,	 //iove_skin_cs_prob_en
+  0x20,	 //iove_skin_cs_prob_increase
+  0x01,	 //iove_skin_cs_gain
+  0x00,	 
+  0x00,	 //iove_skin_w
+  0x6A,	 //iove_skin_CB
+  0x9A,	 //iove_skin_cr
+  0x0C,	 //dist_u
+  0x0C,	 //dist_d
+  0x0C,	 //dist_r
+  0x0C,	 //dist_l
+  0x00,	 //skin_dist_u
+  0xAA,	
+  0xAB,	
+  0x00,	
+  0xAA,	
+  0xAB,
+  0x00,
+  0xAA,
+  0xAB,	
+  0x00,	
+  0xAA,	
+  0xAB,	
+  0x00,	
+  0x40,	 //iove_skin_dark_w
+  0x40,	
+  0x40,	
+  0x40,	 
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
 };
 
 static char EBOOK_STANDARD_MDNIE_2[] = {
@@ -18179,7 +19177,7 @@ static char EBOOK_STANDARD_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -18313,6 +19311,106 @@ static char EBOOK_NATURAL_MDNIE_1[] = {
 	0x80,
 	0x08, //ascr_gamma_y16
 	0x00,
+	  0x00,	 //iove_on
+  0x00,	 //iove_gain
+  0x00,	 //iove_type
+  0x00,	 //iove_histo_range_dark
+  0xFF,	 //iove_histo_range_light
+  0x01,	 //iove_diff_en
+  0x00,	 //iove_diff_dark_min
+  0x00,	
+  0x00,	 //iove_diff_dark_max
+  0x00,	
+  0x00,	 //iove_diff_light_min
+  0x00,	 
+  0x00,	 //iove_diff_light_max
+  0x00,	
+  0x01,	 //iove_slope_en 
+  0x18,	 //iove_slope_dark_min
+  0x00,	  
+  0x00,	 
+  0xE0,	 //iove_slope_dark_max
+  0x00,	 
+  0x00,	
+  0x18,	 //iove_slope_light_min
+  0x00,	
+  0x00,	 
+  0xE0,	 //iove_slope_light_max
+  0x00,	
+  0x00,	
+  0x01,	 //iove_same_diff
+  0x00,	 
+  0x01,	 //iove_smoothing_en
+  0x00,	 //iove_stretch_w
+  0x03,	 //iove_pixel_num
+  0xFF,	 
+  0x01,	 //iove_trans_stretch_en 
+  0x04,	 //iove_trans_stretch_w
+  0x01,	 //iove_trans_curve_en
+  0x04,	 //iove_trans_curve_w
+  0x00, //iove_pattern_en
+  0x73,	 //iove_pattern_min
+  0x7A,
+  0x80,
+  0x00,	 //iove_bg_en
+  0x40,	 //iove_bg_min
+  0x60,	
+  0x00,	
+  0x00,	 //iove_histo_ration_en
+  0x00,	 //iove_histo_min
+  0x80,	
+  0x20,	 
+  0x00,	
+  0x00,	 //iove_cs_en 
+  0x01,	 //iove_cs_dark_min
+  0x00,	 
+  0x01,	 //iove_cs_dark_max
+  0x00,	
+  0x01,	 //iove_cs_light_min
+  0x00,	 
+  0x01,	 //iove_cs_light_max
+  0x00,	
+  0x00,	 //iove_cs_low_en
+  0x0D,	 //iove_cs_low_min
+  0x01,	 
+  0x00,	
+  0x26,	 //iove_cs_low_max
+  0x00,	 //iove_skin_cs_prob_en
+  0x20,	 //iove_skin_cs_prob_increase
+  0x01,	 //iove_skin_cs_gain
+  0x00,	 
+  0x00,	 //iove_skin_w
+  0x6A,	 //iove_skin_CB
+  0x9A,	 //iove_skin_cr
+  0x0C,	 //dist_u
+  0x0C,	 //dist_d
+  0x0C,	 //dist_r
+  0x0C,	 //dist_l
+  0x00,	 //skin_dist_u
+  0xAA,	
+  0xAB,	
+  0x00,	
+  0xAA,	
+  0xAB,
+  0x00,
+  0xAA,
+  0xAB,	
+  0x00,	
+  0xAA,	
+  0xAB,	
+  0x00,	
+  0x40,	 //iove_skin_dark_w
+  0x40,	
+  0x40,	
+  0x40,	 
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
 };
 
 static char EBOOK_NATURAL_MDNIE_2[] = {
@@ -18534,7 +19632,7 @@ static char EBOOK_NATURAL_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -18544,7 +19642,7 @@ static char EBOOK_NATURAL_MDNIE_3[] = {
 static char EBOOK_AUTO_MDNIE_1[] = {
 	//start
 	0xDF,
-  0x01,	 //linear_on
+	0x01, //linear_on ascr_skin_on 0000 0000
   0x6A,	 //ascr_skin_cb
   0x9A,	 //ascr_skin_cr
   0x25,	 //ascr_dist_up
@@ -18564,10 +19662,10 @@ static char EBOOK_AUTO_MDNIE_1[] = {
   0x30,	
   0xC3,	
   0xFF,	 //ascr_skin_Rr
-  0x41,	 //ascr_skin_Rg
-  0x32,	 //ascr_skin_Rb
+  0x37,	 //ascr_skin_Rg
+  0x19,	 //ascr_skin_Rb
   0xFF,	 //ascr_skin_Yr
-  0xFA,	 //ascr_skin_Yg
+  0xF7,	 //ascr_skin_Yg
   0x00,	 //ascr_skin_Yb
   0xFF,	 //ascr_skin_Mr
   0x00,	 //ascr_skin_Mg
@@ -18576,13 +19674,13 @@ static char EBOOK_AUTO_MDNIE_1[] = {
   0xFF,	 //ascr_skin_Wg
   0xFF,	 //ascr_skin_Wb
   0x00,	 //ascr_Cr
-  0xff,	 //ascr_Rr
-  0xFF,	 //ascr_Cg
+  0xF8,	 //ascr_Rr
+  0xEF,	 //ascr_Cg
   0x00,	 //ascr_Rg
-  0xF7,	 //ascr_Cb
+  0xFF,	 //ascr_Cb
   0x00,	 //ascr_Rb
   0xFF,	 //ascr_Mr
-  0x28,	 //ascr_Gr
+  0x4E,	 //ascr_Gr
   0x00,	 //ascr_Mg
   0xFF,	 //ascr_Gg
   0xFF,	 //ascr_Mb
@@ -18595,9 +19693,9 @@ static char EBOOK_AUTO_MDNIE_1[] = {
   0xFF,	 //ascr_Bb
   0xFF,	 //ascr_Wr
   0x00,	 //ascr_Kr
-  0xFF,	 //ascr_Wg
+  0xF9,	 //ascr_Wg
   0x00,	 //ascr_Kg
-  0xFF,	 //ascr_Wb
+  0xed,	 //ascr_Wb
   0x00,	 //ascr_Kb
 	0x00, //ascr_gamma_w
 	0x00, //ascr_gamma_x0
@@ -18702,9 +19800,9 @@ static char EBOOK_AUTO_MDNIE_1[] = {
   0x03,	 //iove_pixel_num
   0xFF,	 
   0x01,	 //iove_trans_stretch_en 
-  0x05,	 //iove_trans_stretch_w
+  0x08,	 //iove_trans_stretch_w
   0x01,	 //iove_trans_curve_en
-  0x05,	 //iove_trans_curve_w
+  0x08,	 //iove_trans_curve_w
   0x01,	 //iove_pattern_en
   0x50,	 //iove_pattern_min
   0x7A,	
@@ -18734,8 +19832,8 @@ static char EBOOK_AUTO_MDNIE_1[] = {
   0x26,	 //iove_cs_low_max
   0x01,	 //iove_skin_cs_prob_en
   0x28,	 //iove_skin_cs_prob_increase
-  0x01,	 //iove_skin_cs_gain
-  0x00,	  
+  0x00,	 //iove_skin_cs_gain
+  0x10,	 
   0x40,	 //iove_skin_w
   0x6A,	 //iove_skin_CB
   0x9A,	 //iove_skin_cr
@@ -18756,8 +19854,8 @@ static char EBOOK_AUTO_MDNIE_1[] = {
   0x30,	
   0xC3,	
   0x06,	
-  0x40,	 //iove_skin_dark_w_x
-  0x50,	
+  0x40,	 //iove_skin_dark_w
+  0x40,	
   0x20,	
   0x40,	 
   0x00,	
@@ -18794,7 +19892,7 @@ static char EBOOK_AUTO_MDNIE_2[] = {
 	0x00,
 	0x00, //slce_on cadrx_en 0000 0000
 	0x00, //lce_gain 000 0000
-	0x15, //lce_color_gain 00 0000
+	0x30, //lce_color_gain 00 0000
 	0x01, //lce_min_ref_offset
 	0x00,
 	0x70, //lce_illum_gain
@@ -18989,7 +20087,7 @@ static char EBOOK_AUTO_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -18999,7 +20097,7 @@ static char EBOOK_AUTO_MDNIE_3[] = {
 static char EMAIL_AUTO_MDNIE_1[] = {
 	//start
 	0xDF,
-  0x01,	 //linear_on
+	0x01, //linear_on ascr_skin_on 0000 0000
   0x6A,	 //ascr_skin_cb
   0x9A,	 //ascr_skin_cr
   0x25,	 //ascr_dist_up
@@ -19019,10 +20117,10 @@ static char EMAIL_AUTO_MDNIE_1[] = {
   0x30,	
   0xC3,	
   0xFF,	 //ascr_skin_Rr
-  0x41,	 //ascr_skin_Rg
-  0x32,	 //ascr_skin_Rb
+  0x37,	 //ascr_skin_Rg
+  0x19,	 //ascr_skin_Rb
   0xFF,	 //ascr_skin_Yr
-  0xFA,	 //ascr_skin_Yg
+  0xF7,	 //ascr_skin_Yg
   0x00,	 //ascr_skin_Yb
   0xFF,	 //ascr_skin_Mr
   0x00,	 //ascr_skin_Mg
@@ -19031,13 +20129,13 @@ static char EMAIL_AUTO_MDNIE_1[] = {
   0xFF,	 //ascr_skin_Wg
   0xFF,	 //ascr_skin_Wb
   0x00,	 //ascr_Cr
-  0xff,	 //ascr_Rr
-  0xFF,	 //ascr_Cg
+  0xF8,	 //ascr_Rr
+  0xEF,	 //ascr_Cg
   0x00,	 //ascr_Rg
-  0xF7,	 //ascr_Cb
+  0xFF,	 //ascr_Cb
   0x00,	 //ascr_Rb
   0xFF,	 //ascr_Mr
-  0x28,	 //ascr_Gr
+  0x4E,	 //ascr_Gr
   0x00,	 //ascr_Mg
   0xFF,	 //ascr_Gg
   0xFF,	 //ascr_Mb
@@ -19157,9 +20255,9 @@ static char EMAIL_AUTO_MDNIE_1[] = {
   0x03,	 //iove_pixel_num
   0xFF,	 
   0x01,	 //iove_trans_stretch_en 
-  0x05,	 //iove_trans_stretch_w
+  0x08,	 //iove_trans_stretch_w
   0x01,	 //iove_trans_curve_en
-  0x05,	 //iove_trans_curve_w
+  0x08,	 //iove_trans_curve_w
   0x01,	 //iove_pattern_en
   0x50,	 //iove_pattern_min
   0x7A,	
@@ -19189,8 +20287,8 @@ static char EMAIL_AUTO_MDNIE_1[] = {
   0x26,	 //iove_cs_low_max
   0x01,	 //iove_skin_cs_prob_en
   0x28,	 //iove_skin_cs_prob_increase
-  0x01,	 //iove_skin_cs_gain
-  0x00,	 
+  0x00,	 //iove_skin_cs_gain
+  0x10,	 
   0x40,	 //iove_skin_w
   0x6A,	 //iove_skin_CB
   0x9A,	 //iove_skin_cr
@@ -19211,8 +20309,8 @@ static char EMAIL_AUTO_MDNIE_1[] = {
   0x30,	
   0xC3,	
   0x06,	
-  0x40,	 //iove_skin_dark_w_x
-  0x50,	
+  0x40,	 //iove_skin_dark_w
+  0x40,	
   0x20,	
   0x40,	 
   0x00,	
@@ -19249,7 +20347,7 @@ static char EMAIL_AUTO_MDNIE_2[] = {
 	0x00,
 	0x00, //slce_on cadrx_en 0000 0000
 	0x00, //lce_gain 000 0000
-	0x15, //lce_color_gain 00 0000
+	0x30, //lce_color_gain 00 0000
 	0x01, //lce_min_ref_offset
 	0x00,
 	0x70, //lce_illum_gain
@@ -19444,7 +20542,7 @@ static char EMAIL_AUTO_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -19578,6 +20676,106 @@ static char TDMB_STANDARD_MDNIE_1[] = {
 	0x80,
 	0x08, //ascr_gamma_y16
 	0x00,
+	  0x00,	 //iove_on
+  0x00,	 //iove_gain
+  0x00,	 //iove_type
+  0x00,	 //iove_histo_range_dark
+  0xFF,	 //iove_histo_range_light
+  0x01,	 //iove_diff_en
+  0x00,	 //iove_diff_dark_min
+  0x00,	
+  0x00,	 //iove_diff_dark_max
+  0x00,	
+  0x00,	 //iove_diff_light_min
+  0x00,	 
+  0x00,	 //iove_diff_light_max
+  0x00,	
+  0x01,	 //iove_slope_en 
+  0x18,	 //iove_slope_dark_min
+  0x00,	  
+  0x00,	 
+  0xE0,	 //iove_slope_dark_max
+  0x00,	 
+  0x00,	
+  0x18,	 //iove_slope_light_min
+  0x00,	
+  0x00,	 
+  0xE0,	 //iove_slope_light_max
+  0x00,	
+  0x00,	
+  0x01,	 //iove_same_diff
+  0x00,	 
+  0x01,	 //iove_smoothing_en
+  0x00,	 //iove_stretch_w
+  0x03,	 //iove_pixel_num
+  0xFF,	 
+  0x01,	 //iove_trans_stretch_en 
+  0x04,	 //iove_trans_stretch_w
+  0x01,	 //iove_trans_curve_en
+  0x04,	 //iove_trans_curve_w
+  0x00, //iove_pattern_en
+  0x73,	 //iove_pattern_min
+  0x7A,
+  0x80,
+  0x00,	 //iove_bg_en
+  0x40,	 //iove_bg_min
+  0x60,	
+  0x00,	
+  0x00,	 //iove_histo_ration_en
+  0x00,	 //iove_histo_min
+  0x80,	
+  0x20,	 
+  0x00,	
+  0x00,	 //iove_cs_en 
+  0x01,	 //iove_cs_dark_min
+  0x00,	 
+  0x01,	 //iove_cs_dark_max
+  0x00,	
+  0x01,	 //iove_cs_light_min
+  0x00,	 
+  0x01,	 //iove_cs_light_max
+  0x00,	
+  0x00,	 //iove_cs_low_en
+  0x0D,	 //iove_cs_low_min
+  0x01,	 
+  0x00,	
+  0x26,	 //iove_cs_low_max
+  0x00,	 //iove_skin_cs_prob_en
+  0x20,	 //iove_skin_cs_prob_increase
+  0x01,	 //iove_skin_cs_gain
+  0x00,	 
+  0x00,	 //iove_skin_w
+  0x6A,	 //iove_skin_CB
+  0x9A,	 //iove_skin_cr
+  0x0C,	 //dist_u
+  0x0C,	 //dist_d
+  0x0C,	 //dist_r
+  0x0C,	 //dist_l
+  0x00,	 //skin_dist_u
+  0xAA,	
+  0xAB,	
+  0x00,	
+  0xAA,	
+  0xAB,
+  0x00,
+  0xAA,
+  0xAB,	
+  0x00,	
+  0xAA,	
+  0xAB,	
+  0x00,	
+  0x40,	 //iove_skin_dark_w
+  0x40,	
+  0x40,	
+  0x40,	 
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
 };
 
 static char TDMB_STANDARD_MDNIE_2[] = {
@@ -19799,7 +20997,7 @@ static char TDMB_STANDARD_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -19933,6 +21131,106 @@ static char TDMB_NATURAL_MDNIE_1[] = {
 	0x80,
 	0x08, //ascr_gamma_y16
 	0x00,
+	  0x00,	 //iove_on
+  0x00,	 //iove_gain
+  0x00,	 //iove_type
+  0x00,	 //iove_histo_range_dark
+  0xFF,	 //iove_histo_range_light
+  0x01,	 //iove_diff_en
+  0x00,	 //iove_diff_dark_min
+  0x00,	
+  0x00,	 //iove_diff_dark_max
+  0x00,	
+  0x00,	 //iove_diff_light_min
+  0x00,	 
+  0x00,	 //iove_diff_light_max
+  0x00,	
+  0x01,	 //iove_slope_en 
+  0x18,	 //iove_slope_dark_min
+  0x00,	  
+  0x00,	 
+  0xE0,	 //iove_slope_dark_max
+  0x00,	 
+  0x00,	
+  0x18,	 //iove_slope_light_min
+  0x00,	
+  0x00,	 
+  0xE0,	 //iove_slope_light_max
+  0x00,	
+  0x00,	
+  0x01,	 //iove_same_diff
+  0x00,	 
+  0x01,	 //iove_smoothing_en
+  0x00,	 //iove_stretch_w
+  0x03,	 //iove_pixel_num
+  0xFF,	 
+  0x01,	 //iove_trans_stretch_en 
+  0x04,	 //iove_trans_stretch_w
+  0x01,	 //iove_trans_curve_en
+  0x04,	 //iove_trans_curve_w
+  0x00, //iove_pattern_en
+  0x73,	 //iove_pattern_min
+  0x7A,
+  0x80,
+  0x00,	 //iove_bg_en
+  0x40,	 //iove_bg_min
+  0x60,	
+  0x00,	
+  0x00,	 //iove_histo_ration_en
+  0x00,	 //iove_histo_min
+  0x80,	
+  0x20,	 
+  0x00,	
+  0x00,	 //iove_cs_en 
+  0x01,	 //iove_cs_dark_min
+  0x00,	 
+  0x01,	 //iove_cs_dark_max
+  0x00,	
+  0x01,	 //iove_cs_light_min
+  0x00,	 
+  0x01,	 //iove_cs_light_max
+  0x00,	
+  0x00,	 //iove_cs_low_en
+  0x0D,	 //iove_cs_low_min
+  0x01,	 
+  0x00,	
+  0x26,	 //iove_cs_low_max
+  0x00,	 //iove_skin_cs_prob_en
+  0x20,	 //iove_skin_cs_prob_increase
+  0x01,	 //iove_skin_cs_gain
+  0x00,	 
+  0x00,	 //iove_skin_w
+  0x6A,	 //iove_skin_CB
+  0x9A,	 //iove_skin_cr
+  0x0C,	 //dist_u
+  0x0C,	 //dist_d
+  0x0C,	 //dist_r
+  0x0C,	 //dist_l
+  0x00,	 //skin_dist_u
+  0xAA,	
+  0xAB,	
+  0x00,	
+  0xAA,	
+  0xAB,
+  0x00,
+  0xAA,
+  0xAB,	
+  0x00,	
+  0xAA,	
+  0xAB,	
+  0x00,	
+  0x40,	 //iove_skin_dark_w
+  0x40,	
+  0x40,	
+  0x40,	 
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
 };
 
 static char TDMB_NATURAL_MDNIE_2[] = {
@@ -20154,7 +21452,7 @@ static char TDMB_NATURAL_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -20165,7 +21463,7 @@ static char TDMB_DYNAMIC_MDNIE_1[] = {
 	//start
 	0xDF,
 	0x11, //linear_on ascr_skin_on 0000 0000
-	0x6A,	 //ascr_skin_cb
+  0x6A,	 //ascr_skin_cb
   0x9A,	 //ascr_skin_cr
   0x25,	 //ascr_dist_up
   0x1A,	 //ascr_dist_down
@@ -20184,10 +21482,10 @@ static char TDMB_DYNAMIC_MDNIE_1[] = {
   0x30,	
   0xC3,	
   0xFF,	 //ascr_skin_Rr
-  0x41,	 //ascr_skin_Rg
-  0x32,	 //ascr_skin_Rb
+  0x37,	 //ascr_skin_Rg
+  0x19,	 //ascr_skin_Rb
   0xFF,	 //ascr_skin_Yr
-  0xFA,	 //ascr_skin_Yg
+  0xF7,	 //ascr_skin_Yg
   0x00,	 //ascr_skin_Yb
   0xFF,	 //ascr_skin_Mr
   0x00,	 //ascr_skin_Mg
@@ -20195,29 +21493,29 @@ static char TDMB_DYNAMIC_MDNIE_1[] = {
   0xFF,	 //ascr_skin_Wr
   0xFF,	 //ascr_skin_Wg
   0xFF,	 //ascr_skin_Wb
-  0x53,	 //ascr_Cr
-  0xF2,	 //ascr_Rr
-  0xFC,	 //ascr_Cg
-  0x22,	 //ascr_Rg
-  0xF4,	 //ascr_Cb
+  0x61,	 //ascr_Cr
+  0xEA,	 //ascr_Rr
+  0xF8,	 //ascr_Cg
+  0x20,	 //ascr_Rg
+  0xF7,	 //ascr_Cb
   0x00,	 //ascr_Rb
-  0xF4,	 //ascr_Mr
+  0xF6,	 //ascr_Mr
   0x46,	 //ascr_Gr
-  0x28,	 //ascr_Mg
-  0xF8,	 //ascr_Gg
+  0x14,	 //ascr_Mg
+  0xEB,	 //ascr_Gg
   0xEC,	 //ascr_Mb
   0x00,	 //ascr_Gb
-  0xFA,	 //ascr_Yr
-  0x42,	 //ascr_Br
-  0xFA,	 //ascr_Yg
+  0xF6,	 //ascr_Yr
+  0x46,	 //ascr_Br
+  0xF0,	 //ascr_Yg
   0x00,	 //ascr_Bg
   0x00,	 //ascr_Yb
-  0xF4,	 //ascr_Bb
+  0xF8,	 //ascr_Bb
   0xFF,	 //ascr_Wr
   0x00,	 //ascr_Kr
-  0xFC,	 //ascr_Wg
+  0xFA,	 //ascr_Wg
   0x00,	 //ascr_Kg
-  0xF6,	 //ascr_Wb
+  0xF4,	 //ascr_Wb
   0x00,	 //ascr_Kb
 	0x00, //ascr_gamma_w
 	0x00, //ascr_gamma_x0
@@ -20322,9 +21620,9 @@ static char TDMB_DYNAMIC_MDNIE_1[] = {
   0x03,	 //iove_pixel_num
   0xFF,	 
   0x01,	 //iove_trans_stretch_en 
-  0x05,	 //iove_trans_stretch_w
+  0x08,	 //iove_trans_stretch_w
   0x01,	 //iove_trans_curve_en
-  0x05,	 //iove_trans_curve_w
+  0x08,	 //iove_trans_curve_w
   0x01,	 //iove_pattern_en
   0x50,	 //iove_pattern_min
   0x7A,	
@@ -20387,7 +21685,7 @@ static char TDMB_DYNAMIC_MDNIE_1[] = {
   0x00,	
   0x60,	
   0x30,	
-  0x60,	
+  0x60,		
 };
 
 static char TDMB_DYNAMIC_MDNIE_2[] = {
@@ -20609,7 +21907,7 @@ static char TDMB_DYNAMIC_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -20619,7 +21917,7 @@ static char TDMB_DYNAMIC_MDNIE_3[] = {
 static char TDMB_AUTO_MDNIE_1[] = {
 	//start
 	0xDF,
-  0x01,	 //linear_on
+	0x01, //linear_on ascr_skin_on 0000 0000
   0x6A,	 //ascr_skin_cb
   0x9A,	 //ascr_skin_cr
   0x25,	 //ascr_dist_up
@@ -20639,10 +21937,10 @@ static char TDMB_AUTO_MDNIE_1[] = {
   0x30,	
   0xC3,	
   0xFF,	 //ascr_skin_Rr
-  0x41,	 //ascr_skin_Rg
-  0x32,	 //ascr_skin_Rb
+  0x37,	 //ascr_skin_Rg
+  0x19,	 //ascr_skin_Rb
   0xFF,	 //ascr_skin_Yr
-  0xFA,	 //ascr_skin_Yg
+  0xF7,	 //ascr_skin_Yg
   0x00,	 //ascr_skin_Yb
   0xFF,	 //ascr_skin_Mr
   0x00,	 //ascr_skin_Mg
@@ -20651,13 +21949,13 @@ static char TDMB_AUTO_MDNIE_1[] = {
   0xFF,	 //ascr_skin_Wg
   0xFF,	 //ascr_skin_Wb
   0x00,	 //ascr_Cr
-  0xff,	 //ascr_Rr
-  0xFF,	 //ascr_Cg
+  0xF8,	 //ascr_Rr
+  0xEF,	 //ascr_Cg
   0x00,	 //ascr_Rg
-  0xF7,	 //ascr_Cb
+  0xFF,	 //ascr_Cb
   0x00,	 //ascr_Rb
   0xFF,	 //ascr_Mr
-  0x28,	 //ascr_Gr
+  0x4E,	 //ascr_Gr
   0x00,	 //ascr_Mg
   0xFF,	 //ascr_Gg
   0xFF,	 //ascr_Mb
@@ -20777,9 +22075,9 @@ static char TDMB_AUTO_MDNIE_1[] = {
   0x03,	 //iove_pixel_num
   0xFF,	 
   0x01,	 //iove_trans_stretch_en 
-  0x05,	 //iove_trans_stretch_w
+  0x08,	 //iove_trans_stretch_w
   0x01,	 //iove_trans_curve_en
-  0x05,	 //iove_trans_curve_w
+  0x08,	 //iove_trans_curve_w
   0x01,	 //iove_pattern_en
   0x50,	 //iove_pattern_min
   0x7A,	
@@ -21064,7 +22362,7 @@ static char TDMB_AUTO_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -21198,6 +22496,106 @@ static char HMT_COLOR_TEMP_3000K_MDNIE_1[] = {
 	0x80,
 	0x08, //ascr_gamma_y16
 	0x00,
+	  0x00,	 //iove_on
+  0x00,	 //iove_gain
+  0x00,	 //iove_type
+  0x00,	 //iove_histo_range_dark
+  0xFF,	 //iove_histo_range_light
+  0x01,	 //iove_diff_en
+  0x00,	 //iove_diff_dark_min
+  0x00,	
+  0x00,	 //iove_diff_dark_max
+  0x00,	
+  0x00,	 //iove_diff_light_min
+  0x00,	 
+  0x00,	 //iove_diff_light_max
+  0x00,	
+  0x01,	 //iove_slope_en 
+  0x18,	 //iove_slope_dark_min
+  0x00,	  
+  0x00,	 
+  0xE0,	 //iove_slope_dark_max
+  0x00,	 
+  0x00,	
+  0x18,	 //iove_slope_light_min
+  0x00,	
+  0x00,	 
+  0xE0,	 //iove_slope_light_max
+  0x00,	
+  0x00,	
+  0x01,	 //iove_same_diff
+  0x00,	 
+  0x01,	 //iove_smoothing_en
+  0x00,	 //iove_stretch_w
+  0x03,	 //iove_pixel_num
+  0xFF,	 
+  0x01,	 //iove_trans_stretch_en 
+  0x04,	 //iove_trans_stretch_w
+  0x01,	 //iove_trans_curve_en
+  0x04,	 //iove_trans_curve_w
+  0x00, //iove_pattern_en
+  0x73,	 //iove_pattern_min
+  0x7A,
+  0x80,
+  0x00,	 //iove_bg_en
+  0x40,	 //iove_bg_min
+  0x60,	
+  0x00,	
+  0x00,	 //iove_histo_ration_en
+  0x00,	 //iove_histo_min
+  0x80,	
+  0x20,	 
+  0x00,	
+  0x00,	 //iove_cs_en 
+  0x01,	 //iove_cs_dark_min
+  0x00,	 
+  0x01,	 //iove_cs_dark_max
+  0x00,	
+  0x01,	 //iove_cs_light_min
+  0x00,	 
+  0x01,	 //iove_cs_light_max
+  0x00,	
+  0x00,	 //iove_cs_low_en
+  0x0D,	 //iove_cs_low_min
+  0x01,	 
+  0x00,	
+  0x26,	 //iove_cs_low_max
+  0x00,	 //iove_skin_cs_prob_en
+  0x20,	 //iove_skin_cs_prob_increase
+  0x01,	 //iove_skin_cs_gain
+  0x00,	 
+  0x00,	 //iove_skin_w
+  0x6A,	 //iove_skin_CB
+  0x9A,	 //iove_skin_cr
+  0x0C,	 //dist_u
+  0x0C,	 //dist_d
+  0x0C,	 //dist_r
+  0x0C,	 //dist_l
+  0x00,	 //skin_dist_u
+  0xAA,	
+  0xAB,	
+  0x00,	
+  0xAA,	
+  0xAB,
+  0x00,
+  0xAA,
+  0xAB,	
+  0x00,	
+  0xAA,	
+  0xAB,	
+  0x00,	
+  0x40,	 //iove_skin_dark_w
+  0x40,	
+  0x40,	
+  0x40,	 
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
 };
 
 static char HMT_COLOR_TEMP_3000K_MDNIE_2[] = {
@@ -21224,7 +22622,7 @@ static char HMT_COLOR_TEMP_3000K_MDNIE_2[] = {
 	0x00,
 	0x00, //slce_on cadrx_en 0000 0000
 	0x00, //lce_gain 000 0000
-	0x15, //lce_color_gain 00 0000
+	0x30, //lce_color_gain 00 0000
 	0x01, //lce_min_ref_offset
 	0x00,
 	0x70, //lce_illum_gain
@@ -21419,7 +22817,7 @@ static char HMT_COLOR_TEMP_3000K_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -21553,6 +22951,106 @@ static char HMT_COLOR_TEMP_4000K_MDNIE_1[] = {
 	0x80,
 	0x08, //ascr_gamma_y16
 	0x00,
+	  0x00,	 //iove_on
+  0x00,	 //iove_gain
+  0x00,	 //iove_type
+  0x00,	 //iove_histo_range_dark
+  0xFF,	 //iove_histo_range_light
+  0x01,	 //iove_diff_en
+  0x00,	 //iove_diff_dark_min
+  0x00,	
+  0x00,	 //iove_diff_dark_max
+  0x00,	
+  0x00,	 //iove_diff_light_min
+  0x00,	 
+  0x00,	 //iove_diff_light_max
+  0x00,	
+  0x01,	 //iove_slope_en 
+  0x18,	 //iove_slope_dark_min
+  0x00,	  
+  0x00,	 
+  0xE0,	 //iove_slope_dark_max
+  0x00,	 
+  0x00,	
+  0x18,	 //iove_slope_light_min
+  0x00,	
+  0x00,	 
+  0xE0,	 //iove_slope_light_max
+  0x00,	
+  0x00,	
+  0x01,	 //iove_same_diff
+  0x00,	 
+  0x01,	 //iove_smoothing_en
+  0x00,	 //iove_stretch_w
+  0x03,	 //iove_pixel_num
+  0xFF,	 
+  0x01,	 //iove_trans_stretch_en 
+  0x04,	 //iove_trans_stretch_w
+  0x01,	 //iove_trans_curve_en
+  0x04,	 //iove_trans_curve_w
+  0x00, //iove_pattern_en
+  0x73,	 //iove_pattern_min
+  0x7A,
+  0x80,
+  0x00,	 //iove_bg_en
+  0x40,	 //iove_bg_min
+  0x60,	
+  0x00,	
+  0x00,	 //iove_histo_ration_en
+  0x00,	 //iove_histo_min
+  0x80,	
+  0x20,	 
+  0x00,	
+  0x00,	 //iove_cs_en 
+  0x01,	 //iove_cs_dark_min
+  0x00,	 
+  0x01,	 //iove_cs_dark_max
+  0x00,	
+  0x01,	 //iove_cs_light_min
+  0x00,	 
+  0x01,	 //iove_cs_light_max
+  0x00,	
+  0x00,	 //iove_cs_low_en
+  0x0D,	 //iove_cs_low_min
+  0x01,	 
+  0x00,	
+  0x26,	 //iove_cs_low_max
+  0x00,	 //iove_skin_cs_prob_en
+  0x20,	 //iove_skin_cs_prob_increase
+  0x01,	 //iove_skin_cs_gain
+  0x00,	 
+  0x00,	 //iove_skin_w
+  0x6A,	 //iove_skin_CB
+  0x9A,	 //iove_skin_cr
+  0x0C,	 //dist_u
+  0x0C,	 //dist_d
+  0x0C,	 //dist_r
+  0x0C,	 //dist_l
+  0x00,	 //skin_dist_u
+  0xAA,	
+  0xAB,	
+  0x00,	
+  0xAA,	
+  0xAB,
+  0x00,
+  0xAA,
+  0xAB,	
+  0x00,	
+  0xAA,	
+  0xAB,	
+  0x00,	
+  0x40,	 //iove_skin_dark_w
+  0x40,	
+  0x40,	
+  0x40,	 
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
 };
 
 static char HMT_COLOR_TEMP_4000K_MDNIE_2[] = {
@@ -21579,7 +23077,7 @@ static char HMT_COLOR_TEMP_4000K_MDNIE_2[] = {
 	0x00,
 	0x00, //slce_on cadrx_en 0000 0000
 	0x00, //lce_gain 000 0000
-	0x15, //lce_color_gain 00 0000
+	0x30, //lce_color_gain 00 0000
 	0x01, //lce_min_ref_offset
 	0x00,
 	0x70, //lce_illum_gain
@@ -21774,7 +23272,7 @@ static char HMT_COLOR_TEMP_4000K_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -21908,6 +23406,106 @@ static char HMT_COLOR_TEMP_5000K_MDNIE_1[] = {
 	0x80,
 	0x08, //ascr_gamma_y16
 	0x00,
+	  0x00,	 //iove_on
+  0x00,	 //iove_gain
+  0x00,	 //iove_type
+  0x00,	 //iove_histo_range_dark
+  0xFF,	 //iove_histo_range_light
+  0x01,	 //iove_diff_en
+  0x00,	 //iove_diff_dark_min
+  0x00,	
+  0x00,	 //iove_diff_dark_max
+  0x00,	
+  0x00,	 //iove_diff_light_min
+  0x00,	 
+  0x00,	 //iove_diff_light_max
+  0x00,	
+  0x01,	 //iove_slope_en 
+  0x18,	 //iove_slope_dark_min
+  0x00,	  
+  0x00,	 
+  0xE0,	 //iove_slope_dark_max
+  0x00,	 
+  0x00,	
+  0x18,	 //iove_slope_light_min
+  0x00,	
+  0x00,	 
+  0xE0,	 //iove_slope_light_max
+  0x00,	
+  0x00,	
+  0x01,	 //iove_same_diff
+  0x00,	 
+  0x01,	 //iove_smoothing_en
+  0x00,	 //iove_stretch_w
+  0x03,	 //iove_pixel_num
+  0xFF,	 
+  0x01,	 //iove_trans_stretch_en 
+  0x04,	 //iove_trans_stretch_w
+  0x01,	 //iove_trans_curve_en
+  0x04,	 //iove_trans_curve_w
+  0x00, //iove_pattern_en
+  0x73,	 //iove_pattern_min
+  0x7A,
+  0x80,
+  0x00,	 //iove_bg_en
+  0x40,	 //iove_bg_min
+  0x60,	
+  0x00,	
+  0x00,	 //iove_histo_ration_en
+  0x00,	 //iove_histo_min
+  0x80,	
+  0x20,	 
+  0x00,	
+  0x00,	 //iove_cs_en 
+  0x01,	 //iove_cs_dark_min
+  0x00,	 
+  0x01,	 //iove_cs_dark_max
+  0x00,	
+  0x01,	 //iove_cs_light_min
+  0x00,	 
+  0x01,	 //iove_cs_light_max
+  0x00,	
+  0x00,	 //iove_cs_low_en
+  0x0D,	 //iove_cs_low_min
+  0x01,	 
+  0x00,	
+  0x26,	 //iove_cs_low_max
+  0x00,	 //iove_skin_cs_prob_en
+  0x20,	 //iove_skin_cs_prob_increase
+  0x01,	 //iove_skin_cs_gain
+  0x00,	 
+  0x00,	 //iove_skin_w
+  0x6A,	 //iove_skin_CB
+  0x9A,	 //iove_skin_cr
+  0x0C,	 //dist_u
+  0x0C,	 //dist_d
+  0x0C,	 //dist_r
+  0x0C,	 //dist_l
+  0x00,	 //skin_dist_u
+  0xAA,	
+  0xAB,	
+  0x00,	
+  0xAA,	
+  0xAB,
+  0x00,
+  0xAA,
+  0xAB,	
+  0x00,	
+  0xAA,	
+  0xAB,	
+  0x00,	
+  0x40,	 //iove_skin_dark_w
+  0x40,	
+  0x40,	
+  0x40,	 
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
 };
 
 static char HMT_COLOR_TEMP_5000K_MDNIE_2[] = {
@@ -21934,7 +23532,7 @@ static char HMT_COLOR_TEMP_5000K_MDNIE_2[] = {
 	0x00,
 	0x00, //slce_on cadrx_en 0000 0000
 	0x00, //lce_gain 000 0000
-	0x15, //lce_color_gain 00 0000
+	0x30, //lce_color_gain 00 0000
 	0x01, //lce_min_ref_offset
 	0x00,
 	0x70, //lce_illum_gain
@@ -22129,7 +23727,7 @@ static char HMT_COLOR_TEMP_5000K_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -22263,6 +23861,106 @@ static char HMT_COLOR_TEMP_6500K_MDNIE_1[] = {
 	0x80,
 	0x08, //ascr_gamma_y16
 	0x00,
+	  0x00,	 //iove_on
+  0x00,	 //iove_gain
+  0x00,	 //iove_type
+  0x00,	 //iove_histo_range_dark
+  0xFF,	 //iove_histo_range_light
+  0x01,	 //iove_diff_en
+  0x00,	 //iove_diff_dark_min
+  0x00,	
+  0x00,	 //iove_diff_dark_max
+  0x00,	
+  0x00,	 //iove_diff_light_min
+  0x00,	 
+  0x00,	 //iove_diff_light_max
+  0x00,	
+  0x01,	 //iove_slope_en 
+  0x18,	 //iove_slope_dark_min
+  0x00,	  
+  0x00,	 
+  0xE0,	 //iove_slope_dark_max
+  0x00,	 
+  0x00,	
+  0x18,	 //iove_slope_light_min
+  0x00,	
+  0x00,	 
+  0xE0,	 //iove_slope_light_max
+  0x00,	
+  0x00,	
+  0x01,	 //iove_same_diff
+  0x00,	 
+  0x01,	 //iove_smoothing_en
+  0x00,	 //iove_stretch_w
+  0x03,	 //iove_pixel_num
+  0xFF,	 
+  0x01,	 //iove_trans_stretch_en 
+  0x04,	 //iove_trans_stretch_w
+  0x01,	 //iove_trans_curve_en
+  0x04,	 //iove_trans_curve_w
+  0x00, //iove_pattern_en
+  0x73,	 //iove_pattern_min
+  0x7A,
+  0x80,
+  0x00,	 //iove_bg_en
+  0x40,	 //iove_bg_min
+  0x60,	
+  0x00,	
+  0x00,	 //iove_histo_ration_en
+  0x00,	 //iove_histo_min
+  0x80,	
+  0x20,	 
+  0x00,	
+  0x00,	 //iove_cs_en 
+  0x01,	 //iove_cs_dark_min
+  0x00,	 
+  0x01,	 //iove_cs_dark_max
+  0x00,	
+  0x01,	 //iove_cs_light_min
+  0x00,	 
+  0x01,	 //iove_cs_light_max
+  0x00,	
+  0x00,	 //iove_cs_low_en
+  0x0D,	 //iove_cs_low_min
+  0x01,	 
+  0x00,	
+  0x26,	 //iove_cs_low_max
+  0x00,	 //iove_skin_cs_prob_en
+  0x20,	 //iove_skin_cs_prob_increase
+  0x01,	 //iove_skin_cs_gain
+  0x00,	 
+  0x00,	 //iove_skin_w
+  0x6A,	 //iove_skin_CB
+  0x9A,	 //iove_skin_cr
+  0x0C,	 //dist_u
+  0x0C,	 //dist_d
+  0x0C,	 //dist_r
+  0x0C,	 //dist_l
+  0x00,	 //skin_dist_u
+  0xAA,	
+  0xAB,	
+  0x00,	
+  0xAA,	
+  0xAB,
+  0x00,
+  0xAA,
+  0xAB,	
+  0x00,	
+  0xAA,	
+  0xAB,	
+  0x00,	
+  0x40,	 //iove_skin_dark_w
+  0x40,	
+  0x40,	
+  0x40,	 
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
 };
 
 static char HMT_COLOR_TEMP_6500K_MDNIE_2[] = {
@@ -22484,7 +24182,7 @@ static char HMT_COLOR_TEMP_6500K_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -22618,6 +24316,106 @@ static char HMT_COLOR_TEMP_7500K_MDNIE_1[] = {
 	0x80,
 	0x08, //ascr_gamma_y16
 	0x00,
+	  0x00,	 //iove_on
+  0x00,	 //iove_gain
+  0x00,	 //iove_type
+  0x00,	 //iove_histo_range_dark
+  0xFF,	 //iove_histo_range_light
+  0x01,	 //iove_diff_en
+  0x00,	 //iove_diff_dark_min
+  0x00,	
+  0x00,	 //iove_diff_dark_max
+  0x00,	
+  0x00,	 //iove_diff_light_min
+  0x00,	 
+  0x00,	 //iove_diff_light_max
+  0x00,	
+  0x01,	 //iove_slope_en 
+  0x18,	 //iove_slope_dark_min
+  0x00,	  
+  0x00,	 
+  0xE0,	 //iove_slope_dark_max
+  0x00,	 
+  0x00,	
+  0x18,	 //iove_slope_light_min
+  0x00,	
+  0x00,	 
+  0xE0,	 //iove_slope_light_max
+  0x00,	
+  0x00,	
+  0x01,	 //iove_same_diff
+  0x00,	 
+  0x01,	 //iove_smoothing_en
+  0x00,	 //iove_stretch_w
+  0x03,	 //iove_pixel_num
+  0xFF,	 
+  0x01,	 //iove_trans_stretch_en 
+  0x04,	 //iove_trans_stretch_w
+  0x01,	 //iove_trans_curve_en
+  0x04,	 //iove_trans_curve_w
+  0x00, //iove_pattern_en
+  0x73,	 //iove_pattern_min
+  0x7A,
+  0x80,
+  0x00,	 //iove_bg_en
+  0x40,	 //iove_bg_min
+  0x60,	
+  0x00,	
+  0x00,	 //iove_histo_ration_en
+  0x00,	 //iove_histo_min
+  0x80,	
+  0x20,	 
+  0x00,	
+  0x00,	 //iove_cs_en 
+  0x01,	 //iove_cs_dark_min
+  0x00,	 
+  0x01,	 //iove_cs_dark_max
+  0x00,	
+  0x01,	 //iove_cs_light_min
+  0x00,	 
+  0x01,	 //iove_cs_light_max
+  0x00,	
+  0x00,	 //iove_cs_low_en
+  0x0D,	 //iove_cs_low_min
+  0x01,	 
+  0x00,	
+  0x26,	 //iove_cs_low_max
+  0x00,	 //iove_skin_cs_prob_en
+  0x20,	 //iove_skin_cs_prob_increase
+  0x01,	 //iove_skin_cs_gain
+  0x00,	 
+  0x00,	 //iove_skin_w
+  0x6A,	 //iove_skin_CB
+  0x9A,	 //iove_skin_cr
+  0x0C,	 //dist_u
+  0x0C,	 //dist_d
+  0x0C,	 //dist_r
+  0x0C,	 //dist_l
+  0x00,	 //skin_dist_u
+  0xAA,	
+  0xAB,	
+  0x00,	
+  0xAA,	
+  0xAB,
+  0x00,
+  0xAA,
+  0xAB,	
+  0x00,	
+  0xAA,	
+  0xAB,	
+  0x00,	
+  0x40,	 //iove_skin_dark_w
+  0x40,	
+  0x40,	
+  0x40,	 
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
+  0x40,	
 };
 
 static char HMT_COLOR_TEMP_7500K_MDNIE_2[] = {
@@ -22839,7 +24637,7 @@ static char HMT_COLOR_TEMP_7500K_MDNIE_3[] = {
 	0x00, //roi_ex
 	0x00, //roi_ey
 	0x00, //roi_ey
-	0x01, //trans_on
+	0x01, //trans_en 
 	0xff, //trans_on trans_block 0 000 0000
 	0x04, //trans_slope
 	0x01, //trans_interval
@@ -23351,4 +25149,3 @@ static struct dsi_cmd_desc *hdr_tune_value_dsi0[HDR_MAX] = {
 #define RGB_SENSOR_MDNIE_3_SIZE ARRAY_SIZE(RGB_SENSOR_MDNIE_3)
 
 #endif
-
