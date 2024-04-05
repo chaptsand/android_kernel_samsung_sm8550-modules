@@ -876,6 +876,16 @@ end:
 	return rc;
 }
 #endif
+#else
+#if IS_ENABLED(CONFIG_QCOM_FSA4480_I2C)
+static int secdp_aux_configure_fsa_switch(struct dp_aux *dp_aux,
+		bool enable, int orientation)
+{
+	//.TODO:
+	return 0;
+}
+#endif
+#endif
 
 #if IS_ENABLED(CONFIG_QCOM_WCD939X_I2C)
 static int dp_aux_configure_wcd_switch(struct dp_aux *dp_aux,
@@ -928,15 +938,6 @@ static int dp_aux_configure_wcd_switch(struct dp_aux *dp_aux,
 	return rc;
 }
 #endif
-#else
-static int secdp_aux_configure_aux_switch(struct dp_aux *dp_aux,
-		bool enable, int orientation)
-{
-	//.TODO:
-	return 0;
-}
-#endif
-
 struct dp_aux *dp_aux_get(struct device *dev, struct dp_catalog_aux *catalog,
 		struct dp_parser *parser, struct device_node *aux_switch,
 		struct dp_aux_bridge *aux_bridge, enum dp_aux_switch_type switch_type)
@@ -982,15 +983,24 @@ struct dp_aux *dp_aux_get(struct device *dev, struct dp_catalog_aux *catalog,
 	dp_aux->abort = dp_aux_abort_transaction;
 	dp_aux->set_sim_mode = dp_aux_set_sim_mode;
 
-#if !defined(CONFIG_SECDP)
 	/*Condition to avoid allocating function pointers for aux bypass mode*/
 	if (switch_type != DP_AUX_SWITCH_BYPASS) {
+#if !defined(CONFIG_SECDP)
 #if IS_ENABLED(CONFIG_QCOM_FSA4480_I2C)
 		if (switch_type == DP_AUX_SWITCH_FSA4480) {
 			dp_aux->switch_configure = dp_aux_configure_fsa_switch;
 			dp_aux->switch_register_notifier = fsa4480_reg_notifier;
 			dp_aux->switch_unregister_notifier = fsa4480_unreg_notifier;
 		}
+#endif
+#else
+#if IS_ENABLED(CONFIG_QCOM_FSA4480_I2C)
+		if (switch_type == DP_AUX_SWITCH_FSA4480) {
+			dp_aux->switch_configure = secdp_aux_configure_fsa_switch;
+			dp_aux->switch_register_notifier = fsa4480_reg_notifier;
+			dp_aux->switch_unregister_notifier = fsa4480_unreg_notifier;
+		}
+#endif
 #endif
 #if IS_ENABLED(CONFIG_QCOM_WCD939X_I2C)
 		if (switch_type == DP_AUX_SWITCH_WCD939x) {
@@ -1000,9 +1010,6 @@ struct dp_aux *dp_aux_get(struct device *dev, struct dp_catalog_aux *catalog,
 		}
 #endif
 	}
-#else
-	dp_aux->aux_switch = secdp_aux_configure_aux_switch;
-#endif
 
 	return dp_aux;
 error:
