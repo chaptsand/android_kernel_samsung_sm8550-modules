@@ -267,6 +267,14 @@ static int cam_sensor_i2c_component_bind(struct device *dev,
 		goto free_perframe;
 	}
 
+	s_ctrl->i2c_data.bubble_update =
+		kzalloc(sizeof(struct i2c_settings_array) *
+		MAX_PER_FRAME_ARRAY, GFP_KERNEL);
+	if (s_ctrl->i2c_data.bubble_update == NULL) {
+		rc = -ENOMEM;
+		goto free_frame_skip;
+	}
+
 	INIT_LIST_HEAD(&(s_ctrl->i2c_data.init_settings.list_head));
 	INIT_LIST_HEAD(&(s_ctrl->i2c_data.config_settings.list_head));
 	INIT_LIST_HEAD(&(s_ctrl->i2c_data.streamon_settings.list_head));
@@ -278,6 +286,7 @@ static int cam_sensor_i2c_component_bind(struct device *dev,
 	for (i = 0; i < MAX_PER_FRAME_ARRAY; i++) {
 		INIT_LIST_HEAD(&(s_ctrl->i2c_data.per_frame[i].list_head));
 		INIT_LIST_HEAD(&(s_ctrl->i2c_data.frame_skip[i].list_head));
+		INIT_LIST_HEAD(&(s_ctrl->i2c_data.bubble_update[i].list_head));
 	}
 
 	s_ctrl->bridge_intf.device_hdl = -1;
@@ -288,10 +297,20 @@ static int cam_sensor_i2c_component_bind(struct device *dev,
 	s_ctrl->bridge_intf.ops.notify_frame_skip =
 		cam_sensor_notify_frame_skip;
 	s_ctrl->bridge_intf.ops.flush_req = cam_sensor_flush_request;
-
+#if defined(CONFIG_SAMSUNG_DEBUG_SENSOR_I2C)
+	s_ctrl->bridge_intf.ops.process_evt = cam_sensor_process_evt_for_sensor_using_i2c;
+#endif
 	s_ctrl->sensordata->power_info.dev = soc_info->dev;
 
+#if defined (CONFIG_CAMERA_FRAME_CNT_DBG)
+	s_ctrl->is_thread_started = false;
+	s_ctrl->sensor_thread = NULL;
+#endif
+
 	return rc;
+
+free_frame_skip:
+	kfree(s_ctrl->i2c_data.frame_skip);
 free_perframe:
 	kfree(s_ctrl->i2c_data.per_frame);
 unreg_subdev:
@@ -330,6 +349,7 @@ static void cam_sensor_i2c_component_unbind(struct device *dev,
 
 	kfree(s_ctrl->i2c_data.per_frame);
 	kfree(s_ctrl->i2c_data.frame_skip);
+	kfree(s_ctrl->i2c_data.bubble_update);
 	v4l2_set_subdevdata(&(s_ctrl->v4l2_dev_str.sd), NULL);
 	kfree(s_ctrl);
 }
@@ -356,7 +376,7 @@ static int cam_sensor_i2c_driver_probe(struct i2c_client *client,
 		return -EFAULT;
 	}
 
-	CAM_DBG(CAM_SENSOR, "Adding sensor component");
+	CAM_INFO(CAM_SENSOR, "Adding sensor component");
 	rc = component_add(&client->dev, &cam_sensor_i2c_component_ops);
 	if (rc)
 		CAM_ERR(CAM_SENSOR, "failed to add component rc: %d", rc);
@@ -436,6 +456,14 @@ static int cam_sensor_component_bind(struct device *dev,
 		goto free_perframe;
 	}
 
+	s_ctrl->i2c_data.bubble_update =
+		kzalloc(sizeof(struct i2c_settings_array) *
+		MAX_PER_FRAME_ARRAY, GFP_KERNEL);
+	if (s_ctrl->i2c_data.bubble_update == NULL) {
+		rc = -ENOMEM;
+		goto free_frame_skip;
+	}
+
 	INIT_LIST_HEAD(&(s_ctrl->i2c_data.init_settings.list_head));
 	INIT_LIST_HEAD(&(s_ctrl->i2c_data.config_settings.list_head));
 	INIT_LIST_HEAD(&(s_ctrl->i2c_data.streamon_settings.list_head));
@@ -447,6 +475,7 @@ static int cam_sensor_component_bind(struct device *dev,
 	for (i = 0; i < MAX_PER_FRAME_ARRAY; i++) {
 		INIT_LIST_HEAD(&(s_ctrl->i2c_data.per_frame[i].list_head));
 		INIT_LIST_HEAD(&(s_ctrl->i2c_data.frame_skip[i].list_head));
+		INIT_LIST_HEAD(&(s_ctrl->i2c_data.bubble_update[i].list_head));
 	}
 
 	s_ctrl->bridge_intf.device_hdl = -1;
@@ -467,8 +496,14 @@ static int cam_sensor_component_bind(struct device *dev,
 	g_i3c_sensor_data[soc_info->index].s_ctrl = s_ctrl;
 	init_completion(&g_i3c_sensor_data[soc_info->index].probe_complete);
 
+#if defined (CONFIG_CAMERA_FRAME_CNT_DBG)
+	s_ctrl->is_thread_started = false;
+	s_ctrl->sensor_thread = NULL;
+#endif
 	return rc;
 
+free_frame_skip:
+	kfree(s_ctrl->i2c_data.frame_skip);
 free_perframe:
 	kfree(s_ctrl->i2c_data.per_frame);
 unreg_subdev:
@@ -508,6 +543,7 @@ static void cam_sensor_component_unbind(struct device *dev,
 
 	kfree(s_ctrl->i2c_data.per_frame);
 	kfree(s_ctrl->i2c_data.frame_skip);
+	kfree(s_ctrl->i2c_data.bubble_update);
 	platform_set_drvdata(pdev, NULL);
 	v4l2_set_subdevdata(&(s_ctrl->v4l2_dev_str.sd), NULL);
 	devm_kfree(&pdev->dev, s_ctrl);
@@ -535,7 +571,7 @@ static int32_t cam_sensor_driver_platform_probe(
 {
 	int rc = 0;
 
-	CAM_DBG(CAM_SENSOR, "Adding Sensor component for %s", pdev->name);
+	CAM_INFO(CAM_SENSOR, "Adding Sensor component for %s", pdev->name);
 	rc = component_add(&pdev->dev, &cam_sensor_component_ops);
 	if (rc)
 		CAM_ERR(CAM_SENSOR, "failed to add component rc: %d", rc);

@@ -271,6 +271,9 @@ struct cam_hw_soc_info {
 	int32_t                         cam_cx_ipeak_bit;
 
 	void                           *soc_private;
+#if defined(CONFIG_SENSOR_RETENTION)
+	bool disable_sensor_retention;
+#endif
 };
 
 /**
