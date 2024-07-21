@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2017-2021 The Linux Foundation. All rights reserved.
- * Copyright (c) 2021-2023 Qualcomm Innovation Center, Inc. All rights reserved.
+ * Copyright (c) 2021-2024 Qualcomm Innovation Center, Inc. All rights reserved.
  *
  * Permission to use, copy, modify, and/or distribute this software for
  * any purpose with or without fee is hereby granted, provided that the
@@ -364,6 +364,7 @@ struct security_info {
  * @profile_num: profile number
  * @profile_count: total profile count
  * @trans_bssid: TX BSSID address
+ * @non_trans_bssid: non TX BSSID address
  * @split_profile: Indicates if next MBSSID tag has the other part
  *                 of the non tx profile
  * @prof_residue: Set prof_residue to true, if the first non TX
@@ -380,6 +381,7 @@ struct scan_mbssid_info {
 	uint8_t profile_num;
 	uint8_t profile_count;
 	uint8_t trans_bssid[QDF_MAC_ADDR_SIZE];
+	uint8_t non_trans_bssid[QDF_MAC_ADDR_SIZE];
 	bool split_profile;
 	bool prof_residue;
 	bool split_prof_continue;
@@ -417,6 +419,7 @@ struct non_inheritance_ie {
 	bool non_inh_ie_found;
 };
 
+#define TBTT_BSS_PARAM_TRANS_BSSID_BIT 0x08
 /**
  * struct rnr_bss_info - Reduced Neighbor Report BSS information
  * @neighbor_ap_tbtt_offset: Neighbor AP TBTT offset
@@ -471,6 +474,10 @@ struct neighbor_ap_info_field {
  * @TBTT_NEIGHBOR_AP_BSSID_S_SSID_BSS_PARAM_20MHZ_PSD: neighbor AP, bssid,
  * short ssid, bss params and 20MHz PSD
  * bssid, short ssid, bss params, 20MHz PSD and MLD param
+ * @TBTT_NEIGHBOR_AP_BSSID_S_SSID_BSS_PARAM_20MHZ_PSD_MLD_PARAM:
+ * @TBTT_NEIGHBOR_AP_PARAM_AFTER_LAST: This is to calculate the max supported
+ * param length and maintain it in TBTT_NEIGHBOR_AP_PARAM_MAX
+ * @TBTT_NEIGHBOR_AP_PARAM_MAX: This is to track the max supported param length
  */
 enum tbtt_information_field {
 	TBTT_NEIGHBOR_AP_OFFSET_ONLY = 1,
@@ -483,7 +490,11 @@ enum tbtt_information_field {
 	TBTT_NEIGHBOR_AP_BSSSID_S_SSID = 11,
 	TBTT_NEIGHBOR_AP_BSSID_S_SSID_BSS_PARAM = 12,
 	TBTT_NEIGHBOR_AP_BSSID_S_SSID_BSS_PARAM_20MHZ_PSD = 13,
-	TBTT_NEIGHBOR_AP_BSSID_S_SSID_BSS_PARAM_20MHZ_PSD_MLD_PARAM = 16
+	TBTT_NEIGHBOR_AP_BSSID_S_SSID_BSS_PARAM_20MHZ_PSD_MLD_PARAM = 16,
+
+	/* keep last */
+	TBTT_NEIGHBOR_AP_PARAM_AFTER_LAST,
+	TBTT_NEIGHBOR_AP_PARAM_MAX = TBTT_NEIGHBOR_AP_PARAM_AFTER_LAST - 1,
 };
 
 /**

@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2012-2015, 2020-2021 The Linux Foundation. All rights reserved.
- * Copyright (c) 2021-2023 Qualcomm Innovation Center, Inc. All rights reserved.
+ * Copyright (c) 2021-2024 Qualcomm Innovation Center, Inc. All rights reserved.
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -460,25 +460,27 @@ void cm_set_vdev_link_id(struct cnx_mgr *cm_ctx,
 	}
 }
 
-static void cm_update_vdev_mlme_macaddr(struct cnx_mgr *cm_ctx,
-					struct cm_connect_req *req)
+static QDF_STATUS cm_update_vdev_mlme_macaddr(struct cnx_mgr *cm_ctx,
+					      struct cm_connect_req *req)
 {
 	struct qdf_mac_addr *mac;
 	bool eht_capab;
 
 	if (wlan_vdev_mlme_get_opmode(cm_ctx->vdev) != QDF_STA_MODE)
-		return;
+		return QDF_STATUS_SUCCESS;
 
 	wlan_psoc_mlme_get_11be_capab(wlan_vdev_get_psoc(cm_ctx->vdev),
 				      &eht_capab);
 	if (!eht_capab)
-		return;
+		return QDF_STATUS_SUCCESS;
 
 	mac = (struct qdf_mac_addr *)wlan_vdev_mlme_get_mldaddr(cm_ctx->vdev);
 
 	if (req->cur_candidate->entry->ie_list.multi_link_bv &&
 	    !qdf_is_macaddr_zero(mac) &&
-	    cm_is_eht_allowed_for_current_security(req->cur_candidate->entry)) {
+	    wlan_cm_is_eht_allowed_for_current_security(
+					wlan_vdev_get_psoc(cm_ctx->vdev),
+					req->cur_candidate->entry)) {
 		wlan_vdev_obj_lock(cm_ctx->vdev);
 		/* Use link address for ML connection */
 		wlan_vdev_mlme_set_macaddr(cm_ctx->vdev,
@@ -487,6 +489,12 @@ static void cm_update_vdev_mlme_macaddr(struct cnx_mgr *cm_ctx,
 		wlan_vdev_mlme_set_mlo_vdev(cm_ctx->vdev);
 		mlme_debug("set link address for ML connection");
 	} else {
+		if (wlan_vdev_mlme_is_mlo_link_vdev(cm_ctx->vdev)) {
+			mlme_debug("MLIE is not present for partner" QDF_MAC_ADDR_FMT,
+				   QDF_MAC_ADDR_REF(mac->bytes));
+			return QDF_STATUS_E_INVAL;
+		}
+
 		/* Use net_dev address for non-ML connection */
 		if (!qdf_is_macaddr_zero(mac)) {
 			wlan_vdev_obj_lock(cm_ctx->vdev);
@@ -499,6 +507,8 @@ static void cm_update_vdev_mlme_macaddr(struct cnx_mgr *cm_ctx,
 		wlan_vdev_mlme_clear_mlo_vdev(cm_ctx->vdev);
 		mlme_debug("clear MLO cap for non-ML connection");
 	}
+
+	return QDF_STATUS_SUCCESS;
 }
 #else
 static inline
@@ -506,9 +516,10 @@ void cm_set_vdev_link_id(struct cnx_mgr *cm_ctx,
 			 struct cm_connect_req *req)
 { }
 
-static void cm_update_vdev_mlme_macaddr(struct cnx_mgr *cm_ctx,
-					struct cm_connect_req *req)
+static QDF_STATUS cm_update_vdev_mlme_macaddr(struct cnx_mgr *cm_ctx,
+					      struct cm_connect_req *req)
 {
+	return QDF_STATUS_SUCCESS;
 }
 #endif
 /**
@@ -559,9 +570,10 @@ void cm_set_vdev_link_id(struct cnx_mgr *cm_ctx,
 			 struct cm_connect_req *req)
 { }
 
-static void cm_update_vdev_mlme_macaddr(struct cnx_mgr *cm_ctx,
-					struct cm_connect_req *req)
+static QDF_STATUS cm_update_vdev_mlme_macaddr(struct cnx_mgr *cm_ctx,
+					      struct cm_connect_req *req)
 {
+	return QDF_STATUS_SUCCESS;
 }
 
 static struct qdf_mac_addr *cm_get_bss_peer_mld_addr(struct cm_connect_req *req)
@@ -602,7 +614,9 @@ static void cm_create_bss_peer(struct cnx_mgr *cm_ctx,
 	wlan_psoc_mlme_get_11be_capab(wlan_vdev_get_psoc(cm_ctx->vdev),
 				      &eht_capab);
 	if (eht_capab && wlan_vdev_mlme_is_mlo_vdev(cm_ctx->vdev) &&
-	    cm_is_eht_allowed_for_current_security(req->cur_candidate->entry)) {
+	    wlan_cm_is_eht_allowed_for_current_security(
+					wlan_vdev_get_psoc(cm_ctx->vdev),
+					req->cur_candidate->entry)) {
 		cm_set_vdev_link_id(cm_ctx, req);
 		wlan_mlo_init_cu_bpcc(cm_ctx->vdev);
 		mld_mac = cm_get_bss_peer_mld_addr(req);
@@ -1095,6 +1109,16 @@ static void cm_teardown_tdls(struct wlan_objmgr_vdev *vdev)
 	wlan_tdls_teardown_links_sync(psoc);
 }
 
+static void cm_handle_connect_start_req(struct wlan_objmgr_vdev *vdev,
+					struct wlan_cm_connect_req *req)
+{
+	if (!wlan_vdev_mlme_is_mlo_link_vdev(vdev))
+		cm_teardown_tdls(vdev);
+
+	wlan_cm_set_force_20mhz_in_24ghz(vdev,
+					 req->ht_caps & WLAN_HTCAP_C_CHWIDTH40);
+}
+
 #else
 static inline bool
 cm_is_any_other_vdev_connecting_disconnecting(struct cnx_mgr *cm_ctx,
@@ -1229,6 +1253,11 @@ post_err:
 }
 
 static inline void cm_teardown_tdls(struct wlan_objmgr_vdev *vdev) {}
+
+static inline void cm_handle_connect_start_req(struct wlan_objmgr_vdev *vdev,
+					       struct wlan_cm_connect_req *req)
+{
+}
 
 #endif /* CONN_MGR_ADV_FEATURE */
 
@@ -1975,7 +2004,10 @@ QDF_STATUS cm_try_next_candidate(struct cnx_mgr *cm_ctx,
 	 */
 	if (status == QDF_STATUS_E_NOSUPPORT) {
 		/* Update vdev mlme mac address based on connection type */
-		cm_update_vdev_mlme_macaddr(cm_ctx, &cm_req->connect_req);
+		status = cm_update_vdev_mlme_macaddr(cm_ctx,
+						     &cm_req->connect_req);
+		if (QDF_IS_STATUS_ERROR(status))
+			goto connect_err;
 
 		cm_create_bss_peer(cm_ctx, &cm_req->connect_req);
 	} else if (QDF_IS_STATUS_ERROR(status)) {
@@ -2069,7 +2101,10 @@ QDF_STATUS cm_connect_active(struct cnx_mgr *cm_ctx, wlan_cm_id *cm_id)
 	 */
 	if (status == QDF_STATUS_E_NOSUPPORT) {
 		/* Update vdev mlme mac address based on connection type */
-		cm_update_vdev_mlme_macaddr(cm_ctx, &cm_req->connect_req);
+		status = cm_update_vdev_mlme_macaddr(cm_ctx,
+						     &cm_req->connect_req);
+		if (QDF_IS_STATUS_ERROR(status))
+			goto connect_err;
 
 		cm_create_bss_peer(cm_ctx, &cm_req->connect_req);
 	} else if (QDF_IS_STATUS_ERROR(status)) {
@@ -2995,8 +3030,7 @@ QDF_STATUS cm_connect_start_req(struct wlan_objmgr_vdev *vdev,
 
 	cm_set_crypto_params_from_ie(&connect_req->req);
 
-	if (!wlan_vdev_mlme_is_mlo_link_vdev(vdev))
-		cm_teardown_tdls(vdev);
+	cm_handle_connect_start_req(vdev, req);
 
 	status = cm_sm_deliver_event(vdev, WLAN_CM_SM_EV_CONNECT_REQ,
 				     sizeof(*connect_req), connect_req);
