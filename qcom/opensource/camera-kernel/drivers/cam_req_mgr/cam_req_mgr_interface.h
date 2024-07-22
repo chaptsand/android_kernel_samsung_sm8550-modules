@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: GPL-2.0-only */
 /*
  * Copyright (c) 2016-2021, The Linux Foundation. All rights reserved.
- * Copyright (c) 2022-2023 Qualcomm Innovation Center, Inc. All rights reserved.
+ * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
  */
 
 #ifndef _CAM_REQ_MGR_INTERFACE_H
@@ -116,21 +116,20 @@ enum cam_pipeline_delay {
 };
 
 /**
- * enum cam_modeswitch_delay
- * @brief     : enumerator for different modeswitch delays in camera
- *
- * @DELAY_0   : device processed mode switch settings after 0 frame
- * @DELAY_1   : device processed mode switch settings after 1 frame
- * @DELAY_2   : device processed mode switch settings after 2 frames
- * @DELAY_MAX : maximum supported mode switch delay
- */
+  * enum cam_modeswitch_delay
+  * @brief     : enumerator for different modeswitch delays in camera
+  *
+  * @DELAY_0   : device processed mode switch settings after 0 frame
+  * @DELAY_1   : device processed mode switch settings after 1 frame
+  * @DELAY_2   : device processed mode switch settings after 2 frames
+  * @DELAY_MAX : maximum supported mode switch delay
+  */
 enum cam_modeswitch_delay {
 	CAM_MODESWITCH_DELAY_0,
 	CAM_MODESWITCH_DELAY_1,
 	CAM_MODESWITCH_DELAY_2,
 	CAM_MODESWITCH_DELAY_MAX,
 };
-
 
 /**
  * @CAM_TRIGGER_POINT_SOF   : Trigger point for Start Of Frame
@@ -323,6 +322,15 @@ struct cam_req_mgr_notify_stop {
 	int32_t  link_hdl;
 };
 
+/**
+ * struct cam_req_mgr_notify_event_drop
+ * @request_id : RequestID for which shutter is dropped
+ *
+ */
+struct cam_req_mgr_notify_event_drop {
+	uint64_t  request_id;
+};
+
 
 /* CRM to KMD devices */
 /**
@@ -371,17 +379,16 @@ struct cam_req_mgr_core_dev_link_setup {
  * @dev_hdl                  : device handle for cross check
  * @request_id               : request id settings to apply
  * @last_applied_max_pd_req  : Last applied request on highest pd device
- *                             -1 is considered invalid
  * @report_if_bubble         : report to crm if failure in applying
  * @trigger_point            : the trigger point of this apply
  * @re_apply                 : to skip re_apply for buf_done request
- * @recovery                 : Indicate if it is recovery req
+ * @recovery         : Indicate if it is recovery req
  *
  */
 struct cam_req_mgr_apply_request {
 	int32_t    link_hdl;
 	int32_t    dev_hdl;
-	uint64_t   request_id;
+	int64_t    request_id;
 	int64_t    last_applied_max_pd_req;
 	int32_t    report_if_bubble;
 	uint32_t   trigger_point;

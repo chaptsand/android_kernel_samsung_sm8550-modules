@@ -2185,7 +2185,8 @@ int cam_soc_util_regulator_enable(struct regulator *rgltr,
 		rc = regulator_set_voltage(
 			rgltr, rgltr_min_volt, rgltr_max_volt);
 		if (rc) {
-			CAM_ERR(CAM_UTIL, "%s set voltage failed", rgltr_name);
+			CAM_ERR(CAM_UTIL, "%s set voltage failed, voltage min=%d, max=%d", 
+				rgltr_name, rgltr_min_volt, rgltr_max_volt);
 			return rc;
 		}
 
@@ -2388,7 +2389,8 @@ static void cam_soc_util_regulator_disable_default(
 				soc_info->rgltr_delay[j]);
 		} else {
 			if (soc_info->rgltr[j])
-				regulator_disable(soc_info->rgltr[j]);
+				if (regulator_is_enabled(soc_info->rgltr[j]))
+					regulator_disable(soc_info->rgltr[j]);
 		}
 	}
 }
@@ -2734,8 +2736,6 @@ put_clk:
 		soc_info->mmrm_handle = NULL;
 	}
 
-	if (i == -1)
-		i = soc_info->num_clk;
 	for (i = i - 1; i >= 0; i--) {
 		if (soc_info->clk[i]) {
 			if (CAM_IS_BIT_SET(soc_info->shared_clk_mask, i))

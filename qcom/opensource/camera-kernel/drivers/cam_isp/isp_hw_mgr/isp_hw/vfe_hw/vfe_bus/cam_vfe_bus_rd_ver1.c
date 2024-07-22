@@ -1303,8 +1303,6 @@ int cam_vfe_bus_rd_ver1_init(
 	return rc;
 
 deinit_vfe_bus_rd:
-	if (i < 0)
-		i = CAM_VFE_BUS_RD_VER1_VFE_BUSRD_MAX;
 	for (--i; i >= 0; i--)
 		cam_vfe_bus_deinit_vfe_bus_rd_resource(
 			&bus_priv->vfe_bus_rd[i]);

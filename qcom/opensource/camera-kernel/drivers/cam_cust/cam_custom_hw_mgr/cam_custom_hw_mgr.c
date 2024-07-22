@@ -421,10 +421,6 @@ static int cam_custom_mgr_start_hw(void *hw_mgr_priv,
 
 start_only:
 
-	/* Start custom HW first */
-	if (rc < 0)
-		goto err;
-
 	/* Start custom csid */
 	list_for_each_entry(hw_mgr_res,
 		&ctx->res_list_custom_csid, list) {

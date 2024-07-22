@@ -449,7 +449,7 @@ int cam_spi_write(struct camera_io_master *client,
 	if ((addr_type <= CAMERA_SENSOR_I2C_TYPE_INVALID)
 		|| (addr_type >= CAMERA_SENSOR_I2C_TYPE_MAX)
 		|| (data_type <= CAMERA_SENSOR_I2C_TYPE_INVALID)
-		|| (data_type != CAMERA_SENSOR_I2C_TYPE_MAX))
+		|| (data_type >= CAMERA_SENSOR_I2C_TYPE_MAX))
 		return rc;
 
 	CAM_DBG(CAM_EEPROM, "Data: 0x%x", data);
