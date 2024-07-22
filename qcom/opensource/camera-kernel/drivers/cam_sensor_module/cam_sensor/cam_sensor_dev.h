@@ -60,16 +60,18 @@ struct sensor_intf_params {
  *
  * @res_index        : The resolution index that gets updated
  *                     during a mode switch
+ * @feature_mask     : Feature mask
  * @fps              : Frame rate
  * @width            : Pixel width to output to csiphy
  * @height           : Pixel height to output to csiphy
- * @num_exposures    : For sHDR, etc purposes, 1, or more
+ * request_id        : Request Id
  * @caps             : Specifies capability sensor is configured
  *                     for, (eg, XCFA, HFR), num_exposures and
  *                     PDAF type
  */
 struct cam_sensor_dev_res_info {
 	uint16_t   res_index;
+	uint16_t   feature_mask;
 	uint32_t   fps;
 	uint32_t   width;
 	uint32_t   height;
@@ -104,11 +106,14 @@ struct cam_sensor_dev_res_info {
  * @bob_pwm_switch: Boolean flag to switch into PWM mode for BoB regulator
  * @last_flush_req: Last request to flush
  * @pipeline_delay: Sensor pipeline delay
+ * @modeswitch_delay: Mode switch delay
  * @sensor_name: Sensor name
  * @aon_camera_id: AON Camera ID associated with this sensor
+ * @last_applied_req: Last updated request id
  * @last_applied_req: Last applied request id
  * @is_stopped_by_user: Indicate if sensor has been stopped by userland
  * @stream_off_after_eof: Indicates if sensor needs to stream off after eof
+ * @is_res_info_updated: Indicate if resolution info is updated
  */
 struct cam_sensor_ctrl_t {
 	char                           device_name[CAM_CTX_DEV_NAME_MAX_LENGTH];
@@ -116,7 +121,7 @@ struct cam_sensor_ctrl_t {
 	struct cam_hw_soc_info         soc_info;
 	struct mutex                   cam_sensor_mutex;
 	struct cam_sensor_board_info  *sensordata;
-	struct cam_sensor_dev_res_info sensor_res;
+	struct cam_sensor_dev_res_info sensor_res[MAX_PER_FRAME_ARRAY];
 	enum cci_i2c_master_t          cci_i2c_master;
 	enum cci_device_num            cci_num;
 	struct camera_io_master        io_master_info;
@@ -137,11 +142,30 @@ struct cam_sensor_ctrl_t {
 	bool                           bob_pwm_switch;
 	uint32_t                       last_flush_req;
 	uint16_t                       pipeline_delay;
+	uint16_t                       modeswitch_delay;
 	char                           sensor_name[CAM_SENSOR_NAME_MAX_SIZE];
 	uint8_t                        aon_camera_id;
+	int64_t                        last_updated_req;
 	int64_t                        last_applied_req;
 	bool                           is_stopped_by_user;
 	bool                           stream_off_after_eof;
+	bool                           is_res_info_updated;
+#if defined(CONFIG_CAMERA_HYPERLAPSE_300X)
+	uint32_t                       camera_shooting_mode;
+#endif
+#if defined(CONFIG_SAMSUNG_DEBUG_SENSOR_I2C)
+	bool                           is_bubble_packet;
+#endif
+#if defined(CONFIG_CAMERA_ADAPTIVE_MIPI)
+	u32 mipi_clock_index_new;
+	u32 mipi_clock_index_cur;
+	const struct cam_mipi_sensor_mode *mipi_info;
+	uint8_t sensor_mode;
+#endif
+#if defined (CONFIG_CAMERA_FRAME_CNT_DBG)
+	struct task_struct *sensor_thread;
+	bool is_thread_started;
+#endif
 };
 
 /**

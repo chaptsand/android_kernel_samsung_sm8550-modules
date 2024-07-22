@@ -38,7 +38,7 @@ int cam_sensor_power(struct v4l2_subdev *sd, int on);
  *
  * This API applies the req_id settings to sensor
  */
-int cam_sensor_apply_settings(struct cam_sensor_ctrl_t *s_ctrl, uint64_t req_id,
+int cam_sensor_apply_settings(struct cam_sensor_ctrl_t *s_ctrl, int64_t req_id,
 	enum cam_sensor_packet_opcodes opcode);
 
 /**
@@ -82,6 +82,10 @@ int cam_sensor_establish_link(struct cam_req_mgr_core_dev_link_setup *link);
  * This API processes the event which is published by request mgr
  */
 int cam_sensor_process_evt(struct cam_req_mgr_link_evt_data *evt_data);
+#if defined(CONFIG_SAMSUNG_DEBUG_SENSOR_I2C)
+#define MIPI_SW_SEL_GPIO 487
+int cam_sensor_process_evt_for_sensor_using_i2c(struct cam_req_mgr_link_evt_data *evt_data);
+#endif
 
 /**
  * @s_ctrl: Sensor ctrl structure
