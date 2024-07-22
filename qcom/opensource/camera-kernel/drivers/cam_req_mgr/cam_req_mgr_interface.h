@@ -333,6 +333,15 @@ struct cam_req_mgr_notify_stop {
 	int32_t  link_hdl;
 };
 
+/**
+ * struct cam_req_mgr_notify_event_drop
+ * @request_id : RequestID for which shutter is dropped
+ *
+ */
+struct cam_req_mgr_notify_event_drop {
+	uint64_t  request_id;
+};
+
 
 /* CRM to KMD devices */
 /**

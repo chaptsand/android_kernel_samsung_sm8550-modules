@@ -451,8 +451,7 @@ static int cam_jpeg_mgr_bottom_half_irq(void *priv, void *data)
 			CAM_JPEG_CMD_DUMP_HW_MISR_VAL, &misr_args,
 			sizeof(struct cam_jpeg_misr_dump_args));
 		if (rc)
-			CAM_WARN_RATE_LIMIT(CAM_JPEG, "jpeg and camnoc hw misr enable failed %d",
-				rc);
+			CAM_ERR(CAM_JPEG, "jpeg and camnoc hw misr enable failed %d", rc);
 	}
 
 	/* If we have processed just plane 1 for jpeg dma,

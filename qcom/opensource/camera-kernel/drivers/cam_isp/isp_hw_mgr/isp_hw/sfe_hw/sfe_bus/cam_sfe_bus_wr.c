@@ -1655,14 +1655,8 @@ static int cam_sfe_bus_start_sfe_out(
 
 	for (i = 0; i < rsrc_data->num_wm; i++) {
 		rc = cam_sfe_bus_start_wm(&rsrc_data->wm_res[i]);
-		if (rc) {
-			CAM_ERR(CAM_SFE,
-				"SFE:%d Start Failed for out_type:0x%X",
-				sfe_out->res_state, rsrc_data->common_data->core_index,
-				rsrc_data->out_type);
-
+		if (rc)
 			return rc;
-		}
 	}
 
 	memset(bus_irq_reg_mask, 0, sizeof(bus_irq_reg_mask));
